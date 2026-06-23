@@ -1,14 +1,21 @@
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import CommandCenter from './command_center'
 import About from './About'
+import {useState, useEffect} from 'react'
 
 
 function App() {
-  
+  const [missionData, setMissionData] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/mission_data').then(res => res.json()).then(data => setMissionData(data));
+  }, []);
+
   return (
     <BrowserRouter>
       <nav>
         <Link to="/">Command Center</Link>
+
         <Link to="/about">About</Link>
       </nav>
 

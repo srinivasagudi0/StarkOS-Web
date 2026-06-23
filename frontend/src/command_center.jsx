@@ -1,15 +1,47 @@
+import { useEffect, useState } from 'react'
+
 function CommandCenter() {
-    return (
-        <main>
-            <h1>Command Center</h1>
-            <ul>Active Missions: None</ul>
-            <ul>Streaks: None</ul>
-            <ul>Focus Score: None</ul>
-            <ul>Energy Level: None</ul>
-            <ul>Warnings: None</ul>
-            <ul>Jarvis Daily Advice: None</ul>
-        </main> 
-    )   
+  const [missions, setMissions] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/command-center')
+      .then((response) => response.json())
+      .then((data) => {
+        setMissions(data)
+        setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) {
+    return <p>Loading command center...</p>
+  }
+
+  return (
+    <main>
+      <h1>Command Center</h1>
+
+      <section>
+        <h2>Active Missions</h2>
+
+        {missions.length === 0 ? (
+          <p>No active missions.</p>
+        ) : (
+          missions.map((mission) => (
+            <article key={mission.id}>
+              <h3>{mission.mission}</h3>
+              <p>Streak: {mission.streaks}</p>
+              <p>XP: {mission.xp_points}</p>
+              <p>Focus score: {mission.focus_score}</p>
+            </article>
+          ))
+        )}
+      </section>
+    </main>
+  )
 }
 
-export default CommandCenter
+export default CommandCenter;
