@@ -14,6 +14,7 @@ def init_db():
             warnings TEXT DEFAULT '',
             daily_advice TEXT DEFAULT ''
             )
+        
         ''')
     
     c.execute('SELECT COUNT(*) FROM command_center')
@@ -33,6 +34,20 @@ def init_db():
             'Finish one small feature today.'
         ))
 
+        c.execute('''
+            INSERT INTO command_center
+            (code_hours, mission, streaks, focus_score, energy_score, warnings, daily_advice)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            3,
+            'Build Mission Control page',
+            3,
+            80,
+            70,
+            'Dont use AI too much.',
+            'Reduce 1000 calories.'
+        ))
+
     conn.commit()
     conn.close()
 
@@ -48,4 +63,30 @@ def get_mission_data():
     rows = cursor.fetchall()
     conn.close()
 
-    return [dict(row) for row in rows]
+    missions = []
+    warnings = []
+    daily_advice = []
+    
+    total_code_hours = 0
+    focus_score = 0
+    energy_score = 0
+    streaks = 0
+
+    for row in rows:
+        missions.append(row['mission'])
+        warnings.append(row['warnings'])
+        daily_advice.append(row['daily_advice'])
+        total_code_hours += row['code_hours']
+        focus_score += row['focus_score']
+        energy_score += row['energy_score']
+        streaks += row['streaks']
+
+    return {
+        'code_hours': total_code_hours,
+        'missions': missions,
+        'streaks': streaks,
+        'focus_score': focus_score,
+        'energy_score': energy_score,
+        'warnings': warnings,
+        'daily_advice': daily_advice
+    }

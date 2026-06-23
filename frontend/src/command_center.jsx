@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 
 function CommandCenter() {
-  const [missions, setMissions] = useState([])
+  const [CommandData, setCommandData] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/command-center')
       .then((response) => response.json())
       .then((data) => {
-        setMissions(data)
+        setCommandData(data)
         setLoading(false)
       })
       .catch(() => {
@@ -25,15 +25,32 @@ function CommandCenter() {
         <h1>Command Center</h1>
 
         <br />
-        <ul>Code Hours: {missions[0].code_hours}</ul>
-        <ul>Mission: {missions[0].mission}</ul>
-        <ul>Streaks: {missions[0].streaks}</ul>
-        <ul>Focus Score: {missions[0].focus_score}</ul>
-        <ul>Energy Score: {missions[0].energy_score}</ul>
-        <ul>Warnings: {missions[0].warnings}</ul>
-        <ul>Daily Goal: {missions[0].daily_advice}</ul>
+        <h3>Code Hours: {CommandData.code_hours}</h3>
+        <h2>Missions</h2>
+        <ul>
+          {CommandData.missions.map((mission) => (
+            <li>{mission}</li>
+          ))}
+        </ul>
+        <h3>Streaks: {CommandData.streaks}</h3>
+        <h3>Focus Score: {CommandData.focus_score}</h3>
+        <h3>Energy Score: {CommandData.energy_score}</h3>
+        <h2>Warnings</h2>
+        <ul>
+          {CommandData.warnings.map((warning) => (
+            <li>{warning}</li>
+          ))}
+        </ul>
+
+        <h2>Daily Advice</h2>
+        <ul>
+          {CommandData.daily_advice.map((advice) => (
+            <li>{advice}</li>
+          ))}
+        </ul>
         
       </div>
     )
 }
 export default CommandCenter;
+
