@@ -1,4 +1,0 @@
-function MissionControl() {
-    // placeholder
-
-    return ()

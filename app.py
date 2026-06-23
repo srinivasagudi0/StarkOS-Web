@@ -5,13 +5,10 @@ app = Flask(__name__)
 
 init_db()
 
-def get_mission_data():
-	data = get_mission_data()
-    
 @app.route('/api/command-center')
-def index():
-	data = get_mission_data()
-	return jsonify(data)    
+def command_center():
+    data = get_mission_data()
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

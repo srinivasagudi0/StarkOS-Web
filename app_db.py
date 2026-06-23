@@ -6,13 +6,33 @@ def init_db():
     c.execute('''
         CREATE TABLE IF NOT EXISTS command_center (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            code_hours INTEGER NOT NULL,
             mission TEXT NOT NULL,
             streaks INTEGER DEFAULT 0,
-            xp_points INTEGER DEFAULT 0,
             focus_score INTEGER DEFAULT 0,
             energy_score INTEGER DEFAULT 0,
+            warnings TEXT DEFAULT '',
+            daily_advice TEXT DEFAULT ''
             )
-    ''')
+        ''')
+    
+    c.execute('SELECT COUNT(*) FROM command_center')
+
+    if c.fetchone()[0] == 0:
+        c.execute('''
+            INSERT INTO command_center
+            (code_hours, mission, streaks, focus_score, energy_score, warnings, daily_advice)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            4,
+            'Build Command Center page',
+            3,
+            80,
+            70,
+            'Do not code too late. Take breaks.',
+            'Finish one small feature today.'
+        ))
+
     conn.commit()
     conn.close()
 

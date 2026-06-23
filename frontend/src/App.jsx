@@ -5,10 +5,10 @@ import {useState, useEffect} from 'react'
 
 
 function App() {
-  const [missionData, setMissionData] = useState([]);
+  
 
   useEffect(() => {
-    fetch('/api/mission_data').then(res => res.json()).then(data => setMissionData(data));
+    fetch('/api/command-center').then(res => res.json()).then(data => setMissionData(data));
   }, []);
 
   return (
