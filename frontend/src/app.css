@@ -23,6 +23,12 @@
 
 }
 
+.cards-row {
+    display: flex;
+    gap: 1px;
+    align-items: stretch;
+}
+
 .icon {
     width: 50px;
     height: 50px;
@@ -54,4 +60,39 @@
   color: #9ca3af;
   font-size: 18px;
 }
+
+
+.mission-card {
+  display: block;
+  width: 420px;
+}
+
+.mission-header h2 {
+  margin: 0;
+}
+
+.mission-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0 0;
+}
+
+.mission-card li {
+  background: #0d2038;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.mission-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
+}
+
+.mission-icon {
+  font-size: 70px;
+}
+
 

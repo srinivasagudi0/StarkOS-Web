@@ -29,28 +29,35 @@ function CommandCenter() {
         </div>  
 
         <br />
-        <div className="card">
-          <div className="icon"></div>
+        <div className="cards-row">
+          <div className="card">
+            <div className="icon"></div>
 
-          <div className="content">
-            <h4>Code Hours (Yesterday)</h4>
+            <div className="content">
+              <h4>Code Hours (Yesterday)</h4>
 
-            <div className="stats">
-              <span className="number">{CommandData.code_hours}</span>
-              <span className="label">Hours</span>
+              <div className="stats">
+                <span className="number">{CommandData.code_hours}</span>
+                <span className="label">Hours</span>
+              </div>
             </div>
-
           </div>
 
+          <div className="card mission-card">
+            <div className="mission-header">
+              <div className="mission-icon">🎯</div>
+              <h2>Missions</h2>
+            </div>
+
+            <ul>
+              {CommandData.missions.map((mission) => (
+                <li>{mission}</li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        
-        <h2>Missions</h2>
-        <ul>
-          {CommandData.missions.map((mission) => (
-            <li>{mission}</li>
-          ))}
-        </ul>
+
         <h3>Streaks: {CommandData.streaks}</h3>
         <h3>Focus Score: {CommandData.focus_score}</h3>
         <h3>Energy Score: {CommandData.energy_score}</h3>
