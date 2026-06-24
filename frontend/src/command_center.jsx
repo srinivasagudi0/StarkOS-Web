@@ -55,19 +55,24 @@ function CommandCenter() {
               ))}
             </ul>
           </div>
-        </div>
+          <div className="card mission-card">
+            <div className="mission-header">
+              <div className="mission-icon">⚠️</div>
+              <h2>Warnings</h2>
+            </div>
+            <ul>
+          {CommandData.warnings.map((warning) => (
+            <li>{warning}</li>
+          ))}
+        </ul>
+          </div>
+            </div>
 
 
         <h3>Streaks: {CommandData.streaks}</h3>
         <h3>Focus Score: {CommandData.focus_score}</h3>
         <h3>Energy Score: {CommandData.energy_score}</h3>
-        <h2>Warnings</h2>
-        <ul>
-          {CommandData.warnings.map((warning) => (
-            <li>{warning}</li>
-          ))}
-        </ul>
-
+        
         <h2>Daily Advice</h2>
         <ul>
           {CommandData.daily_advice.map((advice) => (
