@@ -81,8 +81,13 @@ def get_mission_data():
         energy_score += row['energy_score']
         streaks += row['streaks']
 
+    # average the focus and energy scores
+    if len(rows) > 0:
+        focus_score = focus_score // len(rows)
+        energy_score = energy_score // len(rows)
+        
     return {
-        'code_hours': total_code_hours,
+        'code_hours': total_code_hours,  # wwhen you come with hackatime plugin thn, the today code hours will be fetched from hackatime plugin and will be showed so absically everyday start with 0 code hours and then it will be updated with hackatime plugin and when shoudl it, so we are going to do coded hours ystday
         'missions': missions,
         'streaks': streaks,
         'focus_score': focus_score,

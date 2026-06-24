@@ -22,10 +22,29 @@ function CommandCenter() {
 // i am doing code hours peer day because i always do like 4 hrs for each day consistently unlike do as much as possible or less than 4hrs.
     return (
       <div className="cmd-center-txt">
+        <br />
+        <div className="title">
+
         <h1>Command Center</h1>
+        </div>  
 
         <br />
-        <h3>Code Hours: {CommandData.code_hours}</h3>
+        <div className="card">
+          <div className="icon"></div>
+
+          <div className="content">
+            <h4>Code Hours (Yesterday)</h4>
+
+            <div className="stats">
+              <span className="number">{CommandData.code_hours}</span>
+              <span className="label">Hours</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        
         <h2>Missions</h2>
         <ul>
           {CommandData.missions.map((mission) => (
@@ -53,4 +72,3 @@ function CommandCenter() {
     )
 }
 export default CommandCenter;
-
