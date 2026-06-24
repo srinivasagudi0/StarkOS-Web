@@ -31,7 +31,7 @@ function CommandCenter() {
         <br />
         <div className="cards-row">
           <div className="card">
-            <div className="icon"></div>
+              <div className='mission-icon'>⏱️</div>
 
             <div className="content">
               <h4>Code Hours (Yesterday)</h4>
@@ -57,7 +57,7 @@ function CommandCenter() {
           </div>
           <div className="card mission-card">
             <div className="mission-header">
-              <div className="mission-icon">⚠️</div>
+              <div className="mission-icon">🔺</div>
               <h2>Warnings</h2>
             </div>
             <ul>
