@@ -154,8 +154,6 @@ def get_mission_data():
         daily_advice.append(row['daily_advice'])
         
     
-
-
     if len(rows) > 0:
         focus_score = focus_score // len(rows)
         energy_score = energy_score // len(rows)
