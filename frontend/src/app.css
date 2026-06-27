@@ -7,12 +7,17 @@ body {
   padding: 1rem;
 }
 
+.mission-control-text {
+  padding: 1rem;
+}
+
 .title {
   padding: 1.5rem;
   color: white;
   background: linear-gradient(135deg, #020617, #0f2f5f, #032da0);
   border: 2px solid rgb(76, 10, 32);
   text-align: center;
+  font-size: 1rem;
 }
 
 .cards-row {

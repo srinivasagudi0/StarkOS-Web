@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react'
 
 function CommandCenter() {
-  const [CommandData, setCommandData] = useState([])
+  const [commandData, setCommandData] = useState({
+    code_hours: 0,
+    missions: [],
+    streaks: 0,
+    focus_score: 0,
+    energy_score: 0,
+    warnings: [],
+    daily_advice: [],
+  })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -37,7 +45,7 @@ function CommandCenter() {
               <h4>Code Hours (Yesterday)</h4>
 
               <div className="stats">
-                <span className="number">{CommandData.code_hours}</span>
+                <span className="number">{commandData.code_hours}</span>
                 <span className="label">Hours</span>
               </div>
             </div>
@@ -50,7 +58,7 @@ function CommandCenter() {
             </div>
 
             <ul>
-              {CommandData.missions.map((mission) => (
+              {commandData.missions.map((mission) => (
                 <li>{mission}</li>
               ))}
             </ul>
@@ -61,7 +69,7 @@ function CommandCenter() {
               <h2>Warnings</h2>
             </div>
             <ul>
-          {CommandData.warnings.map((warning) => (
+          {commandData.warnings.map((warning) => (
             <li>{warning}</li>
           ))}
         </ul>
@@ -71,15 +79,15 @@ function CommandCenter() {
         <div className="cards-row bottom-cards">
         <div className="card">
           <div className="mission-icon">🔥</div>
-          <h3>Streaks : {CommandData.streaks}</h3>
+          <h3>Streaks : {commandData.streaks}</h3>
           </div>
        <div className="card">
         <div className="mission-icon">🧠</div>
-        <h3>Focus Score: {CommandData.focus_score}</h3>
+        <h3>Focus Score: {commandData.focus_score}</h3>
         </div>
         <div className="card">
           <div className="mission-icon">⚡</div>
-        <h3>Energy Score: {CommandData.energy_score}</h3>
+        <h3>Energy Score: {commandData.energy_score}</h3>
         </div>
         
         </div>
@@ -90,7 +98,7 @@ function CommandCenter() {
           </div>
 
           <ul>
-            {CommandData.daily_advice.map((advice) => (
+            {commandData.daily_advice.map((advice) => (
               <li>{advice}</li>
             ))}
           </ul>
@@ -99,3 +107,5 @@ function CommandCenter() {
     )
 }
 export default CommandCenter;
+
+// done!!
