@@ -16,6 +16,20 @@ function CommandCenter() {
       })
   }, [])
 
+  const [missionData, setMissionData] = useState([])
+  
+  useEffect(() => {
+    fetch('/api/mission-control')
+      .then((response) => response.json())
+      .then((data) => {
+        setMissionData(data)
+        setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false)
+      })
+  })
+
   if (loading) {
     return <div>Loading...</div>
   }
@@ -48,12 +62,24 @@ function CommandCenter() {
               <div className="mission-icon">🎯</div>
               <h2>Missions</h2>
             </div>
-
             <ul>
-              {CommandData.missions.map((mission) => (
-                <li>{mission}</li>
+              {missionData.daily_missions.map((mission) => (
+                <li key={mission}>{mission}</li>
               ))}
-            </ul>
+
+              {missionData.weekly_missions
+                .map((mission) => (
+                  <li key={mission}>{mission}</li>
+                ))}
+
+              {missionData.long_term_goals
+              .map((missions) => (
+                <li key={missions}>{missions}</li>
+              ))}
+
+
+              </ul>
+            
           </div>
           <div className="card mission-card">
             <div className="mission-header">
