@@ -38,6 +38,20 @@ function MissionControl() {
       })
   }, [])
 
+  const [recovery, setRecovery] = useState('')
+
+  useEffect(() => {
+    fetch('/api/recovery-assistant')
+        .then((response) => response.json())
+        .then((data) => {
+            setRecovery(data) // its just full explantion
+            setLoading(false)
+        })
+        .catch(() => {
+            setLoading(false)
+        })
+    }, [])
+
   if (loading) {
     return <div>Loading...</div>
   }
@@ -118,10 +132,12 @@ function MissionControl() {
           <div className="mission-icon">💡</div>
           <h2>Failed Mission Recovery</h2>
         </div>
+        <p>{recovery.message}</p>
       </div>
     </div>
 
   )
 }
+
 
 export default MissionControl
