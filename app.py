@@ -17,21 +17,29 @@ def mission_control():
     data = get_mission_control_data()
     return jsonify(data)
 
-def generate_recovery_advice(failed_missions):
+def generate_recovery_advice(failed_missions, daily_tasks, weekly_tasks):
 
     try:
         api = os.getenv("OPENAI_API_KEY")
     except KeyError:
         return jsonify({"message": failed_missions})
     
-    prompt = "The user will ask you for an advice on how to recover from his failed missions. Give a detailed yet concise advice and make sure to quote often from the failed missions." 
-    "Your expected input will be a list of failed missions. Your output should be a single string with the advice. It will be used in a web applications to help users recover from their failed missions. DONT be too generic, and DONT ask questions. Make sure to give a plan with quotes from the failed missions and NO comments such 'tell me when you are done' or 'Ask me anything you need '."
+    prompt = """
+    You help users recover from failed missions.
+    Write a single short, actionable advice string.
+    Use the failed missions as context and quote exact phrashes from them when useful.
+    Be specific, concise, and practical.
+    Do not be generic. Do not ask questions.
+    Do not include filler like 'tell me when you are done' or 'let me know' or 'ask me anyhting'.
+    Return only the advice text.
+    Actually plan, dont just say 'If you missed your daily tasks, aim to catch up on them during the weekend to stay on track.'
+    """
     client = OpenAI(api_key=api)
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": prompt},
-            {"role": "user", "content": f"Failed missions: {failed_missions}"}
+            {"role": "user", "content": f"Failed missions: {failed_missions}\n\nDaily tasks: {daily_tasks}\n\nWeekly tasks: {weekly_tasks}\n\nIf a task cannot be completed during the day, suggest completing it on the weekend."}
             
         ]
     )
@@ -46,10 +54,12 @@ def recovery_assistant():
         return jsonify({"message": "Yaey, no failed missions! Keep up the good work!"})
 
     try:
-        advice = generate_recovery_advice(failed_missions)
+        advice = generate_recovery_advice(failed_missions, data['daily_missions'], data['weekly_missions'])
         return jsonify({"message": advice})
     except Exception as e:
         return jsonify({"messages": failed_missions})
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+

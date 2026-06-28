@@ -14,9 +14,13 @@ function CommandCenter() {
       .catch(() => {
         setLoading(false)
       })
-  }, [])
+  }, []) 
 
-  const [missionData, setMissionData] = useState([])
+  const [missionData, setMissionData] = useState({
+  daily_missions: [],
+  weekly_missions: [],
+  long_term_goals: [],
+  })
   
   useEffect(() => {
     fetch('/api/mission-control')
@@ -28,7 +32,7 @@ function CommandCenter() {
       .catch(() => {
         setLoading(false)
       })
-  })
+  }, [])
 
   if (loading) {
     return <div>Loading...</div>

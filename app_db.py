@@ -30,60 +30,6 @@ def init_db():
         )
     ''')
 
-    c.execute('PRAGMA table_info(mission_control)')
-    mission_columns = [column[1] for column in c.fetchall()]
-
-    if 'failed_misions' in mission_columns and 'failed_missions' not in mission_columns:
-        c.execute('ALTER TABLE mission_control RENAME COLUMN failed_misions TO failed_missions')
-
-    if 'streaks' not in mission_columns:
-        c.execute('ALTER TABLE mission_control ADD COLUMN streaks INTEGER DEFAULT 0')
-
-    c.execute('SELECT COUNT(*) FROM command_center')
-    if c.fetchone()[0] == 0:
-        c.execute('''
-            INSERT INTO command_center
-            (code_hours, mission, streaks, focus_score, energy_score, warnings, daily_advice)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            4,
-            'Build Command Center page',
-            3,
-            80,
-            70,
-            'Do not code too late. Take breaks.',
-            'Finish one small feature today.'
-        ))
-
-        c.execute('''
-            INSERT INTO command_center
-            (code_hours, mission, streaks, focus_score, energy_score, warnings, daily_advice)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            3,
-            'Build Mission Control page',
-            3,
-            80,
-            70,
-            'Dont use AI too much.',
-            'Reduce 1000 calories.'
-        ))
-
-    c.execute('SELECT COUNT(*) FROM mission_control')
-    if c.fetchone()[0] == 0:
-        c.execute('''
-            INSERT INTO mission_control
-            (daily_mission, weekly_missions, long_term_goals, XP_points, streaks, failed_missions)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ''', (
-            'Complete today coding session',
-            'Finish Command Center and Mission Control pages',
-            'Build StarkOS into a full personal dashboard',
-            120,
-            6,
-            'Missed workout yesterday'
-        ))
-
     conn.commit()
     conn.close()
 

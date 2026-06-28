@@ -53,7 +53,9 @@ function MissionControl() {
     }, [])
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>
+      <p>Loading...</p>
+      </div>
   }
 
   const xpPoints = (CommandData.focus_score + CommandData.energy_score ) / (CommandData.code_hours || 1) * 10
@@ -107,18 +109,22 @@ function MissionControl() {
       <div className="cards-row">
         <div className="card">
           <div className="mission-icon">⭐</div>
-          <h3>XP Points: {xpPoints.toFixed(2)}pts</h3>
+          <ul>
+          <div className="number">{missionData.XP_points}pts</div>
+          </ul>
         </div>
 
         <div className="card">
           <div className="mission-icon">🔥</div>
-          <h3>Streaks: {CommandData.streaks}</h3>
+          <h2>Streaks: </h2>
+          <div className="number">{CommandData.streaks}</div>
+          <p>day(s)</p>
         </div>
 
         <div className="card mission-card">
           <div className="mission-header">
             <div className="mission-icon">🛠️</div>
-            <h2>Failed Mission</h2>
+            <h2>Failed Mission</h2> 
           </div>
           <ul>
             {missionData.failed_missions.map((mission) => (
@@ -132,7 +138,10 @@ function MissionControl() {
           <div className="mission-icon">💡</div>
           <h2>Failed Mission Recovery</h2>
         </div>
-        <p>{recovery.message}</p>
+        <ul>
+              <li>{recovery.message}</li>
+
+          </ul>
       </div>
     </div>
 
@@ -140,3 +149,4 @@ function MissionControl() {
 }
 
 export default MissionControl
+
