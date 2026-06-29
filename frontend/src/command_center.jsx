@@ -52,6 +52,17 @@ function CommandCenter() {
       })
   }, [])
 
+  const [advice, setAdvice] = useState([])
+  
+  useEffect(() => {
+    fetch ('/api/advice')
+      .then((response) => response.json())
+      .then((data) => {
+        setAdvice(data.message)
+        setLoading(false)
+      })
+  }, [])
+
   if (loading) {
     return <div>Loading...</div>
   }
@@ -150,9 +161,9 @@ function CommandCenter() {
             ) : (
               <></>
             )}
-            {CommandData.daily_advice.map((advice) => (
+
               <li>{advice}</li>
-            ))}
+
           </ul>
         </div>
       </div>

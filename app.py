@@ -121,6 +121,25 @@ def warnings():
         return jsonify({"message": warnings})
     except Exception as e:
         return jsonify({"message": "Warnings are currently unavailable. Please try again later."})
+    
+
+@app.route('/api/advice')
+def advice():
+    data=get_mission_data()
+
+    advice = data['daily_advice']
+
+    if not advice:
+        return jsonify({"message": "No advice available at the moment. Please check back later."})
+    
+    num = len(advice)
+
+    if num == 1:
+        return jsonify({"message": advice[0]})
+    else:
+        import random
+        random_advice = random.choice(advice)
+        return jsonify({"message": random_advice})
 
 
 if __name__ == "__main__":
