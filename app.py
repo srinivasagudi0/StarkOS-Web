@@ -15,6 +15,24 @@ def command_center():
 @app.route('/api/mission-control')
 def mission_control():
     data = get_mission_control_data()
+    
+    daily_missions = data['daily_missions']
+    if not daily_missions:
+        data['daily_missions'] = ["No daily missions at the moment. Enjoy or set new missions!"]
+
+    weekly_missions = data['weekly_missions']
+    if not weekly_missions:
+        data['weekly_missions'] = ["No weekly missions at the moment. Enjoy or set new missions!"]
+
+    ltg = data['long_term_goals']
+
+    if not ltg:
+        data['long_term_goals'] = ["No long term goals. Set a new long term goal, please."]
+
+    failed_missions = data["failed_missions"]
+    if not failed_missions:
+        data["failed_missions"] = ["No failed missions. Keep up the good work!"] 
+    
     return jsonify(data)
 
 def generate_recovery_advice(failed_missions, daily_tasks, weekly_tasks):
@@ -96,14 +114,15 @@ def warnings():
     active_missions = data['daily_missions'] + data['weekly_missions'] + data['long_term_goals']
 
     if not active_missions:
-        return jsonify({"message": "No active missions at the moment. Enjoy or set new missions!"})
+        return jsonify({"message": "No active missions at the moment. Enjoy or set new missions!"}) # thss does the job of telling empty message
 
-    warnings = generate_warnings(active_missions)
-    return jsonify({"message": warnings})
-    
+    try:
+        warnings = generate_warnings(active_missions)
+        return jsonify({"message": warnings})
+    except Exception as e:
+        return jsonify({"message": "Warnings are currently unavailable. Please try again later."})
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
 

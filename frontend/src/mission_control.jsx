@@ -59,8 +59,6 @@ function MissionControl() {
       </div>
   }
 
-  const xpPoints = (CommandData.focus_score + CommandData.energy_score ) / (CommandData.code_hours || 1) * 10
-
   return (
     <div className="mission-control-text">
       <div className="title">

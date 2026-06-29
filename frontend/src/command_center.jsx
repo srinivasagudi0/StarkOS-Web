@@ -14,7 +14,7 @@ function CommandCenter() {
       .catch(() => {
         setLoading(false)
       })
-  }, []) 
+  }, [])  
 
   const [missionData, setMissionData] = useState({
   daily_missions: [],
@@ -40,7 +40,11 @@ function CommandCenter() {
     fetch('/api/warnings')
       .then((response) => response.json())
       .then((data) => {
-        setWarnings(JSON.parse(data.message))
+        try {
+          setWarnings(JSON.parse(data.message))
+        } catch {
+          setWarnings([data.message])
+        }
         setLoading(false)
       })
       .catch(() => {
@@ -81,22 +85,26 @@ function CommandCenter() {
               <h2>Missions</h2>
             </div>
             <ul>
-              {missionData.daily_missions.map((mission) => (
-                <li key={mission}>{mission}</li>
-              ))}
+            {missionData.daily_missions.length === 0 && missionData.weekly_missions.length === 0 && missionData.long_term_goals.length === 0 ? (
+                <li>No active missions</li>
+              ) : (
+                <>
+                  {missionData.daily_missions.map((mission) => (
+                    <li key={mission}>{mission}</li>
+                  ))}
 
-              {missionData.weekly_missions
-                .map((mission) => (
-                  <li key={mission}>{mission}</li>
-                ))}
+                  {missionData.weekly_missions
+                    .map((mission) => (
+                      <li key={mission}>{mission}</li>
+                    ))}
 
-              {missionData.long_term_goals
-              .map((missions) => (
-                <li key={missions}>{missions}</li>
-              ))}
-
-
-              </ul>
+                  {missionData.long_term_goals
+                  .map((missions) => (
+                    <li key={missions}>{missions}</li>
+                  ))}
+                </>
+              )}
+            </ul>
             
           </div>
           <div className="card mission-card">
@@ -137,6 +145,11 @@ function CommandCenter() {
           </div>
 
           <ul>
+            {CommandData.daily_mission === 0 && CommandData.weekly_mission === 0 && CommandData.long_term_goal === 0 ? (
+              <li>Keep up the great work! You have nothing to do right now. Rest or set some new goals.</li>
+            ) : (
+              <></>
+            )}
             {CommandData.daily_advice.map((advice) => (
               <li>{advice}</li>
             ))}
