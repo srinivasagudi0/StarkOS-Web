@@ -34,6 +34,20 @@ function CommandCenter() {
       })
   }, [])
 
+  const [warnings, setWarnings] = useState([])
+
+  useEffect(() => {
+    fetch('/api/warnings')
+      .then((response) => response.json())
+      .then((data) => {
+        setWarnings(JSON.parse(data.message))
+        setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false)
+      })
+  }, [])
+
   if (loading) {
     return <div>Loading...</div>
   }
@@ -91,9 +105,12 @@ function CommandCenter() {
               <h2>Warnings</h2>
             </div>
             <ul>
-          {CommandData.warnings.map((warning) => (
-            <li>{warning}</li>
-          ))}
+              <div className="warning">
+              {warnings.map((warnings) => (
+                <li key={warnings}>{warnings}</li>
+              ))}
+              </div>
+
         </ul>
           </div>
             </div>

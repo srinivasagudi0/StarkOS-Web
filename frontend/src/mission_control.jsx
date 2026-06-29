@@ -52,6 +52,7 @@ function MissionControl() {
         })
     }, [])
 
+
   if (loading) {
     return <div>
       <p>Loading...</p>
@@ -149,4 +150,3 @@ function MissionControl() {
 }
 
 export default MissionControl
-
