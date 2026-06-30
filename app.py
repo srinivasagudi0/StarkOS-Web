@@ -93,6 +93,8 @@ def generate_warnings(active_missions):
     - breif
     - not generic
 
+    WARNINGS SHOULD NOT MORE NUMBER THAN THE NUMBER OF ACTIVE MISSIONS.
+
     Do not ask questions, numbering, or extra text. Do not include filler like 'tell me when you are done' or 'let me know' or 'ask me anyhting'.
 
     """

@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react'
 
 function CommandCenter() {
   const [CommandData, setCommandData] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [commandLoading, setCommandLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/command-center')
       .then((response) => response.json())
       .then((data) => {
         setCommandData(data)
-        setLoading(false)
+        setCommandLoading(false)
       })
       .catch(() => {
-        setLoading(false)
+        setCommandLoading(false)
       })
   }, [])  
 
@@ -21,20 +21,22 @@ function CommandCenter() {
   weekly_missions: [],
   long_term_goals: [],
   })
+  const [missionLoading, setMissionLoading] = useState(true)
   
   useEffect(() => {
     fetch('/api/mission-control')
       .then((response) => response.json())
       .then((data) => {
         setMissionData(data)
-        setLoading(false)
+        setMissionLoading(false)
       })
       .catch(() => {
-        setLoading(false)
+        setMissionLoading(false)
       })
   }, [])
 
   const [warnings, setWarnings] = useState([])
+  const [warningsLoading, setWarningsLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/warnings')
@@ -45,26 +47,36 @@ function CommandCenter() {
         } catch {
           setWarnings([data.message])
         }
-        setLoading(false)
+        setWarningsLoading(false)
       })
       .catch(() => {
-        setLoading(false)
+        setWarningsLoading(false)
       })
   }, [])
 
   const [advice, setAdvice] = useState([])
+  const [adviceLoading, setAdviceLoading] = useState(true)
   
   useEffect(() => {
     fetch ('/api/advice')
       .then((response) => response.json())
       .then((data) => {
         setAdvice(data.message)
-        setLoading(false)
+        setAdviceLoading(false)
+      })
+      .catch(() => {
+        setAdviceLoading(false)
       })
   }, [])
 
-  if (loading) {
-    return <div>Loading...</div>
+  if (commandLoading || missionLoading || warningsLoading || adviceLoading) {
+
+    return (
+      <div className="loading-screen">
+        <div className="loader"></div>
+        <p>Loading StarkOS...</p>
+      </div>
+    )
   }
 // i am doing code hours peer day because i always do like 4 hrs for each day consistently unlike do as much as possible or less than 4hrs.
     return (

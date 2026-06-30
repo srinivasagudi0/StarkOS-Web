@@ -9,21 +9,22 @@ function MissionControl() {
     streaks: 0,
     failed_missions: [],
   })
-  const [loading, setLoading] = useState(true)
+  const [missionLoading, setMissionLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/mission-control')
       .then((response) => response.json())
       .then((data) => {
         setMissionData(data)
-        setLoading(false)
+        setMissionLoading(false)
       })
       .catch(() => {
-        setLoading(false)
+        setMissionLoading(false)
       })
   }, [])
 
   const [CommandData, setCommandData] = useState([])
+  const [commandLoading, setCommandLoading] = useState(true)
 
 
   useEffect(() => {
@@ -31,29 +32,30 @@ function MissionControl() {
       .then((response) => response.json())
       .then((data) => {
         setCommandData(data)
-        setLoading(false)
+        setCommandLoading(false)
       })
       .catch(() => {
-        setLoading(false)
+        setCommandLoading(false)
       })
   }, [])
 
   const [recovery, setRecovery] = useState('')
+  const [recoveryLoading, setRecoveryLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/recovery-assistant')
         .then((response) => response.json())
         .then((data) => {
             setRecovery(data) // its just full explantion
-            setLoading(false)
+            setRecoveryLoading(false)
         })
         .catch(() => {
-            setLoading(false)
+            setRecoveryLoading(false)
         })
     }, [])
 
 
-  if (loading) {
+  if (missionLoading || commandLoading || recoveryLoading) {
     return <div>
       <p>Loading...</p>
       </div>
