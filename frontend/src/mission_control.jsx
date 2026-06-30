@@ -56,9 +56,15 @@ function MissionControl() {
 
 
   if (missionLoading || commandLoading || recoveryLoading) {
-    return <div>
-      <p>Loading...</p>
+    return (
+      <div className="loading-screen">
+        <div className="loader"></div>
+        <p>Loading StarkOS...</p>
       </div>
+
+    )
+
+
   }
 
   return (

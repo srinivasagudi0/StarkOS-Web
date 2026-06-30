@@ -96,3 +96,28 @@ body {
   }
 }
 
+.loading-screen {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  gap: 15px;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #21406a;
+  border-top: 5px solid #38bdf8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+
+@keyframes spin {
+  top {
+    transform: rotate(180deg);
+  }
+}
