@@ -1,12 +1,14 @@
-function About() {
+function MissionForge() {
   return (
+
     <main>
-      <div className="title">
+      <br />
+      <div className="title3">
         <h1>Mission Forge</h1>
-      </div>
-      <p>This is the Mission Forge page.</p>
+        </div>
     </main>
+    
   )
 }
 
-export default About
+export default MissionForge;

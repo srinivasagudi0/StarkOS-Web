@@ -30,6 +30,15 @@ body {
 
 }
 
+.title3 {
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(135deg, #020617, #3d5104, #026941);
+  border: 2px solid rgba(152, 64, 13, 0.574);
+  text-align: center;
+  font-size: 1rem;
+}
+
 .cards-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
