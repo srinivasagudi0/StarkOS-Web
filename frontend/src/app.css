@@ -51,7 +51,7 @@ body {
 }
 
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   box-shadow: 0 0 40px rgba(56, 189, 248, 0.35);
 }
 
@@ -135,8 +135,8 @@ body {
 
 
 @keyframes spin {
-  top {
-    transform: rotate(180deg);
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -158,5 +158,5 @@ nav a {
 nav a:hover {
   text-decoration: underline;
   color: violet;
-  transform: translateY(-10px);
+  transform: translateY(-5px);
 }
