@@ -20,6 +20,16 @@ body {
   font-size: 1rem;
 }
 
+.title2 {
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(135deg, #020617, #2a0f5f, #2e0871);
+  border: 2px solid rgb(76, 66, 10);
+  text-align: center;
+  font-size: 1rem;
+
+}
+
 .cards-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -37,6 +47,12 @@ body {
   color: white;
   border-radius: 2rem;
   border: 1px solid #1e3a5f;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 40px rgba(56, 189, 248, 0.35);
 }
 
 .mission-card,
@@ -142,5 +158,5 @@ nav a {
 nav a:hover {
   text-decoration: underline;
   color: violet;
-  transform: translateY(-10px); 
+  transform: translateY(-10px);
 }

@@ -69,7 +69,8 @@ function MissionControl() {
 
   return (
     <div className="mission-control-text">
-      <div className="title">
+      <br />
+      <div className="title2">
         <h1>Mission Control</h1>
       </div>
 
