@@ -168,7 +168,7 @@ function CommandCenter() {
           </div>
 
           <ul>
-            {CommandData.daily_mission === 0 && CommandData.weekly_mission === 0 && CommandData.long_term_goal === 0 ? (
+            {missionData.daily_missions.length === 0 && missionData.weekly_missions.length === 0 && missionData.long_term_goals.length === 0 ? (
               <li>Keep up the great work! You have nothing to do right now. Rest or set some new goals.</li>
             ) : (
               <></>
@@ -184,3 +184,4 @@ function CommandCenter() {
 export default CommandCenter;
 
 // done!!
+

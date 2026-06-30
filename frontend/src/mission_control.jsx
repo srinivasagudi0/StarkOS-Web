@@ -155,4 +155,4 @@ function MissionControl() {
   )
 }
 
-export default MissionControl
+export default MissionControl;
