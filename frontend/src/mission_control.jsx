@@ -172,5 +172,3 @@ function MissionControl() {
 }
 
 export default MissionControl;
-
-s

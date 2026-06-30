@@ -14,7 +14,7 @@ body {
 .title {
   padding: 1.5rem;
   color: white;
-  background: linear-gradient(135deg, #020617, #0f2f5f, #032da0);
+  background: linear-gradient(135deg, #020617, #0f5f5e, #0398a0);
   border: 2px solid rgb(76, 10, 32);
   text-align: center;
   font-size: 1rem;
@@ -120,4 +120,25 @@ body {
   top {
     transform: rotate(180deg);
   }
+}
+
+nav {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.9rem;
+  background-color: #122e65aa;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  display: inline-block;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: violet;
+  transform: translateY(-5px); 
 }
