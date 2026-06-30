@@ -82,9 +82,13 @@ function MissionControl() {
             <h2>Daily Missions</h2>
           </div>
           <ul>
-            {missionData.daily_missions.map((mission) => (
-              <li>{mission}</li>
-            ))}
+            {missionData.daily_missions.length === 0 ? (
+              <li>No daily missions available.</li>
+            ) : (
+              missionData.daily_missions.map((mission, index) => (
+                <li key={index}>{mission}</li>
+              ))
+            )}
           </ul>
         </div>
 
@@ -94,9 +98,13 @@ function MissionControl() {
             <h2>Weekly Missions</h2>
           </div>
           <ul>
-            {missionData.weekly_missions.map((mission) => (
-              <li>{mission}</li>
-            ))}
+            {missionData.weekly_missions.length === 0 ? (
+              <li>No weekly missions available.</li>
+            ) : (
+              missionData.weekly_missions.map((mission, index) => (
+                <li key={index}>{mission}</li>
+              ))
+            )}
           </ul>
         </div>
 
@@ -106,9 +114,13 @@ function MissionControl() {
             <h2>Long-Term Goals</h2>
           </div>
           <ul>
-            {missionData.long_term_goals.map((goal) => (
-              <li>{goal}</li>
-            ))}
+            {missionData.long_term_goals.length === 0 ? (
+              <li>No long-term goals available.</li>
+            ) : (
+              missionData.long_term_goals.map((goal, index) => (
+                <li key={index}>{goal}</li>
+              ))
+            )}
           </ul>
         </div>
       </div>
@@ -134,9 +146,13 @@ function MissionControl() {
             <h2>Failed Mission</h2> 
           </div>
           <ul>
-            {missionData.failed_missions.map((mission) => (
-              <li>{mission}</li>
-            ))}
+            {missionData.failed_missions.length === 0 ? (
+              <li>No failed missions.</li>
+            ) : (
+              missionData.failed_missions.map((mission, index) => (
+                <li key={index}>{mission}</li>
+              ))
+            )}
           </ul>
         </div>
       </div>
@@ -156,3 +172,5 @@ function MissionControl() {
 }
 
 export default MissionControl;
+
+s
