@@ -142,6 +142,48 @@ def advice():
         import random
         random_advice = random.choice(advice)
         return jsonify({"message": random_advice})
+    
+
+def plan_with_ai(input_text):
+    try:
+        api = os.getenv('OPENAI_API_KEY')
+    except KeyError:
+        return jsonify({"message": "AI planning is currently unavailable. Please add your OpenAI key to the environment variables."})
+    
+    client = OpenAI(api_key=api)
+
+    prompt = """
+    You help users plan out their mission(s)/task(s). Divide the plan into daily, weekly, and long-term goals and ONLY RETURN a valid JSON object with any applicable keys:
+    {
+        "daily": ["task 1", task 2", ...],
+        "weekly": ["task 1", "task 2", ...],
+        "long_term": "goal 1", "goal 2", ...]
+    }
+
+    Include the keys only if it has items; omit empty lists. Do not ask questions, add exxplanations, or include filler. Return only the JSON object
+    """
+
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": f"User input: {input_text}"}
+        ]
+    )
+
+    return response.choices[0].message.content
+
+
+@app.route('/api/ai-forge')
+def ai_forge(input_text):
+    try:
+        plan = plan_with_ai(input_text)
+        try:
+            return jsonify({"message": plan})
+        except Exception:
+            return jsonify({"message": "AI is planning wrong json"})
+    except Exception:
+        return jsonify({"message": "AI planning is currently unavailable. Please try again later."})
 
 
 if __name__ == "__main__":

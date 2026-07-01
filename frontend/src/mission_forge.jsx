@@ -13,7 +13,7 @@ function MissionForge() {
     <div className="card advice-card">
       <p>Enter a brief description of your mission(s). AI will generate one or more mission suggestions you can accept or rejct. Editing will be implemented later.</p>
       <textarea className="mission-input" placeholder="Enter your mission description here..."></textarea>
-      <button className="mission-button">Generate Missions</button>
+      <button className="mission-button" onclick="generateMissions()">Generate Missions</button>
       </div>
       <br />
     </div>
