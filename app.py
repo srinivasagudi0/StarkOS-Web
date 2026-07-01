@@ -152,7 +152,7 @@ def plan_with_ai(input_text):
     
     client = OpenAI(api_key=api)
 
-    prompt = """
+    prompt = '''
     You help users plan out their mission(s)/task(s). Divide the plan into daily, weekly, and long-term goals and ONLY RETURN a valid JSON object with any applicable keys:
     {
         "daily": ["task 1", task 2", ...],
@@ -161,7 +161,7 @@ def plan_with_ai(input_text):
     }
 
     Include the keys only if it has items; omit empty lists. Do not ask questions, add exxplanations, or include filler. Return only the JSON object
-    """
+    '''
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
