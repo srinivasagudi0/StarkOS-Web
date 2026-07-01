@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from app_db import get_mission_data, init_db, get_mission_control_data
 from openai import OpenAI
 import os
@@ -173,18 +173,19 @@ def plan_with_ai(input_text):
 
     return response.choices[0].message.content
 
+@app.route('/api/ai-forge', methods=['POST'])
+def ai_forge():
+    data = request.get_json()
+    input_text = data.get('input', '')
 
-@app.route('/api/ai-forge')
-def ai_forge(input_text):
+    if not input_text:
+        return jsonify({"message": "Please enter a mission first."})
+
     try:
         plan = plan_with_ai(input_text)
-        try:
-            return jsonify({"message": plan})
-        except Exception:
-            return jsonify({"message": "AI is planning wrong json"})
+        return jsonify({"message": plan})
     except Exception:
         return jsonify({"message": "AI planning is currently unavailable. Please try again later."})
-
 
 if __name__ == "__main__":
     app.run(debug=True)
