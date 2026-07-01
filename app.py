@@ -145,22 +145,21 @@ def advice():
     
 
 def plan_with_ai(input_text):
-    try:
-        api = os.getenv('OPENAI_API_KEY')
-    except KeyError:
-        return jsonify({"message": "AI planning is currently unavailable. Please add your OpenAI key to the environment variables."})
+    api = os.getenv('OPENAI_API_KEY')
+    if not api:
+        return "AI planning is currently unavailable. Please add your OpenAI key to the environment variables."
     
     client = OpenAI(api_key=api)
 
     prompt = '''
-    You help users plan out their mission(s)/task(s). Divide the plan into daily, weekly, and long-term goals and ONLY RETURN a valid JSON object with any applicable keys:
+    You help users plan out their mission(s)/task(s). Divide the plan into daily, weekly, and long-term goals and ONLY RETURN a valid JSON object with this shape:
     {
-        "daily": ["task 1", task 2", ...],
+        "daily": ["task 1", "task 2", ...],
         "weekly": ["task 1", "task 2", ...],
-        "long_term": "goal 1", "goal 2", ...]
+        "long_term": ["goal 1", "goal 2", ...]
     }
 
-    Include the keys only if it has items; omit empty lists. Do not ask questions, add exxplanations, or include filler. Return only the JSON object
+    Use arrays for every key. Do not ask questions, add explanations, markdown, or filler. Return only the JSON object.
     '''
 
     response = client.chat.completions.create(
@@ -175,7 +174,7 @@ def plan_with_ai(input_text):
 
 @app.route('/api/ai-forge', methods=['POST'])
 def ai_forge():
-    data = request.get_json()
+    data = request.get_json() or {}
     input_text = data.get('input', '')
 
     if not input_text:
@@ -189,4 +188,3 @@ def ai_forge():
 
 if __name__ == "__main__":
     app.run(debug=True)
-

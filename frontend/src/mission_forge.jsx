@@ -3,72 +3,87 @@ import { useState } from "react";
 function MissionForge() {
   const [input, setInput] = useState("")
   const [result, setResult] = useState("")
+  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
-  function generateMissions() {
-    setLoading(true)
+  async function generateMissions() {
+    if (!input.trim()) {
+      setError("Enter a mission idea first.")
+      return
+    }
 
-    fetch("/api/ai-forge", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ input: input })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setResult(data.message)
-        setLoading(false)
+    setLoading(true)
+    setError("")
+    setResult("")
+
+    try {
+      const response = await fetch("/api/ai-forge", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input }),
       })
-      .catch(() => {
-        setLoading(false)
-        setResult("Something went wrong.")
-      })
+
+      const data = await response.json()
+      setResult(data.message)
+    } catch {
+      setError("Something went wrong. Make sure Flask is running.")
+    }
+
+    setLoading(false)
+  }
+
+  function clearForge() {
+    setInput("")
+    setResult("")
+    setError("")
   }
 
   return (
-    <main>
-      <br />
-
+    <main className="forge-page">
       <div className="title3">
         <h1>Mission Forge</h1>
       </div>
 
-      <br />
+      <section className="forge-text1">
+        <h1>Beta: Quick Add with AI</h1>
 
-      <div className="forge-text1">
-        <h2>Beta: Quick Add (with AI)</h2>
-
-        <div className="card advice-card">
-          <p>
-            Enter a brief description of your mission(s). AI will generate one or more mission suggestions.
-          </p>
+        <div className="card advice-card forge-panel">
+          <p>Describe your goal. AI will turn it into missions.</p>
 
           <textarea
             className="mission-input"
-            placeholder="Enter your mission description here..."
+            placeholder="Example: I want to get better at React and fitness."
             value={input}
             onChange={(event) => setInput(event.target.value)}
-          ></textarea>
+          />
 
-          <button className="mission-button" onClick={generateMissions}>
-            Generate Missions
-          </button>
+          <div className="forge-actions">
+            <button className="mission-button" onClick={generateMissions} disabled={loading}>
+              {loading ? "Generating..." : "Generate Missions"}
+            </button>
 
-          {loading && <p>Generating missions...</p>}
+            <button className="mission-button secondary-button" onClick={clearForge}>
+              Clear
+            </button>
+          </div>
 
+          {error && <p className="forge-error">{error}</p>}
 
-            {result && (
-    <div className="forge-result">
-      <h3>Generated Mission Plan</h3>
-      <pre>{result}</pre>
-    </div>
-  )}
+          {loading && (
+            <div className="forge-loading">
+              <div className="loader"></div>
+              <p>Forging your mission plan...</p>
+            </div>
+          )}
 
+          {result && (
+            <div className="forge-result">
+              <h3>Generated Mission Plan</h3>
+              <pre>{result}</pre>
+            </div>
+          )}
         </div>
-
-        <br />
-      </div>
+      </section>
     </main>
   )
 }
