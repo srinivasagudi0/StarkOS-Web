@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from app_db import get_mission_data, init_db, get_mission_control_data
+from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data
 from openai import OpenAI
 import os
 
@@ -158,7 +158,7 @@ def plan_with_ai(input_text):
         "weekly": ["task 1", "task 2", ...],
         "long_term": ["goal 1", "goal 2", ...]
     }
-
+    DO NOT ASSUME ANYTHING ABOUT THE USER OR TASKS. DO NOT INCLUDE ANY EXPLANATIONS OR FILLER. FOR EXAMPLE, if it says something like "finish homework", you say daily misssion to be finihsh homework
     Use arrays for every key. Do not ask questions, add explanations, markdown, or filler. Return only the JSON object.
     '''
 
@@ -185,6 +185,16 @@ def ai_forge():
         return jsonify({"message": plan})
     except Exception:
         return jsonify({"message": "AI planning is currently unavailable. Please try again later."})
+    
+@app.route('/api/apply_plan', methods=['POST'])
+def apply_plan():
+    data = request.get_json () or {}
+    daily = data.get("daily", [])
+    weekly = data.get("weekly", [])
+    long_term = data.get("long_term", [])
+
+    add_mission_control_data(daily, weekly, long_term)
+    return jsonify({"message": "Plan applied successfully."})
 
 if __name__ == "__main__":
     app.run(debug=True)

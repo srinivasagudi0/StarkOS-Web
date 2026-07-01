@@ -3,6 +3,7 @@ import { useState } from "react";
 function MissionForge() {
   const [input, setInput] = useState("")
   const [result, setResult] = useState("")
+  const [plan, setPlan] = useState(null)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -15,6 +16,7 @@ function MissionForge() {
     setLoading(true)
     setError("")
     setResult("")
+    setPlan(null)
 
     try {
       const response = await fetch("/api/ai-forge", {
@@ -25,6 +27,12 @@ function MissionForge() {
 
       const data = await response.json()
       setResult(data.message)
+
+      try {
+        setPlan(JSON.parse(data.message))
+      } catch {
+        setPlan(null)
+      }
     } catch {
       setError("Something went wrong. Make sure Flask is running.")
     }
@@ -35,7 +43,26 @@ function MissionForge() {
   function clearForge() {
     setInput("")
     setResult("")
+    setPlan(null)
     setError("")
+  }
+
+  function applyPlan() {
+    fetch('/api/apply-mission-plan', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        daily: plan.daily?.[0] || '',
+        weekly: plan.weekly?.[0] || '',
+        long_term: plan.long_term?.[0] || '',
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setResult(data.message)
+      })
   }
 
   return (
@@ -65,6 +92,12 @@ function MissionForge() {
             <button className="mission-button secondary-button" onClick={clearForge}>
               Clear
             </button>
+
+            {plan && (
+              <button className="mission-button" onClick={applyPlan}>
+                Apply to Mission Control
+              </button>
+            )}
           </div>
 
           {error && <p className="forge-error">{error}</p>}

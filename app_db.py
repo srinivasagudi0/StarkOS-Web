@@ -113,3 +113,15 @@ def get_mission_data():
         'warnings': warnings,
         'daily_advice': daily_advice,
     }
+
+def add_mission_control_data(daily, weekly, long_term):
+    conn = sqlite3.connect('app.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
+            INSERT INTO mission_control (daily_mission, weekly_missions, long_term_goals)
+            VALUES (?, ?, ?)
+        """, (daily, weekly, long_term))
+
+    conn.commit()
+    conn.close()
