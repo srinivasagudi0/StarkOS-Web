@@ -48,7 +48,7 @@ function MissionForge() {
   }
 
   function applyPlan() {
-    fetch('/api/apply-mission-plan', {
+    fetch('/api/apply_plan', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
