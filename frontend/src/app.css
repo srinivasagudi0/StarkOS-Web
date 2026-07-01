@@ -169,3 +169,23 @@ nav a:hover {
   color: violet;
   transform: translateY(-5px);
 }
+
+.forge-text1 {
+  color: green
+}
+
+.forge-text1 h2 {
+  text-align: center;
+}
+
+.forge-text1 textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.5px solid #1e3a5f;
+  background-color: #0d2038;
+  color: white;
+  font-size: 1rem;
+  text-align: left;
+  resize: vertical;
+}
