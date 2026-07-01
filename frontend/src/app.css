@@ -189,3 +189,17 @@ nav a:hover {
   text-align: left;
   resize: vertical;
 }
+
+.mission-button {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.75rem 1.5rem;
+  background-color: #38bdf8;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
