@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import date, timedelta
 
 
 def init_db():
@@ -30,18 +31,55 @@ def init_db():
         )
     ''')
 
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS missions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            mission_type TEXT NOT NULL,
+            status TEXT DEFAULT 'active',
+            due_date TEXT,
+            created_at TEXT DEFAULT CURRENT_DATE
+        )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+
+def fail_overdue_missions():
+    conn = sqlite3.connect('app.db')
+    cursor = conn.cursor()
+    today = date.today().isoformat()
+
+    cursor.execute("""
+        UPDATE missions
+        SET status = 'failed'
+        WHERE status = 'active'
+        AND due_date IS NOT NULL
+        AND due_date < ?
+    """, (today,))
+
     conn.commit()
     conn.close()
 
 
 def get_mission_control_data():
+    fail_overdue_missions()
+
     conn = sqlite3.connect('app.db')
     conn.row_factory = sqlite3.Row
 
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM mission_control')
 
-    rows = cursor.fetchall()
+    legacy_rows = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM missions WHERE status = 'active'")
+    active_rows = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM missions WHERE status = 'failed'")
+    failed_rows = cursor.fetchall()
+
     conn.close()
 
     daily_missions = []
@@ -51,14 +89,28 @@ def get_mission_control_data():
     XP_points = 0
     streaks = 0
 
-    for row in rows:
-        daily_missions.append(row['daily_mission'])
-        weekly_missions.append(row['weekly_missions'])
-        long_term_goals.append(row['long_term_goals'])
+    for row in legacy_rows:
+        if row['daily_mission']:
+            daily_missions.append(row['daily_mission'])
+        if row['weekly_missions']:
+            weekly_missions.append(row['weekly_missions'])
+        if row['long_term_goals']:
+            long_term_goals.append(row['long_term_goals'])
         if row['failed_missions']:
             failed_missions.append(row['failed_missions'])
         XP_points += row['XP_points']
         streaks += row['streaks']
+
+    for row in active_rows:
+        if row['mission_type'] == 'daily':
+            daily_missions.append(row['title'])
+        elif row['mission_type'] == 'weekly':
+            weekly_missions.append(row['title'])
+        elif row['mission_type'] == 'long_term':
+            long_term_goals.append(row['title'])
+
+    for row in failed_rows:
+        failed_missions.append(row['title'])
 
     return {
         'daily_missions': daily_missions,
@@ -67,6 +119,7 @@ def get_mission_control_data():
         'XP_points': XP_points,
         'streaks': streaks,
         'failed_missions': failed_missions,
+        'failed_count': len(failed_missions),
     }
 
 
@@ -115,49 +168,36 @@ def get_mission_data():
     }
 
 def add_mission_control_data(daily, weekly, long_term):
+    if daily:
+        add_daily_mission(daily)
+    if weekly:
+        add_weekly_mission(weekly)
+    if long_term:
+        add_long_term_goal(long_term)
+
+
+def add_mission(title, mission_type, days_until_due):
+    if not title:
+        return
+
     conn = sqlite3.connect('app.db')
     cursor = conn.cursor()
+    due_date = (date.today() + timedelta(days=days_until_due)).isoformat()
 
     cursor.execute("""
-            INSERT INTO mission_control (daily_mission, weekly_missions, long_term_goals)
-            VALUES (?, ?, ?)
-        """, (daily, weekly, long_term))
+        INSERT INTO missions (title, mission_type, status, due_date)
+        VALUES (?, ?, 'active', ?)
+    """, (title, mission_type, due_date))
 
     conn.commit()
     conn.close()
+
 
 def add_daily_mission(mission):
-    conn = sqlite3.connect('app.db')
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        INSERT INTO mission_control (daily_mission, weekly_missions, long_term_goals)
-        VALUES (?, '', '')
-    """, (mission,))
-
-    conn.commit()
-    conn.close()
+    add_mission(mission, 'daily', 0)
 
 def add_weekly_mission(mission):
-    conn = sqlite3.connect('app.db')
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        INSERT INTO mission_control (daily_mission, weekly_missions, long_term_goals)
-                   VALUES ('', ?, '')
-    """, (mission,))
-
-    conn.commit()
-    conn.close()
+    add_mission(mission, 'weekly', 7)
 
 def add_long_term_goal(goal):
-    conn = sqlite3.connect('app.db')
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        INSERT INTO mission_control (daily_mission, weekly_missions, long_term_goals)
-        VALUES ('', '', ?)
-    """, (goal,))
-
-    conn.commit()
-    conn.close()
+    add_mission(goal, 'long_term', 90)

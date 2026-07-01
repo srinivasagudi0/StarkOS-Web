@@ -8,6 +8,7 @@ function MissionControl() {
     XP_points: 0,
     streaks: 0,
     failed_missions: [],
+    failed_count: 0,
   })
   const [missionLoading, setMissionLoading] = useState(true)
 
@@ -144,7 +145,7 @@ function MissionControl() {
         <div className="card mission-card">
           <div className="mission-header">
             <div className="mission-icon">🛠️</div>
-            <h2>Failed Mission</h2> 
+            <h2>Failed Mission: {missionData.failed_count}</h2> 
           </div>
           <ul>
             {missionData.failed_missions.length === 0 ? (
