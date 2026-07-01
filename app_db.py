@@ -125,3 +125,39 @@ def add_mission_control_data(daily, weekly, long_term):
 
     conn.commit()
     conn.close()
+
+def add_daily_mission(mission):
+    conn = sqlite3.connect('app.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO mission_control (daily_mission, weekly_missions, long_term_goals)
+        VALUES (?, '', '')
+    """, (mission,))
+
+    conn.commit()
+    conn.close()
+
+def add_weekly_mission(mission):
+    conn = sqlite3.connect('app.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO mission_control (daily_mission, weekly_missions, long_term_goals)
+                   VALUES ('', ?, '')
+    """, (mission,))
+
+    conn.commit()
+    conn.close()
+
+def add_long_term_goal(goal):
+    conn = sqlite3.connect('app.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO mission_control (daily_mission, weekly_missions, long_term_goals)
+        VALUES ('', '', ?)
+    """, (goal,))
+
+    conn.commit()
+    conn.close()

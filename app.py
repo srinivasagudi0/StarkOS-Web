@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data
+from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal
 from openai import OpenAI
 import os
 
@@ -189,11 +189,20 @@ def ai_forge():
 @app.route('/api/apply_plan', methods=['POST'])
 def apply_plan():
     data = request.get_json () or {}
-    daily = data.get("daily", [])
-    weekly = data.get("weekly", [])
-    long_term = data.get("long_term", [])
+    daily = data.get("daily", "")
+    weekly = data.get("weekly", "")
+    long_term = data.get("long_term", "")
 
-    add_mission_control_data(daily, weekly, long_term)
+    if long_term and daily and weekly:
+        add_mission_control_data(daily, weekly, long_term)
+    else:
+        if daily:
+
+            add_daily_mission(daily)
+        if weekly:
+            add_weekly_mission(weekly)
+        if long_term:
+            add_long_term_goal(long_term)
     return jsonify({"message": "Plan applied successfully."})
 
 if __name__ == "__main__":
