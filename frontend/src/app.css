@@ -208,3 +208,31 @@ nav a:hover {
   transform: translateY(-3px);
 }
 
+.forge-result {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg,#0398a0, #0f5f5e, #020617);
+  border: 1px solid #38bdf8;
+  border-radius: 1.5rem;
+  color: white;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+}
+
+.forge-result h3 {
+  margin-top: 0;
+  color: #00080b;
+}
+
+.forge-result pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.forge-result:hover {
+  transform: translateY(-4px);
+  transition: 0.2s ease;
+}
+

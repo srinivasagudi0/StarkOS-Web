@@ -57,9 +57,14 @@ function MissionForge() {
 
           {loading && <p>Generating missions...</p>}
 
-          {result && (
-            <pre>{result}</pre>
-          )}
+
+            {result && (
+    <div className="forge-result">
+      <h3>Generated Mission Plan</h3>
+      <pre>{result}</pre>
+    </div>
+  )}
+
         </div>
 
         <br />
