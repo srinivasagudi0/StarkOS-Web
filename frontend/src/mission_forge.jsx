@@ -5,7 +5,10 @@ function MissionForge() {
   const [result, setResult] = useState("")
   const [plan, setPlan] = useState(null)
   const [error, setError] = useState("")
+  const [showCustomAdd, setShowCustomAdd] = useState(false)
   const [loading, setLoading] = useState(false)
+
+
 
   async function generateMissions() {
     if (!input.trim()) {
@@ -72,7 +75,7 @@ function MissionForge() {
       </div>
 
       <section className="forge-text1">
-        <h1>Beta: Quick Add with AI</h1>
+        <h1>Quick Add with AI</h1>
 
         <div className="card advice-card forge-panel">
           <p>Describe your goal. AI will turn it into missions.</p>
@@ -115,10 +118,47 @@ function MissionForge() {
               <pre>{result}</pre>
             </div>
           )}
+
         </div>
+        <button className="mission-button" onClick={() => setShowCustomAdd(!showCustomAdd)}>
+          {showCustomAdd ? "Hide Custom Add ˰" : "Show Custom Add ⌄"}
+        </button>
+        
+         {showCustomAdd && (
+  <div className="custom-add">
+    <h1>Custom Add</h1>
+
+    <div className="card-rows">
+      <div className="card mission-card">
+        <h3>Daily Mission</h3>
+        <p>Enter a daily mission to add to your plan.</p>
+        <textarea placeholder="Daily mission" />
+        <button className="mission-button">Add Daily Mission</button>
+      </div>
+
+      <div className="card mission-card">
+        <h3>Weekly Mission</h3>
+        <p>Enter a weekly mission to add to your plan.</p>
+        <textarea placeholder="Weekly mission" />
+        <button className="mission-button">Add Weekly Mission</button>
+      </div>
+
+      <div className="card mission-card">
+        <h3>Long-term Mission</h3>
+        <p>Enter a long-term mission to add to your plan.</p>
+        <textarea placeholder="Long-term mission" />
+        <button className="mission-button">Add Long-term Mission</button>
+      </div>
+    </div>
+  </div>
+)}
       </section>
+      
+
+
     </main>
   )
 }
 
 export default MissionForge;
+
