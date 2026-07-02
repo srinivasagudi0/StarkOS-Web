@@ -7,8 +7,9 @@ function MissionForge() {
   const [error, setError] = useState("")
   const [showCustomAdd, setShowCustomAdd] = useState(false)
   const [loading, setLoading] = useState(false)
-
-
+  const [dailyInput, setDailyInput] = useState("")
+  const [weeklyInput, setWeeklyInput] = useState("")
+  const [longTermInput, setLongTermInput] = useState("")
 
   async function generateMissions() {
     if (!input.trim()) {

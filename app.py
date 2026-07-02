@@ -205,6 +205,35 @@ def apply_plan():
             add_long_term_goal(long_term)
     return jsonify({"message": "Plan applied successfully."})
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/api/add_daily', methods=['POST'])
+def add_daily():
+    data = request.get_json() or {}
+    daily = data.get("daily", "")
+    if daily:
+        add_daily_mission(daily)
+        return jsonify({"message": "Daily mission added successfully."})
+    else:
+        return jsonify({"message": "Please provide a daily mission."}), 400
 
+@app.route('/api/add_weekly', methods=['POST'])
+def add_weekly():
+    data = request.get_json() or {}
+    weekly = data.get("weekly", "")
+    if weekly:
+        add_weekly_mission(weekly)
+        return jsonify({"message": "Weekly mission added successfully."})
+    else:
+        return jsonify({"message": "Please provide a weekly mission."}), 400
+
+@app.route('/api/add_long_term', methods=['POST'])
+def add_long_term():
+    data = request.get_json() or {}
+    long_term = data.get("long_term", "")
+    if long_term:
+        add_long_term_goal(long_term)
+        return jsonify({"message": "Long-term goal added successfully."})
+    else:
+        return jsonify({"message": "Please provide a long-term goal."}), 400
+
+if __name__ == "__main__":
+    app.run(debug=True)sf
