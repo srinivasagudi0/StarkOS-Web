@@ -236,4 +236,4 @@ def add_long_term():
         return jsonify({"message": "Please provide a long-term goal."}), 400
 
 if __name__ == "__main__":
-    app.run(debug=True)sf
+    app.run(debug=True)

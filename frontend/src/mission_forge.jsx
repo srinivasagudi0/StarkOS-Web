@@ -69,6 +69,16 @@ function MissionForge() {
       })
   }
 
+  function addCustomMission(type, value) {
+    fetch(`/api/add_${type}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ [type]: value }),
+    })
+      .then((response) => response.json())
+      .then((data) => setResult(data.message))
+  }
+
   return (
     <main className="forge-page">
       <div className="title3">
@@ -133,22 +143,22 @@ function MissionForge() {
       <div className="card mission-card">
         <h3>Daily Mission</h3>
         <p>Enter a daily mission to add to your plan.</p>
-        <textarea placeholder="Daily mission" />
-        <button className="mission-button">Add Daily Mission</button>
+        <textarea placeholder="Daily mission" value={dailyInput} onChange={(event) => setDailyInput(event.target.value)} />
+        <button className="mission-button" onClick={() => addCustomMission("daily", dailyInput)}>Add Daily Mission</button>
       </div>
 
       <div className="card mission-card">
         <h3>Weekly Mission</h3>
         <p>Enter a weekly mission to add to your plan.</p>
-        <textarea placeholder="Weekly mission" />
-        <button className="mission-button">Add Weekly Mission</button>
+        <textarea placeholder="Weekly mission" value={weeklyInput} onChange={(event) => setWeeklyInput(event.target.value)} />
+        <button className="mission-button" onClick={() => addCustomMission("weekly", weeklyInput)}>Add Weekly Mission</button>
       </div>
 
       <div className="card mission-card">
         <h3>Long-term Mission</h3>
         <p>Enter a long-term mission to add to your plan.</p>
-        <textarea placeholder="Long-term mission" />
-        <button className="mission-button">Add Long-term Mission</button>
+        <textarea placeholder="Long-term mission" value={longTermInput} onChange={(event) => setLongTermInput(event.target.value)} />
+        <button className="mission-button" onClick={() => addCustomMission("long_term", longTermInput)}>Add Long-term Mission</button>
       </div>
     </div>
   </div>
@@ -162,4 +172,3 @@ function MissionForge() {
 }
 
 export default MissionForge;
-
