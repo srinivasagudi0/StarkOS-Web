@@ -3,6 +3,7 @@ import CommandCenter from './command_center'
 import MissionControl from './mission_control'
 import MissionForge from './mission_forge'
 //import MissionTracker from './mission_tracker'
+import About from './About'
 
 
 function App() {
@@ -12,14 +13,15 @@ function App() {
       <nav>
         <Link to="/">Command Center</Link>
         <Link to="/mission-control">Mission Control</Link>
-
         <Link to="/missions-forge">Mission Forge</Link>
+        <Link to="/About">About</Link>
       </nav>
 
       <Routes>
         <Route path="/" element={<CommandCenter />} />
         <Route path="/mission-control" element={<MissionControl />} />
         <Route path="/missions-forge" element={<MissionForge />} />
+        <Route path="/About" element={<About />} />
         
       </Routes>
     </BrowserRouter>

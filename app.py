@@ -235,5 +235,13 @@ def add_long_term():
     else:
         return jsonify({"message": "Please provide a long-term goal."}), 400
 
+# redirect url = https://stark.gg/auth/callback
+
+@app.route('/api/hackatime/callback')
+def hackatime_callback():
+    code = request.args.get('code')
+    return f"code: {code}"
+
 if __name__ == "__main__":
     app.run(debug=True)
+# temp oauth code =  gUSjMnaV5y9GPvGypM5pBTfglKQrbeUCnAYJ3vVkdww

@@ -39,6 +39,15 @@ body {
   font-size: 1rem;
 }
 
+.title4 {
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(135deg, rgb(243, 126, 18) 0%, rgb(13, 175, 181) 25%, rgb(68, 140, 202) 50%, rgb(211, 92, 7) 75%, rgb(195, 41, 41) 90%, black 100%);
+  border: 2px solid rgb(0, 26, 255);
+  text-align: center;
+  font-size: 1rem;
+}
+
 .cards-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -287,4 +296,17 @@ nav a:hover {
   color: #38bdf8;
   font-size: 2rem;
   margin-bottom: 1rem;
+}
+
+.about-text {
+  padding: 1rem;
+  font-size: large;
+}
+
+.about-text p {
+  color: white;
+  max-width: 950px;
+  margin: 0 auto;
+  line-height: 1.6;
+  text-align: left;
 }
