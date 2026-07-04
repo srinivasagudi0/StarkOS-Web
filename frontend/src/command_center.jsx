@@ -35,6 +35,18 @@ function CommandCenter() {
       })
   }, [])
 
+  const [hours, setHours] = useState(0)
+  useEffect(() => {
+  fetch('/api/hackatime/hours')
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.connected) {
+        setHours(data.hours)
+      }
+    })
+}, [])
+
+
   const [warnings, setWarnings] = useState([])
   const [warningsLoading, setWarningsLoading] = useState(true)
 
@@ -93,10 +105,11 @@ function CommandCenter() {
               <div className='mission-icon'>⏱️</div>
 
             <div className="content">
-              <h4>Code Hours (Yesterday)</h4>
-
+              <h1>Code Hours</h1>
               <div className="stats">
-                <span className="number">{CommandData.code_hours}</span>
+                <span className="number">
+                  {hours ?? CommandData.code_hours}
+                </span>
                 <span className="label">Hours</span>
               </div>
             </div>
