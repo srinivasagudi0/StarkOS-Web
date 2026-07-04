@@ -146,14 +146,14 @@ function MissionForge() {
         <textarea placeholder="Daily mission" value={dailyInput} onChange={(event) => setDailyInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("daily", dailyInput)}>Add Daily Mission</button>
       </div>
-
+          <br />
       <div className="card mission-card">
         <h3>Weekly Mission</h3>
         <p>Enter a weekly mission to add to your plan.</p>
         <textarea placeholder="Weekly mission" value={weeklyInput} onChange={(event) => setWeeklyInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("weekly", weeklyInput)}>Add Weekly Mission</button>
       </div>
-
+          <br />
       <div className="card mission-card">
         <h3>Long-term Mission</h3>
         <p>Enter a long-term mission to add to your plan.</p>
@@ -164,9 +164,6 @@ function MissionForge() {
   </div>
 )}
       </section>
-      
-
-
     </main>
   )
 }
