@@ -294,10 +294,24 @@ def hackatime_hours():
 
     return jsonify({"connected": True, "hours": round(seconds / 3600, 2)})
 
+@app.route('/api/hackatime/streak')
+def hackatime_streak():
+    token = session.get("hackatime_token")
+
+    if not token:
+        return jsonify({"connected": False, "streak": 0})
+    
+    response = requests.get(
+        "https://hackatime.hackclub.com/api/v1/authenticated/streak",
+        headers={
+            "Authorization": f"Bearer {token}"
+        }
+    )
+
+    data = response.json()
+    streak = data.get("streak_days", 0)
+
+    return jsonify({"connected": True, "streak": streak})
+
 if __name__ == "__main__":
     app.run(debug=True)
-# temp oauth code =  gUSjMnaV5y9GPvGypM5pBTfglKQrbeUCnAYJ3vVkdww
-
-# export HACKATIME_CLIENT_ID="XwCMiD04MF4bsTaLJ9cmLTFggoFVRiHBNHVKHff6e4U"
-# export HACKATIME_CLIENT_SECRET="Nhfa5j1YLBqNShGFYpisywVp7Hx09RAPpXjEMw6rdFA"
-

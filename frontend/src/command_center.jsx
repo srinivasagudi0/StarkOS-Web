@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 
 function CommandCenter() {
   const [CommandData, setCommandData] = useState([])
@@ -46,6 +46,16 @@ function CommandCenter() {
     })
 }, [])
 
+  const [streak, setStreak] = useState(null)
+  useEffect(() => {
+  fetch('/api/hackatime/streak')
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.connected) {
+        setStreak(data.streak)
+      }
+    })
+}, [])
 
   const [warnings, setWarnings] = useState([])
   const [warningsLoading, setWarningsLoading] = useState(true)
@@ -162,7 +172,7 @@ function CommandCenter() {
         <div className="cards-row bottom-cards">
         <div className="card">
           <div className="mission-icon">🔥</div>
-          <h3>Streaks : {CommandData.streaks}</h3>
+          <h1>Streaks : {streak}</h1>
           </div>
        <div className="card">
         <div className="mission-icon">🧠</div>
