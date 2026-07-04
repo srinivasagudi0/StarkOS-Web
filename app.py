@@ -1,9 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect, session
+import requests
+from datetime import date
 from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal
 from openai import OpenAI
 import os
 
 app = Flask(__name__)
+app.secret_key = "dev-secret-key"
 
 init_db()
 
@@ -235,13 +238,66 @@ def add_long_term():
     else:
         return jsonify({"message": "Please provide a long-term goal."}), 400
 
-# redirect url = https://stark.gg/auth/callback
+@app.route('/api/hackatime/login')
+def hackatime_login():
+    client_id = os.getenv("HACKATIME_CLIENT_ID")
+    redirect_uri = "http://localhost:5000/api/hackatime/callback"
+
+    return redirect(
+        "https://hackatime.hackclub.com/oauth/authorize"
+        f"?client_id={client_id}"
+        f"&redirect_uri={redirect_uri}"
+        "&response_type=code"
+        "&scope=profile+read"
+    )
 
 @app.route('/api/hackatime/callback')
 def hackatime_callback():
-    code = request.args.get('code')
-    return f"code: {code}"
+    code = request.args.get("code")
+    response = requests.post(
+        "https://hackatime.hackclub.com/oauth/token",
+        data={
+            "client_id": os.getenv('HACKATIME_CLIENT_ID'),
+            "client_secret": os.getenv('HACKATIME_CLIENT_SECRET'),
+            "code": code,
+            "redirect_uri": "http://localhost:5000/api/hackatime/callback",
+            "grant_type": "authorization_code"
+        },
+    )
+    data = response.json()
+    session["hackatime_token"] = data.get("access_token")
+
+    return redirect("http://localhost:5173/")
+
+@app.route('/api/hackatime/hours')
+def hackatime_hours():
+    token = session.get("hackatime_token")
+
+    if not token:
+        return jsonify({"connected": False, "hours": 0})
+
+    today = date.today().isoformat()
+
+    response = requests.get(
+        "https://hackatime.hackclub.com/api/v1/authenticated/hours",
+        headers={
+            "Authorization": f"Bearer {token}"
+        },
+        params={
+            "start_date": today,
+            "end_date": today
+        }
+    )
+
+    data = response.json()
+    seconds = data.get("total_seconds", 0)
+
+    return jsonify({"connected": True, "hours": round(seconds / 3600, 2)})
 
 if __name__ == "__main__":
     app.run(debug=True)
 # temp oauth code =  gUSjMnaV5y9GPvGypM5pBTfglKQrbeUCnAYJ3vVkdww
+
+# export HACKATIME_CLIENT_ID="XwCMiD04MF4bsTaLJ9cmLTFggoFVRiHBNHVKHff6e4U"
+# export HACKATIME_CLIENT_SECRET="Nhfa5j1YLBqNShGFYpisywVp7Hx09RAPpXjEMw6rdFA"
+
