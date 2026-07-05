@@ -313,5 +313,14 @@ def hackatime_streak():
 
     return jsonify({"connected": True, "streak": streak})
 
+@app.route('/api/command-center/focus-score')
+def focus():
+    hours = hackatime_hours().get_json().get("hours", 0)
+    focus_score = min(hours * 20, 100)
+    focus_score = round(focus_score)
+
+    return jsonify({"connected": True, "focus_score": focus_score})
+
+
 if __name__ == "__main__":
     app.run(debug=True)

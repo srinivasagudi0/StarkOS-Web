@@ -76,6 +76,23 @@ function CommandCenter() {
       })
   }, [])
 
+  const [focus, setFocus] = useState(null)
+  useEffect(() => {
+    fetch('/api/command-center/focus-score')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.connected) {
+          setFocus(data.focus_score)
+        }
+      })
+      .catch(() => {
+        setFocus(0)
+      })
+  }, [])
+
+  
+
+
   const [advice, setAdvice] = useState([])
   const [adviceLoading, setAdviceLoading] = useState(true)
   
@@ -176,7 +193,7 @@ function CommandCenter() {
           </div>
        <div className="card">
         <div className="mission-icon">🧠</div>
-        <h3>Focus Score: {CommandData.focus_score}</h3>
+        <h1>Focus Score: {focus}</h1>
         </div>
         <div className="card">
           <div className="mission-icon">⚡</div>
