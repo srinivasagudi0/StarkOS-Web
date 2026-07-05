@@ -90,6 +90,20 @@ function CommandCenter() {
       })
   }, [])
 
+  const [energy, setEnergy] = useState(null)
+  useEffect(() => {
+    fetch('/api/command-center/energy-score')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.connected) {
+          setEnergy(data.energy_score)
+        }
+      })
+      .catch(() => {
+        setEnergy(0)
+      })
+  }, [])
+
   
 
 
@@ -197,7 +211,7 @@ function CommandCenter() {
         </div>
         <div className="card">
           <div className="mission-icon">⚡</div>
-        <h3>Energy Score: {CommandData.energy_score}</h3>
+        <h3>Energy Score: {energy}</h3>
         </div>
         
         </div>
@@ -218,4 +232,3 @@ function CommandCenter() {
 export default CommandCenter;
 
 // done!!
-

@@ -321,6 +321,42 @@ def focus():
 
     return jsonify({"connected": True, "focus_score": focus_score})
 
+@app.route('/api/command-center/energy-score')
+def energy():
+    hcq = hackatime_streak().get_json()
+    st = hackatime_streak().get_json()
+    mc = get_mission_control_data()
+
+    hours = float(hcq.get("hours", 0))
+    streak = int(st.get("streak", 0))
+
+    daily = len(mc.get("daily_missions", []))  
+    weekly = len(mc.get("weekly_missions", []))
+    long = len(mc.get("long_term_goals", []))
+    failed = len(mc.get("failed_missions", []))
+
+    energy = 100
+    if hours == 0:
+        energy -= 20
+    elif hours < 2:
+        energy += 5
+    elif hours < 4:
+        energy += 2
+    elif hours < 6:
+        energy -= 8
+    else:
+        energy -=18
+    
+    if streak >= 7:
+        energy += 10
+    elif streak == 0:
+        energy -= 5
+
+    if daily and weekly and long:
+        energy +=5
+    
+    energy = max(0, min(100, round(energy)))
+    return jsonify({"connected": True, "energy_score": energy})
 
 if __name__ == "__main__":
     app.run(debug=True)
