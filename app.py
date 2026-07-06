@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, redirect, session
 import requests
 from datetime import date
-from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal, update_mission_status
+from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal, update_mission_status, recover_mission
 from openai import OpenAI
 import os
 
@@ -240,6 +240,14 @@ def add_long_term():
 
 @app.route('/api/missions/<int:mission_id>/<action>', methods=['POST'])
 def update_mission(mission_id, action):
+    if action == 'recover':
+        recovered = recover_mission(mission_id)
+
+        if not recovered:
+            return jsonify({"message": "Mission not found."}), 404
+
+        return jsonify({"message": "Mission recovered and moved back to active."})
+
     action_to_status = {
         'complete': 'completed',
         'fail': 'failed',

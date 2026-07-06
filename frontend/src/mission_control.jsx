@@ -86,6 +86,37 @@ function MissionControl() {
     )
   }
 
+  function renderFailedMissions() {
+    const realFailedMissions = missionData.failed_mission_items || []
+    const realFailedTitles = realFailedMissions.map((mission) => mission.title)
+    const legacyFailedMissions = missionData.failed_missions.filter(
+      (mission) => !realFailedTitles.includes(mission)
+    )
+
+    if (realFailedMissions.length === 0 && legacyFailedMissions.length === 0) {
+      return <li>No failed missions.</li>
+    }
+
+    return (
+      <>
+        {legacyFailedMissions.map((mission, index) => (
+          <li key={`failed-legacy-${index}`}>{mission}</li>
+        ))}
+
+        {realFailedMissions.map((mission) => (
+          <li className="mission-action-item" key={mission.id}>
+            <span>{mission.title}</span>
+
+            <div className="mission-actions">
+              <button onClick={() => updateMission(mission.id, 'recover')}>Recover</button>
+              <button onClick={() => updateMission(mission.id, 'delete')}>Delete</button>
+            </div>
+          </li>
+        ))}
+      </>
+    )
+  }
+
 
   const [streak, setStreak] = useState(null)
 
@@ -201,13 +232,7 @@ function MissionControl() {
             <h2>Failed Mission: {missionData.failed_count}</h2> 
           </div>
           <ul>
-            {missionData.failed_missions.length === 0 ? (
-              <li>No failed missions.</li>
-            ) : (
-              missionData.failed_missions.map((mission, index) => (
-                <li key={index}>{mission}</li>
-              ))
-            )}
+            {renderFailedMissions()}
           </ul>
         </div>
       </div>

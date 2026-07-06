@@ -272,3 +272,36 @@ def update_mission_status(mission_id, status):
     conn.close()
 
     return changed
+
+
+def recover_mission(mission_id):
+    conn = sqlite3.connect('app.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT mission_type FROM missions WHERE id = ?", (mission_id,))
+    mission = cursor.fetchone()
+
+    if not mission:
+        conn.close()
+        return False
+
+    days_by_type = {
+        'daily': 1,
+        'weekly': 7,
+        'long_term': 90,
+    }
+
+    due_date = (date.today() + timedelta(days=days_by_type.get(mission['mission_type'], 1))).isoformat()
+
+    cursor.execute("""
+        UPDATE missions
+        SET status = 'active',
+            due_date = ?
+        WHERE id = ?
+    """, (due_date, mission_id))
+
+    conn.commit()
+    conn.close()
+
+    return True
