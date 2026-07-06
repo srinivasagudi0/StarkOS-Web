@@ -146,7 +146,7 @@ function CommandCenter() {
               <div className='mission-icon'>⏱️</div>
 
             <div className="content">
-              <h1>Code Hours</h1>
+              <h1>Coded Hours</h1>
               <div className="stats">
                 <span className="number">
                   {hours ?? CommandData.code_hours}
@@ -203,7 +203,7 @@ function CommandCenter() {
         <div className="cards-row bottom-cards">
         <div className="card">
           <div className="mission-icon">🔥</div>
-          <h1>Streaks : {streak}</h1>
+          <h1>Streak : {streak}</h1>
           </div>
        <div className="card">
         <div className="mission-icon">🧠</div>
