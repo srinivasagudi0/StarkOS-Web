@@ -211,7 +211,7 @@ function CommandCenter() {
         </div>
         <div className="card">
           <div className="mission-icon">⚡</div>
-        <h3>Energy Score: {energy}</h3>
+        <h1>Energy Score: {energy}</h1>
         </div>
         
         </div>

@@ -74,7 +74,8 @@ function About() {
           <p>
             I built StarkOS while learning full-stack development. This project
             is my way of practicing React, Flask, APIs, databases, OAuth, and
-            clean UI design while making something I would actually use.
+            clean UI design while making something I would actually use. Also If you have any
+            questions about how each features works, it is listed in the README of the repo.
           </p>
           <p>
             I wanted the app to feel like a command center for my own progress:
@@ -88,6 +89,7 @@ function About() {
             to give me feedback on what you want to see in the app or any bugs you find. You can reach me in
             slack at 'srinivasagudi0'.
           </p>
+          <h1>Hope you guys like it!</h1>
         </div>
       </section>
 

@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, redirect, session
 import requests
 from datetime import date
-from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal
+from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal, update_mission_status
 from openai import OpenAI
 import os
 
@@ -237,6 +237,26 @@ def add_long_term():
         return jsonify({"message": "Long-term goal added successfully."})
     else:
         return jsonify({"message": "Please provide a long-term goal."}), 400
+
+@app.route('/api/missions/<int:mission_id>/<action>', methods=['POST'])
+def update_mission(mission_id, action):
+    action_to_status = {
+        'complete': 'completed',
+        'fail': 'failed',
+        'delete': 'deleted',
+    }
+
+    status = action_to_status.get(action)
+
+    if not status:
+        return jsonify({"message": "Invalid mission action."}), 400
+
+    updated = update_mission_status(mission_id, status)
+
+    if not updated:
+        return jsonify({"message": "Mission not found."}), 404
+
+    return jsonify({"message": f"Mission marked as {status}."})
 
 @app.route('/api/hackatime/login')
 def hackatime_login():

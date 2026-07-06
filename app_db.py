@@ -74,11 +74,14 @@ def get_mission_control_data():
 
     legacy_rows = cursor.fetchall()
 
-    cursor.execute("SELECT * FROM missions WHERE status = 'active'")
+    cursor.execute("SELECT * FROM missions WHERE status = 'active' ORDER BY due_date, id")
     active_rows = cursor.fetchall()
 
-    cursor.execute("SELECT * FROM missions WHERE status = 'failed'")
+    cursor.execute("SELECT * FROM missions WHERE status = 'failed' ORDER BY id DESC")
     failed_rows = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM missions WHERE status = 'completed'")
+    completed_rows = cursor.fetchall()
 
     conn.close()
 
@@ -86,40 +89,86 @@ def get_mission_control_data():
     weekly_missions = []
     long_term_goals = []
     failed_missions = []
+    legacy_daily_missions = []
+    legacy_weekly_missions = []
+    legacy_long_term_goals = []
+    daily_mission_items = []
+    weekly_mission_items = []
+    long_term_goal_items = []
+    failed_mission_items = []
     XP_points = 0
     streaks = 0
 
     for row in legacy_rows:
         if row['daily_mission']:
             daily_missions.append(row['daily_mission'])
+            legacy_daily_missions.append(row['daily_mission'])
         if row['weekly_missions']:
             weekly_missions.append(row['weekly_missions'])
+            legacy_weekly_missions.append(row['weekly_missions'])
         if row['long_term_goals']:
             long_term_goals.append(row['long_term_goals'])
+            legacy_long_term_goals.append(row['long_term_goals'])
         if row['failed_missions']:
             failed_missions.append(row['failed_missions'])
         XP_points += row['XP_points']
         streaks += row['streaks']
 
     for row in active_rows:
+        mission_item = {
+            'id': row['id'],
+            'title': row['title'],
+            'mission_type': row['mission_type'],
+            'status': row['status'],
+            'due_date': row['due_date'],
+        }
+
         if row['mission_type'] == 'daily':
             daily_missions.append(row['title'])
+            daily_mission_items.append(mission_item)
         elif row['mission_type'] == 'weekly':
             weekly_missions.append(row['title'])
+            weekly_mission_items.append(mission_item)
         elif row['mission_type'] == 'long_term':
             long_term_goals.append(row['title'])
+            long_term_goal_items.append(mission_item)
 
     for row in failed_rows:
         failed_missions.append(row['title'])
+        failed_mission_items.append({
+            'id': row['id'],
+            'title': row['title'],
+            'mission_type': row['mission_type'],
+            'status': row['status'],
+            'due_date': row['due_date'],
+        })
+
+    for row in completed_rows:
+        if row['mission_type'] == 'daily':
+            XP_points += 20
+        elif row['mission_type'] == 'weekly':
+            XP_points += 50
+        elif row['mission_type'] == 'long_term':
+            XP_points += 120
+
+    XP_points = max(XP_points - (len(failed_rows) * 25), 0)
 
     return {
         'daily_missions': daily_missions,
         'weekly_missions': weekly_missions,
         'long_term_goals': long_term_goals,
+        'legacy_daily_missions': legacy_daily_missions,
+        'legacy_weekly_missions': legacy_weekly_missions,
+        'legacy_long_term_goals': legacy_long_term_goals,
+        'daily_mission_items': daily_mission_items,
+        'weekly_mission_items': weekly_mission_items,
+        'long_term_goal_items': long_term_goal_items,
         'XP_points': XP_points,
         'streaks': streaks,
         'failed_missions': failed_missions,
+        'failed_mission_items': failed_mission_items,
         'failed_count': len(failed_missions),
+        'completed_count': len(completed_rows),
     }
 
 
@@ -201,3 +250,25 @@ def add_weekly_mission(mission):
 
 def add_long_term_goal(goal):
     add_mission(goal, 'long_term', 90)
+
+
+def update_mission_status(mission_id, status):
+    allowed_statuses = {'active', 'completed', 'failed', 'deleted'}
+
+    if status not in allowed_statuses:
+        return False
+
+    conn = sqlite3.connect('app.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE missions
+        SET status = ?
+        WHERE id = ?
+    """, (status, mission_id))
+
+    changed = cursor.rowcount > 0
+    conn.commit()
+    conn.close()
+
+    return changed
