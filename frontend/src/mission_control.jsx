@@ -177,7 +177,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.daily_mission_items,
               missionData.legacy_daily_missions,
-              "No daily missions available."
+              "Nothing to do today!"
             )}
           </ul>
         </div>
@@ -191,7 +191,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.weekly_mission_items,
               missionData.legacy_weekly_missions,
-              "No weekly missions available."
+              "No weeekly mission set, enjoy your free time!"
             )}
           </ul>
         </div>
@@ -205,7 +205,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.long_term_goal_items,
               missionData.legacy_long_term_goals,
-              "No long-term goals available."
+              "No long-term goals set, set some to keep yourself motivated!"
             )}
           </ul>
         </div>
