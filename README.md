@@ -45,3 +45,24 @@ The mission control is where you can manage you tasks not just view them. The mi
 - **Failed Missions Recovery** - This is where you get suggestions on how to finish your recovery missions.
 
 ![alt text](image.png)
+
+## Mission Forge
+
+This is a simple page, just add eveything you need to do in day, week or long-term.
+
+- **AI Quick Add** - Just say eveything you got to do, and let it pick a best plan for you and fill missions once you accept.
+- Then 3 cards each one is for daily, weekly, and long-term goals.
+
+
+![alt text](image-1.png)
+
+## About Page
+
+Just informs user how to get started with the app and about me and how the app is built.
+
+![alt text](image-2.png)
+![alt text](image-3.png)
+
+# Note
+
+I am so proud to make this project and very excitedd to start on V2 once v1 is approved. Also if you want to, try it out [here](getting-link.com)
