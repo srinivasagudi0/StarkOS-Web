@@ -33,7 +33,15 @@ The command center is the main page of the app. It has
 The mission control is where you can manage you tasks not just view them. The missions are also classified as daily, weekly, long and failed.
 
 - **Daily Missions** - This is where you can view your daily missions. Also if not completed by the midnight it will be transferred to the failed missions section.
-- **Weekly Mission** - Simply missions for yourr week, even this will transfer to failed missins after a week of no change.
-- 
+- **Weekly Mission** - Simply missions for your week, even this will transfer to failed missins after a week of no change.
+- **Long Term Missions** - This shows all your long term goals and these will transfer to failed missions after 90 days.
+- **XP Point** - XP points is calculated as follows:
+    - Daily mission completed = +20 xp
+    - Weekly Mission completed = +50 xp
+    - Long Term Mission completed = +120 xp
+    - Failed Mission = -25 xp
+- **Streak** - The streak is again fetched from `Hackatime` again.
+- **Failed Missions** - This where all your failed missions are stored. You can view them and learn from your mistakes and also recover them if you want to.
+- **Failed Missions Recovery** - This is where you get suggestions on how to finish your recovery missions.
 
 ![alt text](image.png)
