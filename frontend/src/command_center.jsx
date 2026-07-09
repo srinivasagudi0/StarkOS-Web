@@ -35,11 +35,13 @@ function CommandCenter() {
       })
   }, [])
 
-  const [hours, setHours] = useState(0)
+  const [hackatimeConnected, setHackatimeConnected] = useState(false)
+  const [hours, setHours] = useState(null)
   useEffect(() => {
   fetch('/api/hackatime/hours')
     .then((response) => response.json())
     .then((data) => {
+      setHackatimeConnected(data.connected)
       if (data.connected) {
         setHours(data.hours)
       }
@@ -141,6 +143,24 @@ function CommandCenter() {
         </div>  
 
         <br />
+        {!hackatimeConnected && (
+          <div className="connect-card">
+            <div className="mission-header">
+              <div className="mission-icon">🔗</div>
+              <h2>Connect Hackatime</h2>
+            </div>
+
+            <p>
+              Connect Hackatime to show your real coding hours, streak, focus,
+              and energy score. This only takes one login.
+            </p>
+
+            <a className="mission-button connect-button" href="http://localhost:5000/api/hackatime/login">
+              Connect Hackatime
+            </a>
+          </div>
+        )}
+
         <div className="cards-row">
           <div className="card">
               <div className='mission-icon'>⏱️</div>
@@ -203,15 +223,15 @@ function CommandCenter() {
         <div className="cards-row bottom-cards">
         <div className="card">
           <div className="mission-icon">🔥</div>
-          <h1>Streak : {streak}</h1>
+          <h1>Streak : {streak ?? CommandData.streaks}</h1>
           </div>
        <div className="card">
         <div className="mission-icon">🧠</div>
-        <h1>Focus Score: {focus}</h1>
+        <h1>Focus Score: {focus ?? CommandData.focus_score}</h1>
         </div>
         <div className="card">
           <div className="mission-icon">⚡</div>
-        <h1>Energy Score: {energy}</h1>
+        <h1>Energy Score: {energy ?? CommandData.energy_score}</h1>
         </div>
         
         </div>
