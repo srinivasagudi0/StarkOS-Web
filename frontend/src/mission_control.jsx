@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { API_URL } from './api'
 
 function MissionControl() {
   const [missionData, setMissionData] = useState({
@@ -23,7 +24,7 @@ function MissionControl() {
 
   function loadMissionData() {
     setMissionLoading(true)
-    fetch('/api/mission-control')
+    fetch(`${API_URL}/api/mission-control`)
       .then((response) => response.json())
       .then((data) => {
         setMissionData(data)
@@ -35,7 +36,7 @@ function MissionControl() {
   }
 
   useEffect(() => {
-    fetch('/api/mission-control')
+    fetch(`${API_URL}/api/mission-control`)
       .then((response) => response.json())
       .then((data) => {
         setMissionData(data)
@@ -47,7 +48,7 @@ function MissionControl() {
   }, [])
 
   function updateMission(missionId, action) {
-    fetch(`/api/missions/${missionId}/${action}`, {
+    fetch(`${API_URL}/api/missions/${missionId}/${action}`, {
       method: 'POST',
     })
       .then((response) => response.json())
@@ -121,7 +122,7 @@ function MissionControl() {
   const [streak, setStreak] = useState(null)
 
   useEffect(() => {
-    fetch('/api/hackatime/streak')
+    fetch(`${API_URL}/api/hackatime/streak`)
       .then((response) => response.json())
       .then((data) => {
         setStreak(data.streak)
@@ -132,7 +133,7 @@ function MissionControl() {
   const [recoveryLoading, setRecoveryLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/recovery-assistant')
+    fetch(`${API_URL}/api/recovery-assistant`)
         .then((response) => response.json())
         .then((data) => {
             setRecovery(data) // its just full explantion

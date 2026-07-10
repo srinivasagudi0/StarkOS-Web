@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
+import { API_URL } from './api'
 
 function CommandCenter() {
   const [CommandData, setCommandData] = useState([])
   const [commandLoading, setCommandLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/command-center')
+    fetch(`${API_URL}/api/command-center`)
       .then((response) => response.json())
       .then((data) => {
         setCommandData(data)
@@ -24,7 +25,7 @@ function CommandCenter() {
   const [missionLoading, setMissionLoading] = useState(true)
   
   useEffect(() => {
-    fetch('/api/mission-control')
+    fetch(`${API_URL}/api/mission-control`)
       .then((response) => response.json())
       .then((data) => {
         setMissionData(data)
@@ -38,7 +39,7 @@ function CommandCenter() {
   const [hackatimeConnected, setHackatimeConnected] = useState(false)
   const [hours, setHours] = useState(null)
   useEffect(() => {
-  fetch('/api/hackatime/hours')
+  fetch(`${API_URL}/api/hackatime/hours`)
     .then((response) => response.json())
     .then((data) => {
       setHackatimeConnected(data.connected)
@@ -50,7 +51,7 @@ function CommandCenter() {
 
   const [streak, setStreak] = useState(null)
   useEffect(() => {
-  fetch('/api/hackatime/streak')
+  fetch(`${API_URL}/api/hackatime/streak`)
     .then((response) => response.json())
     .then((data) => {
       if (data.connected) {
@@ -63,7 +64,7 @@ function CommandCenter() {
   const [warningsLoading, setWarningsLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/warnings')
+    fetch(`${API_URL}/api/warnings`)
       .then((response) => response.json())
       .then((data) => {
         try {
@@ -80,7 +81,7 @@ function CommandCenter() {
 
   const [focus, setFocus] = useState(null)
   useEffect(() => {
-    fetch('/api/command-center/focus-score')
+    fetch(`${API_URL}/api/command-center/focus-score`)
       .then((response) => response.json())
       .then((data) => {
         if (data.connected) {
@@ -94,7 +95,7 @@ function CommandCenter() {
 
   const [energy, setEnergy] = useState(null)
   useEffect(() => {
-    fetch('/api/command-center/energy-score')
+    fetch(`${API_URL}/api/command-center/energy-score`)
       .then((response) => response.json())
       .then((data) => {
         if (data.connected) {
@@ -113,7 +114,7 @@ function CommandCenter() {
   const [adviceLoading, setAdviceLoading] = useState(true)
   
   useEffect(() => {
-    fetch ('/api/advice')
+    fetch(`${API_URL}/api/advice`)
       .then((response) => response.json())
       .then((data) => {
         setAdvice(data.message)
@@ -155,7 +156,7 @@ function CommandCenter() {
               and energy score. This only takes one login.
             </p>
 
-            <a className="mission-button connect-button" href="http://localhost:5000/api/hackatime/login">
+            <a className="mission-button connect-button" href={`${API_URL}/api/hackatime/login`}>
               Connect Hackatime
             </a>
           </div>

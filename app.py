@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, redirect, session
+from flask_cors import CORS
 import requests
 from datetime import date
 from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal, update_mission_status, recover_mission
@@ -7,6 +8,18 @@ import os
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key"
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "https://stark-os-web-eight.vercel.app")
+BACKEND_URL = os.getenv("BACKEND_URL", "https://starkos-web.onrender.com")
+
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": [FRONTEND_URL],
+        }
+    },
+)
 
 init_db()
 
@@ -269,7 +282,7 @@ def update_mission(mission_id, action):
 @app.route('/api/hackatime/login')
 def hackatime_login():
     client_id = os.getenv("HACKATIME_CLIENT_ID")
-    redirect_uri = "http://localhost:5000/api/hackatime/callback"
+    redirect_uri = f"{BACKEND_URL}/api/hackatime/callback"
 
     return redirect(
         "https://hackatime.hackclub.com/oauth/authorize"
@@ -282,20 +295,21 @@ def hackatime_login():
 @app.route('/api/hackatime/callback')
 def hackatime_callback():
     code = request.args.get("code")
+    redirect_uri = f"{BACKEND_URL}/api/hackatime/callback"
     response = requests.post(
         "https://hackatime.hackclub.com/oauth/token",
         data={
             "client_id": os.getenv('HACKATIME_CLIENT_ID'),
             "client_secret": os.getenv('HACKATIME_CLIENT_SECRET'),
             "code": code,
-            "redirect_uri": "http://localhost:5000/api/hackatime/callback",
+            "redirect_uri": redirect_uri,
             "grant_type": "authorization_code"
         },
     )
     data = response.json()
     session["hackatime_token"] = data.get("access_token")
 
-    return redirect("http://localhost:5173/")
+    return redirect(FRONTEND_URL)
 
 @app.route('/api/hackatime/hours')
 def hackatime_hours():

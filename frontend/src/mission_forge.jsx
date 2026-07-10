@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from './api'
 
 function MissionForge() {
   const [input, setInput] = useState("")
@@ -23,7 +24,7 @@ function MissionForge() {
     setPlan(null)
 
     try {
-      const response = await fetch("/api/ai-forge", {
+      const response = await fetch(`${API_URL}/api/ai-forge`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ input }),
@@ -52,7 +53,7 @@ function MissionForge() {
   }
 
   function applyPlan() {
-    fetch('/api/apply_plan', {
+    fetch(`${API_URL}/api/apply_plan`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ function MissionForge() {
   }
 
   function addCustomMission(type, value) {
-    fetch(`/api/add_${type}`, {
+    fetch(`${API_URL}/api/add_${type}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ [type]: value }),
