@@ -39,7 +39,9 @@ function CommandCenter() {
   const [hackatimeConnected, setHackatimeConnected] = useState(false)
   const [hours, setHours] = useState(null)
   useEffect(() => {
-  fetch(`${API_URL}/api/hackatime/hours`)
+  fetch(`${API_URL}/api/hackatime/hours`, {
+    credentials: 'include',
+  })
     .then((response) => response.json())
     .then((data) => {
       setHackatimeConnected(data.connected)
@@ -51,7 +53,9 @@ function CommandCenter() {
 
   const [streak, setStreak] = useState(null)
   useEffect(() => {
-  fetch(`${API_URL}/api/hackatime/streak`)
+  fetch(`${API_URL}/api/hackatime/streak`, {
+    credentials: 'include',
+  })
     .then((response) => response.json())
     .then((data) => {
       if (data.connected) {
@@ -81,7 +85,9 @@ function CommandCenter() {
 
   const [focus, setFocus] = useState(null)
   useEffect(() => {
-    fetch(`${API_URL}/api/command-center/focus-score`)
+    fetch(`${API_URL}/api/command-center/focus-score`, {
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.connected) {
@@ -95,7 +101,9 @@ function CommandCenter() {
 
   const [energy, setEnergy] = useState(null)
   useEffect(() => {
-    fetch(`${API_URL}/api/command-center/energy-score`)
+    fetch(`${API_URL}/api/command-center/energy-score`, {
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.connected) {

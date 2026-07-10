@@ -8,6 +8,8 @@ import os
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key"
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
+app.config["SESSION_COOKIE_SECURE"] = True
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "https://stark-os-web-eight.vercel.app")
 BACKEND_URL = os.getenv("BACKEND_URL", "https://starkos-web.onrender.com")
@@ -19,6 +21,7 @@ CORS(
             "origins": [FRONTEND_URL],
         }
     },
+    supports_credentials=True,
 )
 
 init_db()
@@ -307,7 +310,12 @@ def hackatime_callback():
         },
     )
     data = response.json()
-    session["hackatime_token"] = data.get("access_token")
+    token = data.get("access_token")
+
+    if not token:
+        return jsonify({"message": "Hackatime login failed. Check your OAuth app settings."}), 400
+
+    session["hackatime_token"] = token
 
     return redirect(FRONTEND_URL)
 

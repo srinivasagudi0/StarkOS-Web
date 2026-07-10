@@ -122,7 +122,9 @@ function MissionControl() {
   const [streak, setStreak] = useState(null)
 
   useEffect(() => {
-    fetch(`${API_URL}/api/hackatime/streak`)
+    fetch(`${API_URL}/api/hackatime/streak`, {
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         setStreak(data.streak)
