@@ -8,17 +8,27 @@ import os
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key"
-app.config["SESSION_COOKIE_SAMESITE"] = "None"
-app.config["SESSION_COOKIE_SECURE"] = True
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "https://stark-os-web-eight.vercel.app")
-BACKEND_URL = os.getenv("BACKEND_URL", "https://starkos-web.onrender.com")
+IS_PRODUCTION = os.getenv("RENDER") == "true"
+
+if IS_PRODUCTION:
+    FRONTEND_URL = "https://stark-os-web-eight.vercel.app"
+    BACKEND_URL = "https://starkos-web.onrender.com"
+else:
+    FRONTEND_URL = "http://localhost:5173"
+    BACKEND_URL = "http://localhost:5000"
+
+app.config["SESSION_COOKIE_SAMESITE"] = "None" if IS_PRODUCTION else "Lax"
+app.config["SESSION_COOKIE_SECURE"] = IS_PRODUCTION
 
 CORS(
     app,
     resources={
         r"/api/*": {
-            "origins": [FRONTEND_URL],
+            "origins": [
+                "http://localhost:5173",
+                "https://stark-os-web-eight.vercel.app",
+            ],
         }
     },
     supports_credentials=True,
