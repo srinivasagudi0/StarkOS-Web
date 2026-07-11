@@ -420,14 +420,25 @@ def energy():
 
 @app.route('/api/hackatime/goals')
 def hackatime_goals():
-    token = session.get("hackatime_token")
+    oauth_token = session.get("hackatime_token")
 
-    if not token:
-        return jsonify({"connected": False})
+    if not oauth_token:
+        return jsonify({"connected": False}), 401
+
+    key_response = requests.get(
+        "https://hackatime.hackclub.com/api/v1/authenticated/api_keys",
+        headers={"Authorization": f"Bearer {oauth_token}"}
+    )
+
+    api_key = key_response.json().get("token")
+
+    if not api_key:
+        return jsonify({"connected": False}), 401
 
     response = requests.get(
         "https://hackatime.hackclub.com/api/hackatime/v1/users/current/statusbar/today",
-        headers={"Authorization": f"Bearer {token}"}
+        headers={"Authorization": f"Bearer {api_key}"},
+        params={"api_key": api_key}
     )
 
     data = response.json().get("data", {})
