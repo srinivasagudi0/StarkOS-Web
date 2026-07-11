@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 
 function Code() {
-    const [hackatimeConnected, setHackatimeConnected] = useState(false)
+    const [hackatimeConnected, setHackatimeConnected] = useState(false) 
   const [hours, setHours] = useState(null)
   useEffect(() => {
   fetch('/api/hackatime/hours', {
@@ -28,7 +28,9 @@ function Code() {
                     setStreak(data.streak)
                 }   
         })
-    })
+    }, [])
+
+    const [goals, setGoals] = useState(null)
 
     return (
         <main>

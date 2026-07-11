@@ -66,3 +66,6 @@ Just informs user how to get started with the app and about me and how the app i
 # Note
 
 I am so proud to make this project and very excited to start on V2 once v1 is approved. Also if you want to, try it out [here](https://stark-os-web-eight.vercel.app)
+
+## AI Usage
+I used AI as less as possible, I only used it to help me host it in render and asked it to help me make all the routes work properly.
