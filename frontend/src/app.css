@@ -48,6 +48,15 @@ body {
   font-size: 1rem;
 }
 
+.title5 {
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(135deg,#1f2833 0%, #0b0b0b 100%);
+  border: 2px solid white;
+  text-align: center;
+  font-size: 4rem;
+}
+
 .cards-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
