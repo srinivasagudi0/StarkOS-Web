@@ -31,6 +31,17 @@ function Code() {
     }, [])
 
     const [goals, setGoals] = useState(null)
+    useEffect(() => {
+        fetch('/api/hackatime/goals', {
+            credentials: 'include',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.connected) {
+                    setGoals(data.goal.completion_percent)
+                }
+            })
+    }, [])
 
     return (
         <main>
@@ -57,6 +68,18 @@ function Code() {
                                 {streak}
                             </span>
                             <span className="label">Days</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="card">
+                    <div className='mission-icon'>🏆</div>
+                    <div className="content">
+                        <h1>Status Bar</h1>
+                        <div className="stats">
+                            <span className="number">
+                                {goals ?? 0}%
+                            </span>
+                            <span className="label">Completed</span>
                         </div>
                     </div>
                 </div>

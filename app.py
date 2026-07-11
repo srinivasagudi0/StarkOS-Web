@@ -418,25 +418,24 @@ def energy():
     energy = max(0, min(100, round(energy)))
     return jsonify({"connected": True, "energy_score": energy})
 
-@app.route('/api/coding-intel/code-goals')
-def coding_7_days():
+@app.route('/api/hackatime/goals')
+def hackatime_goals():
     token = session.get("hackatime_token")
 
     if not token:
-        return jsonify({"connected": False, "last_seven_days": []})
-    
+        return jsonify({"connected": False})
+
     response = requests.get(
-        "https://hackatime.hackclub.com/api/hackatime/v1/users/{id}/statusbar/today",
-        headers = {
-            "Authorization": f"Bearer {token}"
-        },
-        params={
-            "api_key": f"{token}"
-        }
+        "https://hackatime.hackclub.com/api/hackatime/v1/users/current/statusbar/today",
+        headers={"Authorization": f"Bearer {token}"}
     )
 
-    data = response.json()
-    return jsonify({"connected": True, "goals": data})
+    data = response.json().get("data", {})
+
+    return jsonify({
+        "connected": True,
+        "goal": data.get("goal", {})
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
