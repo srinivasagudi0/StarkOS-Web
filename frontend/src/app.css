@@ -227,11 +227,19 @@ body {
 }
 
 nav {
-  text-align: center;
+  display: flex;
   padding: 1rem;
-  font-size: 1.9rem;
+  overflow-x: auto;
+  white-space: nowrap;
   background-color: #122e65aa;
 }
+
+nav a {
+  flex-shrink: 0;
+  color: white;
+  text-decoration: none;
+}
+
 
 nav a {
   color: white;
