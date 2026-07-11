@@ -13,12 +13,12 @@ IS_PRODUCTION = os.getenv("RENDER") == "true"
 
 if IS_PRODUCTION:
     FRONTEND_URL = "https://stark-os-web-eight.vercel.app"
-    BACKEND_URL = "https://starkos-web.onrender.com"
+    BACKEND_URL = FRONTEND_URL
 else:
     FRONTEND_URL = "http://localhost:5173"
     BACKEND_URL = "http://localhost:5000"
 
-app.config["SESSION_COOKIE_SAMESITE"] = "None" if IS_PRODUCTION else "Lax"
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_SECURE"] = IS_PRODUCTION
 
 CORS(
