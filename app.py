@@ -444,9 +444,10 @@ def hackatime_goals():
     data = response.json().get("data", {})
 
     return jsonify({
-        "connected": True,
-        "goal": data.get("goal", {})
-    })
+            "connected": True,
+            "goal": data.get("goal", {}),
+            "grand_total": data.get("grand_total", {})
+        })
 
 if __name__ == "__main__":
     app.run(debug=True)

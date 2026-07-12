@@ -43,6 +43,21 @@ function Code() {
             })
     }, [])
 
+
+    const [goalsText, setGoalsText] = useState(null)
+    useEffect(() => {
+        fetch('/api/hackatime/goals', {
+            credentials: 'include',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.connected) {
+                    setGoalsText(data.grand_total?.text || "No goal set")
+                }
+            })
+    }, [])
+
+
     return (
         <main>
             <h1 className="title5">Coding Intelligence</h1>
@@ -74,15 +89,17 @@ function Code() {
                 <div className="card">
                     <div className='mission-icon'>🏆</div>
                     <div className="content">
-                        <h1>Status Bar</h1>
+                        <h1>Daily Coding Goal</h1>
                         <div className="stats">
                             <span className="number">
                                 {goals ?? 0}%
                             </span>
-                            <span className="label">Completed</span>
+                            <span className="label">{goalsText}</span>
                         </div>
                     </div>
                 </div>
+
+                
             </div>
         </main>
     )
