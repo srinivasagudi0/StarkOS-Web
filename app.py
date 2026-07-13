@@ -449,5 +449,48 @@ def hackatime_goals():
             "grand_total": data.get("grand_total", {})
         })
 
+
+@app.route('/api/hackatime/projects')
+def hackatime_projects():
+    oauth_token = session.get("hackatime_token")
+
+    if not oauth_token:
+        return jsonify({"connected": False}), 401
+    
+    key_response = requests.get(
+        "https://hackatime.hackclub.com/api/v1/authenticated/api_keys",
+        headers={"Authorization": f"Bearer {oauth_token}"}
+    )
+
+    api_key = key_response.json().get("token")
+
+    if not api_key:
+        return jsonify({"connected": False}), 401
+    
+    response = requests.get(
+        "https://hackatime.hackclub.com/api/hackatime/v1/users/current/stats/last_7_days",
+        headers={
+            "Authorization": f"Bearer {api_key}"
+        },
+        params={
+            "api_key": f"{api_key}"
+        }
+    )
+
+    data = response.json().get("data", {})
+
+    return jsonify(
+        {
+            "connected": True,
+            "data": data,
+            "editors": data.get("editors", []),
+            "languages": data.get("languages", []),
+            "machines": data.get("machines", []),
+            "projects": data.get("projects", []),
+            "operating_systems": data.get("operating_systems", []),
+            "categories": data.get("categories", []),
+        }
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)

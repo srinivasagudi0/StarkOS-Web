@@ -58,6 +58,20 @@ function Code() {
     }, [])
 
 
+    const [projects, setProjects] = useState([])
+    useEffect(() => {
+        fetch('/api/hackatime/projects', {
+            credentials: 'include',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.connected) {
+                    setProjects(data.projects)
+                }
+            })
+    }, [])
+
+
     return (
         <main>
             <h1 className="title5">Coding Intelligence</h1>
@@ -98,6 +112,30 @@ function Code() {
                         </div>
                     </div>
                 </div>
+
+            <div className="mission-card">
+                <div className="card">
+
+
+                <div className="content">
+                    <h1>This Week's Projects 📊</h1>
+                    <div className="warning">
+
+                    <ul>
+                        {projects.map((project) => (
+                            <li key={project.name}>
+                                <strong>{project.name}</strong> - {project.text}
+                            </li>
+                        ))}
+                    </ul>
+                    </div>
+                    
+                </div>
+                </div>
+                </div>
+
+
+
 
                 
             </div>

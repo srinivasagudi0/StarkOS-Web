@@ -539,3 +539,12 @@ nav a:hover {
     margin: 0 auto 1rem;
   }
 }
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  background-color: red;
+  scrollbar-width: thin;
+}
+
