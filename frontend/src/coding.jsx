@@ -132,10 +132,20 @@ function Code() {
                     </ul>
                     </div>
                     </div>
+    
                     
                 </div>
                 </div>
                 </div>
+            
+            <div className='mission-card'>
+                <div className="card">
+                <div className="content">
+                    <h1>Coding Heatmap</h1>
+                    <p style={{ color: '#9b9090' }}>This week</p>
+                </div>
+                </div>
+            </div>
 
             <div className='mission-card'>
                 <div className="card">
