@@ -2,20 +2,23 @@ import { useState, useEffect } from 'react'
 
 
 function Code() {
-    const [hackatimeConnected, setHackatimeConnected] = useState(false) 
-  const [hours, setHours] = useState(null)
-  useEffect(() => {
-  fetch('/api/hackatime/hours', {
-    credentials: 'include',
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      setHackatimeConnected(data.connected)
-      if (data.connected) {
-        setHours(data.hours)
-      }
-    })
-}, [])
+    const [hours, setHours] = useState(null)
+    const [lang, setLang] = useState([])
+    const [os, setOS] = useState([])
+    useEffect(() => {
+        fetch('/api/hackatime/projects', {
+            credentials: 'include',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.connected) {
+                    setHours(data.data.human_readable_total)
+                    setLang(data.languages)
+                    setOS(data.operating_systems)
+                    
+                }   
+        })
+    }, [])
 
     const [streak, setStreak] = useState(null)
     useEffect(() => {
@@ -71,7 +74,6 @@ function Code() {
             })
     }, [])
 
-
     return (
         <main>
             <h1 className="title5">Coding Intelligence</h1>
@@ -79,7 +81,7 @@ function Code() {
                 <div className="card">
                     <div className='mission-icon'>⏱️</div>
                     <div className="content">
-                        <h1>Coded Hours</h1>
+                        <h1>Coded Hours (This week)</h1>
                         <div className="stats">
                             <span className="number">
                                 {hours}
@@ -120,7 +122,7 @@ function Code() {
                 <div className="content">
                     <h1>This Week's Projects 📊</h1>
                     <div className="warning">
-
+                    <div className="projects-scroll">
                     <ul>
                         {projects.map((project) => (
                             <li key={project.name}>
@@ -129,16 +131,45 @@ function Code() {
                         ))}
                     </ul>
                     </div>
+                    </div>
                     
                 </div>
                 </div>
                 </div>
 
-
-
-
-                
+            <div className='mission-card'>
+                <div className="card">
+                    <div className='mission-icon'>💻</div>
+                    <div className="content">
+                        <h1>Languages
+                         (top 3)
+                            </h1>
+                        <ul>
+                            {lang.slice(0,3).map((language) => (
+                                <li key={language.name}>
+                                    <strong>{language.name}</strong>
+                                </li>
+                            ))}
+                        </ul>
+                        
+                    </div>
+                </div>
             </div>
+            <br />
+            <div className='mission-card'>
+                <div className="card">
+                    <h1>Operating System</h1>
+            <ul>
+            {os.slice(0, 3).map((system) => (
+                <li key={system.name}>
+                <strong>{system.name}</strong>
+                </li>
+            ))}
+            </ul>
+                </div>
+            </div>
+            </div>
+
         </main>
     )
 }

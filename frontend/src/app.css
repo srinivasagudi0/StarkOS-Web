@@ -548,3 +548,7 @@ nav a:hover {
   scrollbar-width: thin;
 }
 
+.projects-scroll {
+  max-height: 143px;
+  overflow-y: auto;
+}
