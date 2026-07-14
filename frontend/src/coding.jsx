@@ -7,13 +7,19 @@ function getHeatLevel(hours) {
     if (hours < 0.5) {
         return 1
     }
-    if (hours < 1.5) {
+    if (hours < 1) {
         return 2
     }
-    if (hours < 4) {
+    if (hours < 2) {
         return 3
     }
-    return 4
+    if (hours < 3) {
+        return 4
+    }
+    if (hours < 4) {
+        return 5
+    }
+    return 6
 }
 
 

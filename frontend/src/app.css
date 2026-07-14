@@ -578,23 +578,29 @@ nav a:hover {
 }
 
 .heat-level-0 {
-  background: rgba(255, 34, 0, 0.89);
+  background: #1f2937;
 }
 
 .heat-level-1 {
-  background: orangered;
+  background: #2563eb;
 }
 
 .heat-level-2 {
-  background: orange;
+  background: #06b6d4;
 }
 
 .heat-level-3 {
-  background: lightgreen;
+  background: #22c55e;
 }
 
 .heat-level-4 {
-  background:rgb(93, 162, 93);
+  background: #eab308;
 }
 
+.heat-level-5 {
+  background: #f97316;
+}
 
+.heat-level-6 {
+  background: #ef4444;
+}
