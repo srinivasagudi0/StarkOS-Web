@@ -1,5 +1,21 @@
 import { useState, useEffect } from 'react'
 
+function getHeatLevel(hours) {
+    if (hours === 0) {
+        return 0
+    }
+    if (hours < 0.5) {
+        return 1
+    }
+    if (hours < 1.5) {
+        return 2
+    }
+    if (hours < 4) {
+        return 3
+    }
+    return 4
+}
+
 
 function Code() {
     const [hours, setHours] = useState(null)
@@ -74,6 +90,29 @@ function Code() {
             })
     }, [])
 
+
+    const [heatmapDays, setHeatmapDays] = useState([])
+    const [heatmapLoading, setHeatmapLoading] = useState(true)
+    const [heatmapError, setHeatmapError] = useState("")
+
+   useEffect(() => {
+  fetch('/api/hackatime/heatmap', {
+    credentials: 'include',
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.connected) {
+        setHeatmapDays(Array.isArray(data.days) ? data.days : []);
+      } else {
+        setHeatmapError(data.message);
+      }
+      setHeatmapLoading(false);
+    })
+    .catch(() => {
+      setHeatmapError('Failed to fetch heatmap');
+      setHeatmapLoading(false);
+    });
+}, []);
     return (
         <main>
             <h1 className="title5">Coding Intelligence</h1>
@@ -142,7 +181,20 @@ function Code() {
                 <div className="card">
                 <div className="content">
                     <h1>Coding Heatmap</h1>
-                    <p style={{ color: '#9b9090' }}>This week</p>
+                    <p>Last 7 Days</p>
+
+                    {heatmapLoading && <p>Loading...</p>}
+                    {heatmapError && <p>{heatmapError}</p>}
+
+                    <div className="heatmap-grid">
+                        {heatmapDays.map((day) => (
+                            <div className="heatmap-day" key={day.date}>
+                                <p>{day.day}</p>
+                                <div className={`heatmap-cell heat-level-${getHeatLevel(day.hours)}`}></div>
+                                <p>{day.hours}h</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 </div>
             </div>

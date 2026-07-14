@@ -1,0 +1,41 @@
+request 1 = 6days agao
+reqest 2 = 5days agao
+request 3= 4 days aga
+request 4= 3 days ago
+request 5= 2 days ago
+rwqyest 6= 1 day ago
+request 7= today
+
+
+7 requests = perefect can do one more 
+
+
+
+should return 
+
+{
+    "connected": true,
+    "days": [
+        {
+            "date": "2026-07-08",
+            "day" : "Wednesday",
+            "total_seconds": 1800,
+            "hours" 0.5
+        },
+        {
+            "date": "2026-07-09",
+            "day" : "Thursday",
+            "total_seconds": 3600,
+            "hours" 1
+        }
+    ]
+}
+
+
+| Hours | Level | Meaning |
+|---:|---:|---|
+| `0` | 0 | No coding |
+| Less than `1` | 1 | Light |
+| Less than `2` | 2 | Medium |
+| Less than `4` | 3 | Strong |
+| `4+` | 4 | Maximum |

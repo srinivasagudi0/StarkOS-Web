@@ -552,3 +552,49 @@ nav a:hover {
   max-height: 143px;
   overflow-y: auto;
 }
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 55px);
+  gap: 0.5rem;
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.heatmap-day {
+  text-align: center;
+}
+
+.heatmap-cell {
+  width: 55px;
+  height: 55px;
+  border-radius: 0.5rem;
+  border: 1px solid #38bdf8;
+}
+
+.heatmap-day p {
+  margin: 0.4rem 0;
+  color: white;
+}
+
+.heat-level-0 {
+  background: rgba(255, 34, 0, 0.89);
+}
+
+.heat-level-1 {
+  background: orangered;
+}
+
+.heat-level-2 {
+  background: orange;
+}
+
+.heat-level-3 {
+  background: lightgreen;
+}
+
+.heat-level-4 {
+  background:rgb(93, 162, 93);
+}
+
+

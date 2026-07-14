@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, redirect, session
 from flask_cors import CORS
 import requests
-from datetime import date
+from datetime import date, timedelta, datetime
 from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal, update_mission_status, recover_mission
 from openai import OpenAI
 import os
@@ -491,6 +491,58 @@ def hackatime_projects():
             "categories": data.get("categories", []),
         }
     )
+
+@app.route('/api/hackatime/heatmap')
+def hackatime_heatmap():
+    oauth_token = session.get("hackatime_token")
+
+    if not oauth_token:
+        return jsonify({"connected": False, "message": "No oAuth token", "days": [] }), 401
+    
+    days = []
+
+    today = date.today()
+
+    try:
+        # new thing learnt offset is the distance from the staring point.
+        for offset in range(6,-1,-1):
+            delta = timedelta(days=offset)
+            target_date = today - delta
+
+            response = requests.get(
+                "https://hackatime.hackclub.com/api/v1/authenticated/hours",
+                headers={
+                    "Authorization": f"Bearer {oauth_token}"
+                },
+                params={
+                    "start_date": target_date.isoformat(),
+                    "end_date": target_date.isoformat()
+                },
+                timeout=10
+            )
+
+            total_seconds = response.json().get("total_seconds", 0)
+            hours = total_seconds / 3600
+            hours = round(hours, 2)
+            day = target_date
+
+            days.append({
+                "date": target_date.isoformat(),
+                "day": day.strftime("%a"),
+                "total_seconds": total_seconds,
+                "hours": hours
+            })
+    except Exception as e:
+        return jsonify({
+            "connected": False,
+            "message": f"Could not load hackatime heatmao because of {e}",
+            "days": []
+        })
+
+
+    return jsonify({"connected": True, "days": days})
+
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
