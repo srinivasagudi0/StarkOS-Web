@@ -162,8 +162,6 @@ function Code() {
 
             <div className="mission-card">
                 <div className="card">
-
-
                 <div className="content">
                     <h1>This Week's Projects 📊</h1>
                     <div className="warning">
@@ -226,14 +224,16 @@ function Code() {
             <br />
             <div className='mission-card'>
                 <div className="card">
-                    <h1>Operating System</h1>
-            <ul>
-            {os.slice(0, 3).map((system) => (
-                <li key={system.name}>
-                <strong>{system.name}</strong>
-                </li>
-            ))}
-            </ul>
+                    <div className="content">
+                        <h1>Operating System</h1>
+                        <ul>
+                        {os.slice(0, 3).map((system) => (
+                            <li key={system.name}>
+                            <strong>{system.name}</strong>
+                            </li>
+                        ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
             </div>

@@ -76,7 +76,7 @@ function MissionControl() {
             <span>{mission.title}</span>
 
             <div className="mission-actions">
-              <button onClick={() => updateMission(mission.id, 'complete')}>Complete</button>
+              <button onClick={() => updateMission(mission.id, 'complete')}>✓ Complete</button>
               <button onClick={() => updateMission(mission.id, 'fail')}>Fail</button>
               <button onClick={() => updateMission(mission.id, 'delete')}>Delete</button>
             </div>

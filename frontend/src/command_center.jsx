@@ -171,7 +171,6 @@ function CommandCenter() {
         <div className="cards-row">
           <div className="card">
               <div className='mission-icon'>⏱️</div>
-
             <div className="content">
               <h1>Coded Hours</h1>
               <div className="stats">
