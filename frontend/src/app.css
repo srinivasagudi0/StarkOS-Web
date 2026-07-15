@@ -1,6 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700;800&display=swap');
+
+:root {
+  --bg: #020617;
+  --bg-alt: #07111f;
+  --panel: rgba(13, 32, 56, 0.86);
+  --panel-strong: rgba(8, 47, 102, 0.92);
+  --text: #e5f3ff;
+  --muted: #b7c7db;
+  --cyan: #38bdf8;
+  --aqua: #06b6d4;
+  --violet: #7c3aed;
+  --lime: #22c55e;
+  --gold: #eab308;
+  --shadow: 0 16px 44px rgba(2, 8, 23, 0.5);
+}
+
 body {
   margin: 0;
-  background: black;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 28%),
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.08), transparent 22%),
+    linear-gradient(180deg, #020617 0%, #050b18 58%, #020617 100%);
+  min-height: 100vh;
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black 42%, transparent 92%);
+  opacity: 0.28;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.technical-label {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8fd7ff;
 }
 
 .cmd-center-txt {
@@ -12,49 +67,79 @@ body {
 }
 
 .title {
-  padding: 1.5rem;
   color: white;
-  background: linear-gradient(135deg, #020617, #0f5f5e, #0398a0);
-  border: 2px solid rgb(76, 10, 32);
+  background: linear-gradient(135deg, rgba(2, 6, 23, 0.94), rgba(8, 47, 102, 0.92));
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: var(--shadow);
   text-align: center;
-  font-size: 1rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  border-radius: 1.25rem;
+  padding: 1.2rem 1rem;
+}
+
+.forge-page p {
+  font-family: inherit;
 }
 
 .title2 {
-  padding: 1.5rem;
   color: white;
-  background: linear-gradient(135deg, #020617, #2a0f5f, #2e0871);
-  border: 2px solid rgb(76, 66, 10);
+  background: linear-gradient(135deg, rgba(2, 6, 23, 0.94), rgba(8, 47, 102, 0.9));
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: var(--shadow);
   text-align: center;
-  font-size: 1rem;
-
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 1.25rem;
+  padding: 1.2rem 1rem;
 }
 
 .title3 {
-  padding: 1.5rem;
   color: white;
-  background: linear-gradient(135deg, #020617, #3d5104, #026941);
-  border: 2px solid rgba(152, 64, 13, 0.574);
+  background: linear-gradient(135deg, rgba(2, 6, 23, 0.94), rgba(13, 32, 56, 0.92));
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: var(--shadow);
   text-align: center;
-  font-size: 1rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 1.25rem;
+  padding: 1.2rem 1rem;
 }
 
 .title4 {
-  padding: 1.5rem;
   color: white;
-  background: linear-gradient(135deg, rgb(243, 126, 18) 0%, rgb(13, 175, 181) 25%, rgb(68, 140, 202) 50%, rgb(211, 92, 7) 75%, rgb(195, 41, 41) 90%, black 100%);
-  border: 2px solid rgb(0, 26, 255);
+  background: linear-gradient(135deg, rgba(2, 6, 23, 0.94), rgba(13, 32, 56, 0.92), rgba(8, 47, 102, 0.95));
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: var(--shadow);
   text-align: center;
-  font-size: 1rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 1.25rem;
+  padding: 1.2rem 1rem;
 }
 
 .title5 {
   padding: 1.5rem;
   color: white;
-  background: linear-gradient(135deg,#1f2833 0%, #0b0b0b 100%);
-  border: 2px solid white;
+  background: linear-gradient(135deg, rgba(31, 40, 51, 0.96) 0%, rgba(11, 11, 11, 0.98) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.24);
+  box-shadow: var(--shadow);
   text-align: center;
-  font-size: 4rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 1.25rem;
 }
 
 .cards-row {
@@ -65,21 +150,26 @@ body {
   margin-bottom: 1rem;
 }
 
-.card {
+.card  {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1.25rem;
-  background: linear-gradient(#0d2038, #063883);
+  background:
+    linear-gradient(135deg, rgba(13, 32, 56, 0.9), rgba(8, 47, 102, 0.92)),
+    linear-gradient(135deg, rgba(56, 189, 248, 0.05), transparent 45%);
   color: white;
-  border-radius: 2rem;
-  border: 1px solid #1e3a5f;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  backdrop-filter: blur(10px);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 40px rgba(56, 189, 248, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 54px rgba(56, 189, 248, 0.16);
+  border-color: rgba(56, 189, 248, 0.32);
 }
 
 .mission-card,
@@ -98,8 +188,21 @@ body {
   margin: 0;
 }
 
+.card h1,
+.card h2,
+.card h3,
+.card h4 {
+  margin: 0;
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
 .mission-icon {
   font-size: 3rem;
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.25));
 }
 
 .stats {
@@ -109,13 +212,15 @@ body {
 }
 
 .number {
-  font-size: 3rem;
+  font-size: 2.75rem;
   font-weight: bold;
+  font-family: 'Orbitron', 'Inter', sans-serif;
 }
 
 .label {
-  color: #9ca3af;
+  color: var(--muted);
   font-size: 1rem;
+  font-family: inherit;
 }
 
 .mission-card ul,
@@ -127,10 +232,11 @@ body {
 
 .mission-card li,
 .advice-card li {
-  background: #0d2038;
+  background: rgba(11, 23, 42, 0.95);
   padding: 0.75rem;
   margin-top: 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(56, 189, 248, 0.1);
 }
 
 .mission-action-item {
@@ -155,35 +261,38 @@ body {
   border-radius: 999px;
   padding: 0.45rem 0.75rem;
   color: white;
-  background: #1e3a5f;
+  background: linear-gradient(135deg, #12345a, #1b5d8d);
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .mission-actions button:hover {
   transform: translateY(-2px);
-  background: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.22);
+  background: linear-gradient(135deg, #0b6f9d, #2563eb);
 }
 
 .mission-message {
   max-width: 1100px;
   margin: 0 auto 1rem;
   padding: 0.85rem 1rem;
-  border: 1px solid #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.2);
   border-radius: 1rem;
   color: white;
-  background: #0d2038;
+  background: rgba(11, 23, 42, 0.92);
   text-align: center;
+  box-shadow: var(--shadow);
 }
 
 .connect-card {
   margin-bottom: 1rem;
   padding: 1.25rem;
   color: white;
-  border: 1px solid #38bdf8;
-  border-radius: 2rem;
-  background: linear-gradient(135deg, #0d2038, #0f5f5e, #063883);
-  box-shadow: 0 0 35px rgba(56, 189, 248, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(135deg, rgba(13, 32, 56, 0.94), rgba(8, 47, 102, 0.9));
+  box-shadow: var(--shadow);
 }
 
 .connect-card p {
@@ -215,17 +324,21 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: #22045e5f;
+  background:
+    radial-gradient(circle at center, rgba(56, 189, 248, 0.12), transparent 42%),
+    rgba(2, 6, 23, 0.72);
   gap: 15px;
+  backdrop-filter: blur(10px);
 }
 
 .loader {
   width: 50px;
   height: 50px;
-  border: 5px solid #21406a;
+  border: 5px solid rgba(33, 64, 106, 0.65);
   border-top: 5px solid #38bdf8;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.24);
 }
 
 
@@ -240,7 +353,9 @@ nav {
   padding: 1rem;
   overflow-x: auto;
   white-space: nowrap;
-  background-color: #122e65aa;
+  background: rgba(7, 17, 31, 0.82);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+  backdrop-filter: blur(10px);
 }
 
 nav a {
@@ -255,13 +370,15 @@ nav a {
   text-decoration: none;
   margin: 0 1rem;
   display: inline-block;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+  letter-spacing: 0.04em;
 }
 
 nav a:hover {
   text-decoration: underline;
-  color: violet;
+  color: #7dd3fc;
   transform: translateY(-5px);
+  text-shadow: 0 0 8px rgba(125, 211, 252, 0.35);
 }
 
 .forge-page {
@@ -283,12 +400,13 @@ nav a:hover {
   min-height: 140px;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border: 0.5px solid #1e3a5f;
-  background-color: #0d2038;
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  background: rgba(11, 23, 42, 0.9);
   color: white;
   font-size: 1rem;
   text-align: left;
   resize: vertical;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
 }
 
 .forge-panel {
@@ -306,13 +424,14 @@ nav a:hover {
   display: block;
   margin: 1rem auto;
   padding: 0.75rem 1.5rem;
-  background-color: #38bdf8;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
   color: white;
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 20px rgba(56, 189, 248, 0.14);
 }
 
 .mission-button:disabled {
@@ -321,26 +440,27 @@ nav a:hover {
 }
 
 .mission-button:hover {
-  background-color: #0ea5e9;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
   transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
 }
 
 .secondary-button {
-  background-color: #334155;
+  background: linear-gradient(135deg, #334155, #1e293b);
 }
 
 .secondary-button:hover {
-  background-color: #475569;
+  background: linear-gradient(135deg, #475569, #0f172a);
 }
 
 .forge-result {
   margin-top: 1.5rem;
   padding: 1.25rem;
-  background: linear-gradient(135deg,#0398a0, #0f5f5e, #020617);
-  border: 1px solid #38bdf8;
+  background: linear-gradient(135deg, rgba(8, 47, 102, 0.94), rgba(11, 23, 42, 0.96));
+  border: 1px solid rgba(56, 189, 248, 0.2);
   border-radius: 1.5rem;
   color: white;
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+  box-shadow: var(--shadow);
 }
 
 .forge-result h3 {
@@ -379,8 +499,11 @@ nav a:hover {
 .forge-text1 h1 {
   text-align: center;
   color: #38bdf8;
-  font-size: 2rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
   margin-bottom: 1rem;
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .about-page {
@@ -394,11 +517,13 @@ nav a:hover {
   max-width: 1100px;
   margin: 1.25rem auto;
   padding: 2rem;
-  border-radius: 2rem;
-  border: 1px solid #1e3a5f;
-  background: radial-gradient(circle at top left, #0ea5e955, transparent 35%),
-    linear-gradient(135deg, #07111f, #0d2038, #063883);
-  box-shadow: 0 0 35px rgba(56, 189, 248, 0.18);
+  border-radius: 1.75rem;
+  border: 1px solid rgba(56, 189, 248, 0.14);
+  background:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.14), transparent 35%),
+    linear-gradient(135deg, rgba(7, 17, 31, 0.9), rgba(11, 23, 42, 0.94));
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
 }
 
 .about-hero {
@@ -416,14 +541,15 @@ nav a:hover {
 .about-hero h2,
 .about-panel h2 {
   margin-top: 0;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-family: inherit;
 }
 
 .about-hero p,
 .about-panel p {
   color: #cbd5e1;
   line-height: 1.7;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .about-grid {
@@ -436,15 +562,18 @@ nav a:hover {
 
 .about-card {
   padding: 1.5rem;
-  border-radius: 2rem;
-  border: 1px solid #1e3a5f;
-  background: linear-gradient(135deg, #0d2038, #063883);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(56, 189, 248, 0.14);
+  background:
+    linear-gradient(135deg, rgba(13, 32, 56, 0.94), rgba(11, 23, 42, 0.96)),
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.06), transparent 45%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .about-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 35px rgba(56, 189, 248, 0.3);
+  box-shadow: 0 16px 42px rgba(56, 189, 248, 0.14);
+  border-color: rgba(56, 189, 248, 0.28);
 }
 
 .about-card span {
@@ -452,7 +581,7 @@ nav a:hover {
 }
 
 .about-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   margin-bottom: 0.5rem;
 }
 
@@ -493,16 +622,16 @@ nav a:hover {
 .about-tags button {
   padding: 2rem 2rem;
   border-radius: 99px;
-  background: #0d2038;
-  border: 1px solid #38bdf8;
+  background: linear-gradient(135deg, rgba(13, 32, 56, 0.92), rgba(11, 23, 42, 0.96));
+  border: 1px solid rgba(56, 189, 248, 0.2);
   color: #e0f2fe;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .about-tags button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
-  background-color: #063883;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.2);
+  background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
 }
 
 .about-developer {
@@ -519,9 +648,10 @@ nav a:hover {
   justify-content: center;
   flex-shrink: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #38bdf8, #063883);
-  font-size: 4rem;
-  box-shadow: 0 0 30px rgba(56, 189, 248, 0.35);
+  background: radial-gradient(circle at 35% 35%, #93c5fd, #38bdf8 40%, #063883 100%);
+  font-size: 3rem;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.22);
+  animation: pulseGlow 4s ease-in-out infinite;
 }
 
 @media (max-width: 800px) {
@@ -544,7 +674,6 @@ nav a:hover {
   list-style: none;
   padding: 0;
   margin: 1rem 0 0;
-  background-color: red;
   scrollbar-width: thin;
 }
 
@@ -569,7 +698,7 @@ nav a:hover {
   width: 55px;
   height: 55px;
   border-radius: 0.5rem;
-  border: 1px solid #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .heatmap-day p {
@@ -603,4 +732,31 @@ nav a:hover {
 
 .heat-level-6 {
   background: #ef4444;
+}
+
+.mission-card h2 {
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.loading-screen p,
+.mission-message,
+.forge-result pre,
+.about-hero p,
+.about-panel p,
+.connect-card p,
+.mission-card li,
+.advice-card li {
+  color: var(--muted);
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.22);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 34px rgba(56, 189, 248, 0.3);
+  }
 }

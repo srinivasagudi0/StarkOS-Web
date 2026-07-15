@@ -146,9 +146,8 @@ function CommandCenter() {
       <div className="cmd-center-txt">
         <br />
         <div className="title">
-
         <h1>Command Center</h1>
-        </div>  
+        </div>
 
         <br />
         {!hackatimeConnected && (

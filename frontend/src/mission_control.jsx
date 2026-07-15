@@ -217,7 +217,10 @@ function MissionControl() {
         <div className="card">
           <div className="mission-icon">⭐</div>
           <ul>
-          <div className="number">{missionData.XP_points}pts</div>
+            <div>
+              <div className="number">{missionData.XP_points}</div>
+              <div className="label">XP</div>
+            </div>
           </ul>
         </div>
 
@@ -225,7 +228,7 @@ function MissionControl() {
           <div className="mission-icon">🔥</div>
           <h2>Streaks: </h2>
           <div className="number">{streak}</div>
-          <p>day(s)</p>
+          <div className="label">day(s)</div>
         </div>
 
         <div className="card mission-card">
@@ -249,7 +252,6 @@ function MissionControl() {
           </ul>
       </div>
     </div>
-
   )
 }
 
