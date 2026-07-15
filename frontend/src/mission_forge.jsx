@@ -80,7 +80,7 @@ function MissionForge() {
   }
 
   return (
-    <main className="forge-page">
+    <main className="page forge-page">
       <div className="title3">
         <h1>Mission Forge</h1>
       </div>

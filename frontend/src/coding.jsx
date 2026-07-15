@@ -120,7 +120,7 @@ function Code() {
     });
 }, []);
     return (
-        <main>
+        <main className="page">
             <h1 className="title5">Coding Intelligence</h1>
             <div className="cards-row">
                 <div className="card">

@@ -142,8 +142,8 @@ function CommandCenter() {
     )
   }
 // i am doing code hours peer day because i always do like 4 hrs for each day consistently unlike do as much as possible or less than 4hrs.
-    return (
-      <div className="cmd-center-txt">
+  return (
+      <main className="page cmd-center-txt">
         <br />
         <div className="title">
         <h1>Command Center</h1>
@@ -253,7 +253,7 @@ function CommandCenter() {
           </ul>
           
         </div>
-      </div>
+      </main>
     )
 }
 export default CommandCenter;

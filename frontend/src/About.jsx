@@ -1,6 +1,6 @@
 function About() {
   return (
-    <main className="about-page">
+    <main className="page about-page">
       <div className="title4">
         <h1>About StarkOS</h1>
       </div>
@@ -44,7 +44,7 @@ function About() {
         </div>
       </section>
 
-      <section className="about-panel">e
+      <section className="about-panel">
         <h2>How StarkOS works</h2>
 
         <div className="about-steps">
@@ -110,4 +110,3 @@ function About() {
 }
 
 export default About;
-

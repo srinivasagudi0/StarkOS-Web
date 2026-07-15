@@ -159,7 +159,7 @@ function MissionControl() {
   }
 
   return (
-    <div className="mission-control-text">
+    <main className="page mission-control-text">
       <br />
       <div className="title2">
         <h1>Mission Control</h1>
@@ -251,7 +251,7 @@ function MissionControl() {
 
           </ul>
       </div>
-    </div>
+    </main>
   )
 }
 
