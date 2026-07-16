@@ -1,4 +1,5 @@
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import CommandCenter from './command_center'
 import MissionControl from './mission_control'
 import MissionForge from './mission_forge'
@@ -8,6 +9,26 @@ import About from './About'
 
 
 function App() {
+  const [now, setNow] = useState(new Date())
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setNow(new Date())
+    }, 60000)
+
+    return () => clearInterval(timer)
+  }, [])
+
+  const time = now.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+
+  const navDate = now.toLocaleDateString([], {
+    weekday: 'short',
+    month: 'short',
+    day: '2-digit'
+  }).toUpperCase()
 
   return (
 
@@ -28,10 +49,19 @@ function App() {
             STARKOS
           </span>
         </Link>
-        <Link to="/">Command Center</Link>
-        <Link to="/mission-control">Mission Control</Link>
-        <Link to="/missions-forge">Mission Forge</Link>
-        <Link to="/About">About</Link>
+
+        <div className="nav-status">
+          <span>{time}</span>
+          <span className="status-divider"></span>
+          <span>{navDate}</span>
+        </div>
+
+        <div className="nav-links">
+          <Link to="/">Command Center</Link>
+          <Link to="/mission-control">Mission Control</Link>
+          <Link to="/missions-forge">Mission Forge</Link>
+          <Link to="/About">About</Link>
+        </div>
       </nav>
 
       <Routes>
