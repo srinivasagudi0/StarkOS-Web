@@ -133,14 +133,20 @@ function CommandCenter() {
   }, [])
 
 const [greeting, setGreeting] = useState('')
+const [time, setTime] = useState('')
   useEffect(() => {
     fetch('/api/command-center/greeting')
       .then((response) => response.json())
       .then((data) => {
         setGreeting(data.message)
+        setInterval(() => {
+          setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }, 60000))
+        })
+
       })
       .catch(() => {
         setGreeting('Hello')
+        setTime('')
       })
   }, [])
 
@@ -158,6 +164,7 @@ const [greeting, setGreeting] = useState('')
       <main className="page cmd-center-txt">
         <br />
         <div className="title">
+        <p style={{color: '#007bff'}}>{time}</p>
         <h1>Command Center</h1>
         <p>{greeting}</p>
         </div>

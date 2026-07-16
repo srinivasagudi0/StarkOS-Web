@@ -558,7 +558,9 @@ def greeting():
 
     text += " sir. I am operating at full capacity and ready to assist you with your missions. Let's make today productive and successful."
 
-    return jsonify({"message": text})
+    time = datetime.now().strftime("%I:%M %p")
+
+    return jsonify({"message": text, "time": time})
 
 if __name__ == "__main__":
     app.run(debug=True)
