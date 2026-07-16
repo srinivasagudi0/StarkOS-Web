@@ -556,8 +556,7 @@ def greeting():
     else:
         text += "Good night!"
 
-    text += " sir. I am operating at full capacity and ready to assist you with your missions. Let's make today productive and successful."
-
+    text += " Here is how you are doing. Keep up the good work!"
     time = datetime.now().strftime("%I:%M %p")
 
     return jsonify({"message": text, "time": time})
