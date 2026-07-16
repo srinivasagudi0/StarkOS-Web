@@ -77,6 +77,12 @@ select {
   padding: 1.2rem 1rem;
 }
 
+.title p {
+  font-family: inherit;
+  font-size: 0.875rem;
+}
+
+
 .forge-page p {
   font-family: inherit;
 }

@@ -542,7 +542,23 @@ def hackatime_heatmap():
 
     return jsonify({"connected": True, "days": days})
 
-    
+@app.route('/api/command-center/greeting')
+def greeting():
+    current_hour = datetime.now().hour
+    text = ""
+
+    if 5 <= current_hour < 12:
+        text += "Good morning!"
+    elif 12 <= current_hour < 17:
+        text += "Good afternoon!"
+    elif 17 <= current_hour < 21:
+        text += "Good evening!"
+    else:
+        text += "Good night!"
+
+    text += " sir. I am operating at full capacity and ready to assist you with your missions. Let's make today productive and successful."
+
+    return jsonify({"message": text})
 
 if __name__ == "__main__":
     app.run(debug=True)

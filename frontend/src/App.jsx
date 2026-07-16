@@ -16,7 +16,6 @@ function App() {
         <Link to="/">Command Center</Link>
         <Link to="/mission-control">Mission Control</Link>
         <Link to="/missions-forge">Mission Forge</Link>
-
         <Link to="/About">About</Link>
       </nav>
 

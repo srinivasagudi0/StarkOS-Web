@@ -132,6 +132,18 @@ function CommandCenter() {
       })
   }, [])
 
+const [greeting, setGreeting] = useState('')
+  useEffect(() => {
+    fetch('/api/command-center/greeting')
+      .then((response) => response.json())
+      .then((data) => {
+        setGreeting(data.message)
+      })
+      .catch(() => {
+        setGreeting('Hello')
+      })
+  }, [])
+
   if (commandLoading || missionLoading || warningsLoading || adviceLoading) {
 
     return (
@@ -147,6 +159,7 @@ function CommandCenter() {
         <br />
         <div className="title">
         <h1>Command Center</h1>
+        <p>{greeting}</p>
         </div>
 
         <br />
