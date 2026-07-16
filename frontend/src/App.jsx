@@ -13,6 +13,21 @@ function App() {
 
     <BrowserRouter>
       <nav>
+        <Link className="nav-brand" to="/" aria-label="StarkOS home">
+          <svg
+            className="stark-logo-mark"
+            viewBox="0 0 40 40"
+            role="img"
+            aria-label="StarkOS logo"
+          >
+            <path d="M20 3 34.5 11.5v17L20 37 5.5 28.5v-17Z" />
+            <circle cx="20" cy="20" r="7" />
+            <path className="logo-core" d="m20 13 5.8 10H14.2Z" />
+          </svg>
+          <span className="nav-wordmark">
+            STARKOS
+          </span>
+        </Link>
         <Link to="/">Command Center</Link>
         <Link to="/mission-control">Mission Control</Link>
         <Link to="/missions-forge">Mission Forge</Link>

@@ -351,6 +351,8 @@ select {
 
 nav {
   display: flex;
+  align-items: center;
+  gap: 0.25rem;
   padding: 1rem;
   overflow-x: auto;
   white-space: nowrap;
@@ -376,10 +378,44 @@ nav a {
 }
 
 nav a:hover {
-  text-decoration: underline;
+  text-decoration: none;
   color: #7dd3fc;
   transform: translateY(-5px);
   text-shadow: 0 0 8px rgba(125, 211, 252, 0.35);
+}
+
+nav .nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 auto 0 0;
+  padding-right: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+nav .nav-brand:hover {
+  text-decoration: none;
+  transform: none;
+}
+
+.stark-logo-mark {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  fill: rgba(56, 189, 248, 0.12);
+  stroke: #38bdf8;
+  stroke-width: 1.8;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.35));
+}
+
+.stark-logo-mark .logo-core {
+  fill: #38bdf8;
+
+}
+
+.nav-wordmark span {
+  color: #38bdf8;
 }
 
 .forge-page {
