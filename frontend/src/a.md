@@ -10,7 +10,7 @@ Show missions as rows:
 
 Every mission should show:
 
-- Completion button
+- Completion button,
 - Mission name
 - Priority
 - Due date

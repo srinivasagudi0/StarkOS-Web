@@ -828,3 +828,10 @@ nav .nav-brand:hover {
     box-shadow: 0 0 34px rgba(56, 189, 248, 0.3);
   }
 }
+
+.mission-actions .delete-button {
+  background: #662424;
+}
+.mission-actions .delete-button:hover{
+  background: #b64646;
+}
