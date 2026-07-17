@@ -83,12 +83,17 @@ function MissionForge() {
     <main className="page forge-page">
       <div className="title3">
         <h1>Mission Forge</h1>
+        <p>Create missions that help you achieve long-term goals.</p>
       </div>
 
-      <section className="forge-text1">
-        <h1>Quick Add with AI</h1>
-
+        
+        <section className="forge-text1"> 
+        <br />
         <div className="card advice-card forge-panel">
+
+            <h1>✨ Quick Add with AI</h1>
+
+
           <p>Describe your goal very clearly. AI will turn it into missions.</p>
 
           <textarea
@@ -132,7 +137,7 @@ function MissionForge() {
 
         </div>
         <button className="mission-button" onClick={() => setShowCustomAdd(!showCustomAdd)}>
-          {showCustomAdd ? "Hide Custom Add ˰" : "Show Custom Add ⌄"}
+          {showCustomAdd ? "Hide Custom Add ⬆" : "Show Custom Add ⬇"}
         </button>
         
          {showCustomAdd && (
@@ -140,23 +145,32 @@ function MissionForge() {
     <h1>Custom Add</h1>
 
     <div className="card-rows">
-      <div className="card mission-card">
-        <h3>Daily Mission</h3>
+      <div className="card mission-card forge">
+        <div className="custom-mission-header">
+          <span className="custom-mission-icon">🧩</span>
+          <h3>Daily Mission</h3>
+        </div>
         <p>Enter a daily mission to add to your plan.</p>
         <textarea placeholder="Daily mission" value={dailyInput} onChange={(event) => setDailyInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("daily", dailyInput)}>Add Daily Mission</button>
       </div>
           <br />
-      <div className="card mission-card">
-        <h3>Weekly Mission</h3>
-        <p>Enter a weekly mission to add to your plan.</p>
+      <div className="card mission-card forge">
+        <div className="custom-mission-header">
+          <span className="custom-mission-icon">📅</span>
+          <h3>Weekly Mission</h3>
+        </div>
+        <p style={{ color: 'rgb(184, 83, 184)' }}>Enter a weekly mission to add to your plan.</p>
         <textarea placeholder="Weekly mission" value={weeklyInput} onChange={(event) => setWeeklyInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("weekly", weeklyInput)}>Add Weekly Mission</button>
       </div>
-          <br />
-      <div className="card mission-card">
-        <h3>Long-term Mission</h3>
-        <p>Enter a long-term mission to add to your plan.</p>
+          <br />a\
+      <div className="card mission-card forge">
+        <div className="custom-mission-header">
+          <span className="custom-mission-icon">🎯</span>
+          <h3>Long-term Mission</h3>
+        </div>
+        <p style={{ color: 'orange' }}>Enter a long-term mission to add to your plan.</p>
         <textarea placeholder="Long-term mission" value={longTermInput} onChange={(event) => setLongTermInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("long_term", longTermInput)}>Add Long-term Mission</button>
       </div>
@@ -169,3 +183,5 @@ function MissionForge() {
 }
 
 export default MissionForge;
+
+// testin before submission

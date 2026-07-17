@@ -87,6 +87,11 @@ select {
   font-family: inherit;
 }
 
+.title3 p {
+  font-family: inherit;
+  font-size: 0.875rem;
+}
+
 .title2 {
   color: white;
   background: rgba(13, 32, 56, 0.9);
@@ -544,6 +549,22 @@ nav .nav-brand:hover {
   transition: 0.2s ease;
 }
 
+.custom-mission-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.custom-mission-header h3 {
+  margin: 0;
+}
+
+.custom-mission-icon {
+  font-size: 3rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.28));
+}
+
 .forge-error {
   color: #f87171;
   text-align: center;
@@ -837,12 +858,23 @@ nav .nav-brand:hover {
 }
 
 .forge-panel p {
-  color: rgb(60, 255, 0);
+  color: white;
   line-height: 1.6;
-  font-family: cursive;
+
 }
 
 
 .forge-text1 textarea {
   overflow: hidden;
+}
+
+.forge p {
+  color: rgb(60, 255, 0);
+  line-height: 1.6;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.forge h2 {
+  color: white;
+  font-family: cursive;
 }
