@@ -1,34 +1,3 @@
-## 9. Improve Mission Control
-
-Show missions as rows:
-
-```text
-○ Finish heatmap                  HIGH
-✓ Connect Hackatime               DONE
-○ Prepare project demo            MEDIUM
-```
-
-Every mission should show:
-
-- Completion button,
-- Mission name
-- Priority
-- Due date
-- Edit button
-- Delete button
-
-Also add:
-
-- All, Active, and Completed filters
-- A mission count
-- A confirmation before deleting
-- A line through completed missions
-- A message when there are no missions
-- Smaller buttons
-- Clear priority colors
-
-Use red only for delete or urgent missions.
-
 ## 10. Improve Mission Forge
 
 Use one main form instead of several large boxes.

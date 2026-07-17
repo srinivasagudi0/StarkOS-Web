@@ -5,6 +5,7 @@ from datetime import date, timedelta, datetime
 from app_db import get_mission_data, init_db, get_mission_control_data, add_mission_control_data, add_daily_mission, add_weekly_mission, add_long_term_goal, update_mission_status, recover_mission
 from openai import OpenAI
 import os
+import json
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key"
@@ -192,7 +193,7 @@ def plan_with_ai(input_text):
     '''
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": prompt},
             {"role": "user", "content": f"User input: {input_text}"}
@@ -211,27 +212,59 @@ def ai_forge():
 
     try:
         plan = plan_with_ai(input_text)
-        return jsonify({"message": plan})
-    except Exception:
-        return jsonify({"message": "AI planning is currently unavailable. Please try again later."})
+        if isinstance(plan, str):
+            plan = json.loads(plan)
+        ufm = "Here is a suggested plan based on your input:\n"
+
+        daily = plan.get("daily", [])
+        if daily:
+            ufm += "Daily Missions:\n"
+            for i, task in enumerate(daily, start=1):
+                ufm += f"{i}. {task}\n"
+            ufm += "\n"
+
+        weekly = plan.get("weekly", [])
+        if weekly:
+            ufm += "Weekly Missions:\n"
+            for i, task in enumerate(weekly, start=1):
+                ufm += f"{i}. {task}\n"
+            ufm += "\n"
+
+        long_term = plan.get("long_term", [])
+        if long_term:
+            ufm += "Long-term Goals:\n"
+            for i, goal in enumerate(long_term, start=1):
+                ufm += f"{i}. {goal}\n"
+
+        return jsonify({"plan": plan, "message": ufm})
+    except Exception as e:
+        return jsonify({"message": f"AI planning is currently unavailable because of {str(e)}"})
     
 @app.route('/api/apply_plan', methods=['POST'])
 def apply_plan():
-    data = request.get_json () or {}
-    daily = data.get("daily", "")
-    weekly = data.get("weekly", "")
-    long_term = data.get("long_term", "")
+    data = request.get_json() or {}
 
-    if long_term and daily and weekly:
-        add_mission_control_data(daily, weekly, long_term)
-    else:
-        if daily:
+    daily = data.get("daily", [])
+    weekly = data.get("weekly", [])
+    long_term = data.get("long_term", [])
 
-            add_daily_mission(daily)
-        if weekly:
-            add_weekly_mission(weekly)
-        if long_term:
-            add_long_term_goal(long_term)
+    if isinstance(daily, str):
+        daily = [daily]
+    if isinstance(weekly, str):
+        weekly = [weekly]
+    if isinstance(long_term, str):
+        long_term = [long_term]
+
+    for mission in daily:
+        if mission:
+            add_daily_mission(mission)
+    for mission in weekly:
+        if mission:
+            add_weekly_mission(mission)
+    for goal in long_term:
+        if goal:
+            add_long_term_goal(goal)
+        
     return jsonify({"message": "Plan applied successfully."})
 
 @app.route('/api/add_daily', methods=['POST'])

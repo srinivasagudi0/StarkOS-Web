@@ -32,10 +32,10 @@ function MissionForge() {
       const data = await response.json()
       setResult(data.message)
 
-      try {
-        setPlan(JSON.parse(data.message))
-      } catch {
-        setPlan(null)
+      if (typeof data.plan === "string") {
+        setPlan(JSON.parse(data.plan))
+      } else {
+        setPlan(data.plan)
       }
     } catch {
       setError("Something went wrong. Make sure Flask is running.")
@@ -58,9 +58,9 @@ function MissionForge() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        daily: plan.daily?.[0] || '',
-        weekly: plan.weekly?.[0] || '',
-        long_term: plan.long_term?.[0] || '',
+        daily: plan.daily || [],
+        weekly: plan.weekly || [],
+        long_term: plan.long_term || [],
       }),
     })
       .then((response) => response.json())
