@@ -835,3 +835,14 @@ nav .nav-brand:hover {
 .mission-actions .delete-button:hover{
   background: #b64646;
 }
+
+.forge-panel p {
+  color: rgb(60, 255, 0);
+  line-height: 1.6;
+  font-family: cursive;
+}
+
+
+.forge-text1 textarea {
+  overflow: hidden;
+}

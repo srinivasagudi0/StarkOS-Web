@@ -89,7 +89,7 @@ function MissionForge() {
         <h1>Quick Add with AI</h1>
 
         <div className="card advice-card forge-panel">
-          <p>Describe your goal. AI will turn it into missions.</p>
+          <p>Describe your goal very clearly. AI will turn it into missions.</p>
 
           <textarea
             className="mission-input"
