@@ -164,7 +164,7 @@ function MissionForge() {
         <textarea placeholder="Weekly mission" value={weeklyInput} onChange={(event) => setWeeklyInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("weekly", weeklyInput)}>Add Weekly Mission</button>
       </div>
-          <br />a\
+          <br />
       <div className="card mission-card forge">
         <div className="custom-mission-header">
           <span className="custom-mission-icon">🎯</span>
