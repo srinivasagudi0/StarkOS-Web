@@ -279,3 +279,4 @@ def recover_mission(mission_id):
     conn.close()
 
     return True
+

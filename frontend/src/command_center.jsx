@@ -160,7 +160,7 @@ function CommandCenter() {
         <br />
         <div className="title">
         <h1>Command Center</h1>
-        <p>{greeting}</p>
+        <p className="greeting">{greeting}</p>
         </div>
 
         <br />
