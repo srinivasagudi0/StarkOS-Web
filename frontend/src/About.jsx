@@ -15,6 +15,14 @@ function About() {
         </p>
       </section>
 
+      <section className="about-panel">
+        <h2>Why I built StarkOS</h2>
+        <p>
+         I built StarkOS because I wanted a simple, personal dashboard to track my coding hours, missions, streaks, and daily advice. I was tired of jumping between different tools and wanted one place to see everything at a glance. The goal is to help you stay focused, organized, and motivated on your coding journey.
+         I also got inspired by the idea of JARVIS from Iron Man, and wanted to create a personal assistant that could help me stay on track with my coding goals.
+        </p>
+      </section>
+
       <section className="about-grid">
         <div className="about-card">
           <span>🛰️</span>

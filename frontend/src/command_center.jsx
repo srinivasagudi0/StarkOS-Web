@@ -132,17 +132,18 @@ function CommandCenter() {
       })
   }, [])
 
-const [greeting, setGreeting] = useState('')
-  useEffect(() => {
-    fetch('/api/command-center/greeting')
-      .then((response) => response.json())
-      .then((data) => {
-        setGreeting(data.message)
-      })
-      .catch(() => {
-        setGreeting('Hello')
-      })
-  }, [])
+  const hour = new Date().getHours()
+  let greeting = "Good night!"
+
+  if (hour >= 5 && hour < 12) {
+    greeting = "Good morning!"
+  } else if (hour >= 12 && hour < 17) {
+    greeting = "Good afternoon!"
+  } else if (hour >= 17 && hour < 21) {
+    greeting = "Good evening!"
+  }
+
+  greeting += " Here is how you are doing. Keep up the good work!"
 
   if (commandLoading || missionLoading || warningsLoading || adviceLoading) {
 
@@ -271,3 +272,4 @@ const [greeting, setGreeting] = useState('')
 export default CommandCenter;
 
 // done!!
+

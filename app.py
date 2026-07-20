@@ -568,31 +568,12 @@ def hackatime_heatmap():
     except Exception as e:
         return jsonify({
             "connected": False,
-            "message": f"Could not load hackatime heatmao because of {e}",
+            "message": f"Could not load hackatime heatmap because of {e}",
             "days": []
         })
 
 
     return jsonify({"connected": True, "days": days})
-
-@app.route('/api/command-center/greeting')
-def greeting():
-    current_hour = datetime.now().hour
-    text = ""
-
-    if 5 <= current_hour < 12:
-        text += "Good morning!"
-    elif 12 <= current_hour < 17:
-        text += "Good afternoon!"
-    elif 17 <= current_hour < 21:
-        text += "Good evening!"
-    else:
-        text += "Good night!"
-
-    text += " Here is how you are doing. Keep up the good work!"
-    time = datetime.now().strftime("%I:%M %p")
-
-    return jsonify({"message": text, "time": time})
 
 if __name__ == "__main__":
     app.run(debug=True)
