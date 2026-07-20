@@ -15,7 +15,7 @@ function About() {
         </p>
       </section>
 
-      <section className="about-panel">
+      <section className="about-panel featured-card">
         <h2>Why I built StarkOS</h2>
         <p>
          I built StarkOS because I wanted a simple, personal dashboard to track my coding hours, missions, streaks, and daily advice. I was tired of jumping between different tools and wanted one place to see everything at a glance. The goal is to help you stay focused, organized, and motivated on your coding journey.
@@ -24,7 +24,7 @@ function About() {
       </section>
 
       <section className="about-grid">
-        <div className="about-card">
+        <div className="about-card small-card">
           <span>🛰️</span>
           <h3>Command Center</h3>
           <p>
@@ -33,7 +33,7 @@ function About() {
           </p>
         </div>
 
-        <div className="about-card">
+        <div className="about-card small-card">
           <span>🎯</span>
           <h3>Mission Control</h3>
           <p>
@@ -42,7 +42,7 @@ function About() {
           </p>
         </div>
 
-        <div className="about-card">
+        <div className="about-card small-card">
           <span>⚒️</span>
           <h3>Mission Forge</h3>
           <p>
@@ -73,7 +73,7 @@ function About() {
         </div>
       </section>
 
-      <section className="about-developer">
+      <section className="about-developer featured-card">
         <div className="developer-avatar">👨‍💻</div>
 
         <div>
@@ -101,7 +101,7 @@ function About() {
         </div>
       </section>
 
-      <section className="about-panel">
+      <section className="about-panel featured-card">
         <h2>Built with</h2>
 
         <div className="about-tags">

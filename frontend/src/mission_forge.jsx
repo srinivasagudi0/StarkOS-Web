@@ -83,13 +83,13 @@ function MissionForge() {
     <main className="page forge-page">
       <div className="title3">
         <h1>Mission Forge</h1>
-        <p>Create missions that help you achieve long-term goals.</p>
+        <p className="greeting">Create missions that help you achieve long-term goals.</p>
       </div>
 
         
         <section className="forge-text1"> 
         <br />
-        <div className="card advice-card forge-panel">
+        <div className="card advice-card forge-panel featured-card">
 
             <h1>✨ Quick Add with AI</h1>
 
@@ -145,7 +145,7 @@ function MissionForge() {
     <h1>Custom Add</h1>
 
     <div className="card-rows">
-      <div className="card mission-card forge">
+      <div className="card mission-card forge small-card">
         <div className="custom-mission-header">
           <span className="custom-mission-icon">🧩</span>
           <h3>Daily Mission</h3>
@@ -155,7 +155,7 @@ function MissionForge() {
         <button className="mission-button" onClick={() => addCustomMission("daily", dailyInput)}>Add Daily Mission</button>
       </div>
           <br />
-      <div className="card mission-card forge">
+      <div className="card mission-card forge small-card">
         <div className="custom-mission-header">
           <span className="custom-mission-icon">📅</span>
           <h3>Weekly Mission</h3>
@@ -165,7 +165,7 @@ function MissionForge() {
         <button className="mission-button" onClick={() => addCustomMission("weekly", weeklyInput)}>Add Weekly Mission</button>
       </div>
           <br />
-      <div className="card mission-card forge">
+      <div className="card mission-card forge small-card">
         <div className="custom-mission-header">
           <span className="custom-mission-icon">🎯</span>
           <h3>Long-term Mission</h3>

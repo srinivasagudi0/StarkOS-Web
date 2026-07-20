@@ -172,7 +172,7 @@ function MissionControl() {
       {missionMessage && <p className="mission-message">{missionMessage}</p>}
 
       <div className="cards-row">
-        <div className="card mission-card">
+        <div className="card mission-card featured-card">
           <div className="mission-header">
             <div className="mission-icon">🎯</div>
             <h2>Daily Missions</h2>
@@ -216,7 +216,7 @@ function MissionControl() {
       </div>
 
       <div className="cards-row">
-        <div className="card">
+        <div className="card small-card">
           <div className="mission-icon">⭐</div>
           <ul>
             <div>
@@ -226,14 +226,14 @@ function MissionControl() {
           </ul>
         </div>
 
-        <div className="card">
+        <div className="card small-card">
           <div className="mission-icon">🔥</div>
           <h2>Streaks: </h2>
           <div className="number">{streak}</div>
           <div className="label">day(s)</div>
         </div>
 
-        <div className="card mission-card">
+        <div className="card mission-card featured-card">
           <div className="mission-header">
             <div className="mission-icon">🛠️</div>
             <h2>Failed Mission: {missionData.failed_count}</h2> 
@@ -243,7 +243,7 @@ function MissionControl() {
           </ul>
         </div>
       </div>
-      <div className='card mission-card'>
+      <div className='card mission-card featured-card'>
         <div className="mission-header">
           <div className="mission-icon">💡</div>
           <h2>Failed Mission Recovery</h2>

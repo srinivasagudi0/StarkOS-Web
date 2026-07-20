@@ -123,7 +123,7 @@ function Code() {
         <main className="page">
             <h1 className="title5">Coding Intelligence</h1>
             <div className="cards-row">
-                <div className="card">
+                <div className="card featured-card">
                     <div className='mission-icon'>⏱️</div>
                     <div className="content">
                         <h1>Coded Hours (This week)</h1>
@@ -135,7 +135,7 @@ function Code() {
                         </div>
                     </div>
                 </div>
-                <div className="card">
+                <div className="card small-card">
                     <div className='mission-icon'>🎯</div>
                     <div className="content">
                         <h1>Streak</h1>
@@ -147,7 +147,7 @@ function Code() {
                         </div>
                     </div>
                 </div>
-                <div className="card">
+                <div className="card small-card">
                     <div className='mission-icon'>🏆</div>
                     <div className="content">
                         <h1>Daily Coding Goal</h1>
@@ -161,7 +161,7 @@ function Code() {
                 </div>
 
             <div className="mission-card">
-                <div className="card">
+                <div className="card featured-card">
                 <div className="content">
                     <h1>This Week's Projects 📊</h1>
                     <div className="warning">
@@ -182,7 +182,7 @@ function Code() {
                 </div>
             
             <div className='mission-card'>
-                <div className="card">
+                <div className="card featured-card">
                 <div className="content">
                     <h1>Coding Heatmap</h1>
                     <p>Last 7 Days</p>
@@ -204,7 +204,7 @@ function Code() {
             </div>
 
             <div className='mission-card'>
-                <div className="card">
+                <div className="card small-card">
                     <div className='mission-icon'>💻</div>
                     <div className="content">
                         <h1>Languages
@@ -223,7 +223,7 @@ function Code() {
             </div>
             <br />
             <div className='mission-card'>
-                <div className="card">
+                <div className="card small-card">
                     <div className="content">
                         <h1>Operating System</h1>
                         <ul>

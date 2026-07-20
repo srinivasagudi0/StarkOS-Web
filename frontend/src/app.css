@@ -71,7 +71,7 @@ select {
 
 .title {
   color: white;
-  background: rgba(13, 32, 56, 0.9);
+  background: rgba(0, 255, 255, 0.212);
   border: 1px solid rgba(56, 189, 248, 0.18);
   box-shadow: var(--shadow);
   text-align: center;
@@ -87,7 +87,7 @@ select {
 
 .title2 {
   color: white;
-  background: rgba(13, 32, 56, 0.9);
+  background: rgba(128, 0, 128, 0.603);
   border: 1px solid rgba(56, 189, 248, 0.18);
   box-shadow: var(--shadow);
   text-align: center;
@@ -101,7 +101,7 @@ select {
 
 .title3 {
   color: white;
-  background: rgba(13, 32, 56, 0.9);
+  background: rgba(36, 99, 36, 0.733);
   border: 1px solid rgba(56, 189, 248, 0.18);
   box-shadow: var(--shadow);
   text-align: center;
@@ -115,7 +115,7 @@ select {
 
 .title4 {
   color: white;
-  background: rgba(13, 32, 56, 0.9);
+  background: rgba(255, 166, 0, 0.67);
   border: 1px solid rgba(56, 189, 248, 0.18);
   box-shadow: var(--shadow);
   text-align: center;
@@ -156,11 +156,22 @@ select {
   padding: 1.25rem;
   background: rgba(13, 32, 56, 0.9);
   color: white;
-  border-radius: 1.5rem;
+  border-radius: 18px;
   border: 1px solid rgba(56, 189, 248, 0.18);
   box-shadow: var(--shadow);
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   backdrop-filter: blur(10px);
+}
+
+.featured-card {
+  border-radius: 28px;
+  background: linear-gradient(135deg, #10233f, #132b4d);
+  padding: 1.5rem;
+}
+
+.small-card {
+  border-radius: 14px;
+  padding: 1rem;
 }
 
 .card:hover {
@@ -485,7 +496,7 @@ nav .nav-brand:hover {
   display: block;
   margin: 1rem auto;
   padding: 0.75rem 1.5rem;
-  background: #38bdf8;
+  background: #38f8e26f;
   color: white;
   border: none;
   border-radius: 0.5rem;

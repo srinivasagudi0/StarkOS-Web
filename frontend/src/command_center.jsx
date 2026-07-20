@@ -165,7 +165,7 @@ function CommandCenter() {
 
         <br />
         {!hackatimeConnected && (
-          <div className="connect-card">
+          <div className="connect-card featured-card">
             <div className="mission-header">
               <div className="mission-icon">🔗</div>
               <h2>Connect Hackatime</h2>
@@ -183,7 +183,7 @@ function CommandCenter() {
         )}
 
         <div className="cards-row">
-          <div className="card">
+          <div className="card featured-card">
               <div className='mission-icon'>⏱️</div>
             <div className="content">
               <h1>Coded Hours</h1>
@@ -196,7 +196,7 @@ function CommandCenter() {
             </div>
           </div>
 
-          <div className="card mission-card">
+          <div className="card mission-card featured-card">
             <div className="mission-header">
               <div className="mission-icon">🎯</div>
               <h2>Missions</h2>
@@ -226,7 +226,7 @@ function CommandCenter() {
           </div>
           <div className="card mission-card">
             <div className="mission-header">
-              <div className="mission-icon">🔺</div>
+              <div className="mission-icon">⚠️</div>
               <h2>Warnings</h2>
             </div>
             <ul>
@@ -241,21 +241,21 @@ function CommandCenter() {
             </div>
         <br/>
         <div className="cards-row bottom-cards">
-        <div className="card">
+        <div className="card small-card">
           <div className="mission-icon">🔥</div>
           <h1>Streak : {streak ?? CommandData.streaks}</h1>
           </div>
-       <div className="card">
+       <div className="card small-card">
         <div className="mission-icon">🧠</div>
         <h1>Focus Score: {focus ?? CommandData.focus_score}</h1>
         </div>
-        <div className="card">
+        <div className="card small-card">
           <div className="mission-icon">⚡</div>
         <h1>Energy Score: {energy ?? CommandData.energy_score}</h1>
         </div>
         
         </div>
-        <div className="card advice-card">
+        <div className="card advice-card featured-card">
           <div className="mission-header">
             <div className="mission-icon">💡</div>
             <h2>Daily Advice</h2>
@@ -272,4 +272,3 @@ function CommandCenter() {
 export default CommandCenter;
 
 // done!!
-
