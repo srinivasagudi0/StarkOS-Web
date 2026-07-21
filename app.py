@@ -591,6 +591,8 @@ def personalize():
         "Start anything with emotion! ❤️",
         "Momentum grows when the first step feels manageable.",
         "Focus isn't intensity. It's loyalty to one task.",
+        "Built by Srinivas while learning React and Flask.",
+        "Keep building - bugs are part of the learning."
     ]
     import random
     message = random.choice(messages)

@@ -26,7 +26,7 @@ The command center is the main page of the app. It has
 - **Energy Score** - This will indicate how much energy you have left/putting into your work. It is determined with a simple formula of `productivity + consistency + balance`.
 - **Daily Advice** - This gives a simple daily `advice`.
 
-![alt text](command-center1.png)
+![alt text](image-8.png)
 
 ## Mission Control
 
@@ -44,7 +44,7 @@ The mission control is where you can manage your tasks not just view them. The m
 - **Failed Missions** - This is where all your failed missions are stored. You can view them and learn from your mistakes and also recover them if you want to.
 - **Failed Missions Recovery** - This is where you get suggestions on how to finish your recovery missions.
 
-![alt text](image.png)
+![alt text](image-5.png)
 
 ## Mission Forge
 
@@ -54,16 +54,17 @@ This is a simple page, just add everything you need to do in day, week or long-t
 - Then 3 cards each one is for daily, weekly, and long-term goals.
 
 
-![alt text](image-1.png)
+![alt text](image-6.png)
 
 ## About Page
 
 Just informs user how to get started with the app and about me and how the app is built.
 
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](image-7.png)
 
 # Note
+
+Your 
 
 I am so proud to make this project and very excited to start on V2 once v1 is approved. Also if you want to, try it out [here](https://stark-os-web-eight.vercel.app)
 

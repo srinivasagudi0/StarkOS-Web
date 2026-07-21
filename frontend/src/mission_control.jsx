@@ -20,9 +20,10 @@ function MissionControl() {
   })
   const [missionLoading, setMissionLoading] = useState(true)
   const [missionMessage, setMissionMessage] = useState("")
+  const [actionLoading, setActionLoading] = useState(false)
 
-  function loadMissionData() {
-    setMissionLoading(true)
+  function loadMissionData(showLoading = true) {
+    if (showLoading) setMissionLoading(true)
     fetch('/api/mission-control')
       .then((response) => response.json())
       .then((data) => {
@@ -46,18 +47,30 @@ function MissionControl() {
       })
   }, [])
 
-  function updateMission(missionId, action) {
-    fetch(`/api/missions/${missionId}/${action}`, {
-      method: 'POST',
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setMissionMessage(data.message)
-        loadMissionData()
+  async function updateMission(missionId, action) {
+    try {
+      if (action === 'complete') {
+        setActionLoading(true)
+      }
+
+      const response = await fetch(`/api/missions/${missionId}/${action}`, {
+        method: 'POST',
       })
-      .catch(() => {
-        setMissionMessage("That didn't go through. Try it again in a moment.")
-      })
+      const data = await response.json()
+
+      setMissionMessage(data.message)
+
+      if (action === 'complete') {
+        await new Promise((resolve) => setTimeout(resolve, 500))
+      }
+
+      setActionLoading(false)
+
+      loadMissionData(false)
+    } catch {
+      setActionLoading(false)
+      setMissionMessage("That didn't go through. Try it again in a moment.")
+    }
   }
 
   function renderMissionList(items = [], legacyItems = [], emptyMessage) {
@@ -192,6 +205,13 @@ function MissionControl() {
       <br />
 
       {missionMessage && <p className="mission-message">{missionMessage}</p>}
+
+      {actionLoading && (
+        <div className="mission-action-loading">
+          <div className="loader"></div>
+          <span>Updating your mission...</span>
+        </div>
+      )}
 
       <div className="cards-row">
         <div className="card mission-card featured-card">
