@@ -891,3 +891,9 @@ nav .nav-brand:hover {
   color: white;
   font-family: "Nunito", sans-serif;
 }
+
+.personalize {
+  text-align: right;
+  margin-bottom: 0%;
+  margin: 1rem auto;
+}

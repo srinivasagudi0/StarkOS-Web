@@ -148,6 +148,15 @@ function MissionControl() {
     }, [])
 
 
+    const [message, setMessage] = useState('')
+    useEffect(() => {
+        fetch('/api/pages/personalize')
+            .then((response) => response.json())
+            .then((data) => {
+                setMessage(data.message)
+            })
+    }, [])
+
   if (missionLoading || recoveryLoading) {
     return (
       <div className="loading-screen">
@@ -253,6 +262,7 @@ function MissionControl() {
 
           </ul>
       </div>
+      <p className='personalize'>{message}</p>
     </main>
   )
 }

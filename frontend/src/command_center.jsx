@@ -114,6 +114,15 @@ function CommandCenter() {
       })
   }, [])
 
+  const [message, setMessage] = useState('')
+  useEffect(() => {
+    fetch('/api/pages/personalize')
+      .then((response) => response.json())
+      .then((data) => {
+        setMessage(data.message)
+      })
+  }, [])
+
   
 
 
@@ -263,6 +272,7 @@ function CommandCenter() {
           </ul>
           
         </div>
+        <p className='personalize'>{message}</p>
       </main>
     )
 }
