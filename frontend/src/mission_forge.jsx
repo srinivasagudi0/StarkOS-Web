@@ -10,6 +10,22 @@ function MissionForge() {
   const [dailyInput, setDailyInput] = useState("")
   const [weeklyInput, setWeeklyInput] = useState("")
   const [longTermInput, setLongTermInput] = useState("")
+  const [lastAddedAt, setLastAddedAt] = useState(() => (
+    localStorage.getItem("lastMissionAddedAt") || ""
+  ))
+
+  function getCurrentTime() {
+    return new Date().toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit",
+    })
+  }
+
+  function saveLastAddedTime() {
+    const time = getCurrentTime()
+    localStorage.setItem("lastMissionAddedAt", time)
+    setLastAddedAt(time)
+  }
 
   async function generateMissions() {
     if (!input.trim()) {
@@ -51,8 +67,8 @@ function MissionForge() {
     setError("")
   }
 
-  function applyPlan() {
-    fetch('/api/apply_plan', {
+  async function applyPlan() {
+    const response = await fetch('/api/apply_plan', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,20 +79,28 @@ function MissionForge() {
         long_term: plan.long_term || [],
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setResult(data.message)
-      })
+
+    const data = await response.json()
+    setResult(data.message)
+
+    if (response.ok) {
+      saveLastAddedTime()
+    }
   }
 
-  function addCustomMission(type, value) {
-    fetch(`/api/add_${type}`, {
+  async function addCustomMission(type, value) {
+    const response = await fetch(`/api/add_${type}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ [type]: value }),
     })
-      .then((response) => response.json())
-      .then((data) => setResult(data.message))
+
+    const data = await response.json()
+    setResult(data.message)
+
+    if (response.ok) {
+      saveLastAddedTime()
+    }
   }
 
   return (
@@ -178,6 +202,8 @@ function MissionForge() {
   </div>
 )}
       </section>
+
+        {lastAddedAt && <p className="personalize">Last mission added at {lastAddedAt}</p>}
     </main>
   )
 }
