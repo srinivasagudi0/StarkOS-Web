@@ -64,7 +64,8 @@ Just informs user how to get started with the app and about me and how the app i
 
 # Note
 
-Your 
+Your first time logging in will take longer (sorry), then it will be smooth.
+About AI use, I used it to do small stuff as a partner and used it to help me deploy this project.
 
 I am so proud to make this project and very excited to start on V2 once v1 is approved. Also if you want to, try it out [here](https://stark-os-web-eight.vercel.app)
 
