@@ -157,6 +157,18 @@ function MissionControl() {
             })
     }, [])
 
+    const [count, setCount] = useState(null)
+    const [countMessage, setCountMessage] = useState("")
+    
+    useEffect(() => {
+        fetch('/api/mission-control/count')
+            .then((response) => response.json())
+            .then((data) => {
+                setCount(data.count)
+                setCountMessage(data.message)
+            })
+    }, [])
+
   if (missionLoading || recoveryLoading) {
     return (
       <div className="loading-screen">
@@ -174,6 +186,7 @@ function MissionControl() {
       <br />
       <div className="title2">
         <h1>Mission Control</h1>
+        <p>{countMessage}</p>
       </div>
 
       <br />

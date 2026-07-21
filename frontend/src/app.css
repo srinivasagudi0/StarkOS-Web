@@ -99,6 +99,11 @@ select {
   padding: 1.2rem 1rem;
 }
 
+.title2 p {
+  font-size: 1rem;
+  text-align: right;
+}
+
 .title3 {
   color: white;
   background: rgba(36, 99, 36, 0.733);

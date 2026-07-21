@@ -590,11 +590,25 @@ def personalize():
         "Be willing to be a beginner every single morning to keep learning! 📚",
         "Start anything with emotion! ❤️",
         "Momentum grows when the first step feels manageable.",
-        "Focus isn't intensity. It's loyalty to one task."
+        "Focus isn't intensity. It's loyalty to one task.",
     ]
     import random
     message = random.choice(messages)
     return jsonify({"message": message})
+
+@app.route('/api/mission-control/count')
+def count():
+    data = get_mission_control_data()
+    daily_count = len(data["daily_missions"])
+
+    if daily_count == 0:
+        message = "Your daily missions are clear."
+    else:
+        mission_word = "mission" if daily_count == 1 else "missions"
+        message = f"{daily_count} daily {mission_word} left to go."
+
+    return jsonify({"count": daily_count, "message": message})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
