@@ -569,8 +569,32 @@ def hackatime_heatmap():
             "days": []
         })
 
-
     return jsonify({"connected": True, "days": days})
+
+
+@app.route('/api/pages/personalize')
+def personalize():
+    messages = [
+        "Built by Srinivasa to make coding feel like a mission 🚀",
+        "Keep building - you're closer than yesterday 💪",
+        "Code with heart of an artist, for elegance lies in simplicity. 🎨",
+        "Your code is a story waiting to unfold in the digital realm. 📖",
+        "Programming is not about what you know, it's about what you can figure out. 🧠",
+        "Code is like humor. When you have to explain it, it's bad. 😄",
+        "Debugging is like being a detective in a crime movie where you are also the murderer. 🔍",
+        "The best way to predict the future is to create it. ✨",
+        "Simplicity is the soul of efficiency. ⚡",
+        "Beauty is the ultimate goal of design. 🌟",
+        "Good luck on the project you are working! 🍀",
+        "Nothing here 🤷",
+        "Be willing to be a beginner every single morning to keep learning! 📚",
+        "Start anything with emotion! ❤️",
+        "Momentum grows when the first step feels manageable.",
+        "Focus isn't intensity. It's loyalty to one task."
+    ]
+    import random
+    message = random.choice(messages)
+    return jsonify({"message": message})
 
 if __name__ == "__main__":
     app.run(debug=True)
