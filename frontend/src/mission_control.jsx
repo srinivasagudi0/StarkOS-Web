@@ -56,7 +56,7 @@ function MissionControl() {
         loadMissionData()
       })
       .catch(() => {
-        setMissionMessage("Could not update mission.")
+        setMissionMessage("That didn't go through. Try it again in a moment.")
       })
   }
 
@@ -96,7 +96,7 @@ function MissionControl() {
     )
 
     if (realFailedMissions.length === 0 && legacyFailedMissions.length === 0) {
-      return <li>No failed missions.</li>
+      return <li>Nothing missed. Nice work!</li>
     }
 
     return (
@@ -152,7 +152,7 @@ function MissionControl() {
     return (
       <div className="loading-screen">
         <div className="loader"></div>
-        <p>Loading StarkOS...</p>
+        <p>Getting your dashboard ready...</p>
       </div>
 
     )
@@ -181,7 +181,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.daily_mission_items,
               missionData.legacy_daily_missions,
-              "Nothing to do today!"
+              "Your day is clear - add a mission when you're ready."
             )}
           </ul>
         </div>
@@ -195,7 +195,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.weekly_mission_items,
               missionData.legacy_weekly_missions,
-              "No weeekly mission set, enjoy your free time!"
+              "Nothing planned this week yet - add something when you're ready."
             )}
           </ul>
         </div>
@@ -209,7 +209,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.long_term_goal_items,
               missionData.legacy_long_term_goals,
-              "No long-term goals set, set some to keep yourself motivated!"
+              "No big goal yet - add one when you know what you're aiming for."
             )}
           </ul>
         </div>

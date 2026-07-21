@@ -113,6 +113,15 @@ select {
   padding: 1.2rem 1rem;
 }
 
+
+.mission-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+}
+
 .title4 {
   color: white;
   background: rgba(255, 166, 0, 0.67);

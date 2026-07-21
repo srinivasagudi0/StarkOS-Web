@@ -48,20 +48,20 @@ def mission_control():
     
     daily_missions = data['daily_missions']
     if not daily_missions:
-        data['daily_missions'] = ["No daily missions at the moment. Enjoy or set new missions!"]
+        data['daily_missions'] = ["Your day is clear - add a mission when you're ready."]
 
     weekly_missions = data['weekly_missions']
     if not weekly_missions:
-        data['weekly_missions'] = ["No weekly missions at the moment. Enjoy or set new missions!"]
+        data['weekly_missions'] = ["Nothing planned this week yet - add something when you're ready."]
 
     ltg = data['long_term_goals']
 
     if not ltg:
-        data['long_term_goals'] = ["No long term goals. Set a new long term goal, please."]
+        data['long_term_goals'] = ["No big goals yet - add one when you know what you're aiming for."]
 
     failed_missions = data["failed_missions"]
     if not failed_missions:
-        data["failed_missions"] = ["No failed missions. Keep up the good work!"] 
+        data["failed_missions"] = ["Nothing missed. Nice work!"]
     
     return jsonify(data)
 
@@ -73,14 +73,11 @@ def generate_recovery_advice(failed_missions, daily_tasks, weekly_tasks):
         return jsonify({"message": failed_missions})
     
     prompt = """
-    You help users recover from failed missions.
-    Write a single short, actionable advice string.
-    Use the failed missions as context and quote exact phrashes from them when useful.
-    Be specific, concise, and practical.
-    Do not be generic. Do not ask questions.
-    Do not include filler like 'tell me when you are done' or 'let me know' or 'ask me anyhting'.
-    Return only the advice text.
-    Actually plan, dont just say 'If you missed your daily tasks, aim to catch up on them during the weekend to stay on track.'
+    You are a calm, helpful teammate in a personal mission app.
+    Write one short recovery message using the user's actual missed missions.
+    Give one specific, realistic next step instead of generic motivation.
+    Sound warm and human, not like a system notification or a life coach.
+    Do not ask questions or add filler. Return only the message.
     """
     client = OpenAI(api_key=api)
     response = client.chat.completions.create(
@@ -99,7 +96,7 @@ def recovery_assistant():
     failed_missions = data['failed_missions']
     
     if not failed_missions:
-        return jsonify({"message": "Yaey, no failed missions! Keep up the good work!"})
+        return jsonify({"message": "Nothing missed. Nice work! You're all clear."})
 
     try: 
         advice = generate_recovery_advice(failed_missions, data['daily_missions'], data['weekly_missions'])
@@ -111,22 +108,15 @@ def generate_warnings(active_missions):
     try:
         api = os.getenv('OPENAI_API_KEY')
     except KeyError:
-        return jsonify({"message": "Warnings cannot be generated at the moment. Please check your API key."})
+        return jsonify({"message": "I can't create warnings right now. Check that your OpenAI key is connected."})
     
     prompt = """
-    You generate cocise warnings for a user's active missions.
-    Return only json like list of short warnings strings, for example: ["warning 1", "warning 2", "warning 3"].
-
-    Each watning must be:
-    - specific to the mission provided
-    - actionable
-    - breif
-    - not generic
-
-    WARNINGS SHOULD NOT MORE NUMBER THAN THE NUMBER OF ACTIVE MISSIONS.
-
-    Do not ask questions, numbering, or extra text. Do not include filler like 'tell me when you are done' or 'let me know' or 'ask me anyhting'.
-
+    You are a helpful teammate in a personal productivity app.
+    Write one short warning for each active mission, using the actual mission as context.
+    Keep each warning specific, practical, and easy to act on.
+    Sound human and calm, not corporate or dramatic.
+    Return only a JSON list of warning strings.
+    Do not ask questions, add numbering, or include filler.
     """
 
     client = OpenAI(api_key=api)
@@ -146,13 +136,13 @@ def warnings():
     active_missions = data['daily_missions'] + data['weekly_missions'] + data['long_term_goals']
 
     if not active_missions:
-        return jsonify({"message": "No active missions at the moment. Enjoy or set new missions!"}) # thss does the job of telling empty message
+        return jsonify({"message": "No warnings today - you're clear to focus."})
 
     try:
         warnings = generate_warnings(active_missions)
         return jsonify({"message": warnings})
     except Exception as e:
-        return jsonify({"message": "Warnings are currently unavailable. Please try again later."})
+        return jsonify({"message": "I couldn't load your warnings this time. Try again in a moment."})
     
 
 @app.route('/api/advice')
@@ -162,7 +152,7 @@ def advice():
     advice = data['daily_advice']
 
     if not advice:
-        return jsonify({"message": "No advice available at the moment. Please check back later."})
+        return jsonify({"message": "No advice is ready right now. Check back in a little while."})
     
     num = len(advice)
 
@@ -177,19 +167,21 @@ def advice():
 def plan_with_ai(input_text):
     api = os.getenv('OPENAI_API_KEY')
     if not api:
-        return "AI planning is currently unavailable. Please add your OpenAI key to the environment variables."
+        return "AI planning isn't connected yet. Add your OpenAI key to turn ideas into missions."
     
     client = OpenAI(api_key=api)
 
     prompt = '''
-    You help users plan out their mission(s)/task(s). Divide the plan into daily, weekly, and long-term goals and ONLY RETURN a valid JSON object with this shape:
+    You help a person turn an idea into a realistic mission plan.
+    Divide the plan into daily, weekly, and long-term goals and ONLY RETURN a valid JSON object with this shape:
     {
         "daily": ["task 1", "task 2", ...],
         "weekly": ["task 1", "task 2", ...],
         "long_term": ["goal 1", "goal 2", ...]
     }
-    DO NOT ASSUME ANYTHING ABOUT THE USER OR TASKS. DO NOT INCLUDE ANY EXPLANATIONS OR FILLER. FOR EXAMPLE, if it says something like "finish homework", you say daily misssion to be finihsh homework
-    Use arrays for every key. Do not ask questions, add explanations, markdown, or filler. Return only the JSON object.
+    Keep the user's wording where possible. Make each mission clear and realistic.
+    Do not assume personal details, ask questions, add explanations, markdown, or filler.
+    Return only the JSON object.
     '''
 
     response = client.chat.completions.create(
@@ -208,37 +200,37 @@ def ai_forge():
     input_text = data.get('input', '')
 
     if not input_text:
-        return jsonify({"message": "Please enter a mission first."})
+        return jsonify({"message": "Tell me what you want to accomplish first."})
 
     try:
         plan = plan_with_ai(input_text)
         if isinstance(plan, str):
             plan = json.loads(plan)
-        ufm = "Here is a suggested plan based on your input:\n"
+        ufm = "Here's a mission plan built around your idea:\n"
 
         daily = plan.get("daily", [])
         if daily:
-            ufm += "Daily Missions:\n"
+            ufm += "Today's missions:\n"
             for i, task in enumerate(daily, start=1):
                 ufm += f"{i}. {task}\n"
             ufm += "\n"
 
         weekly = plan.get("weekly", [])
         if weekly:
-            ufm += "Weekly Missions:\n"
+            ufm += "This week's missions:\n"
             for i, task in enumerate(weekly, start=1):
                 ufm += f"{i}. {task}\n"
             ufm += "\n"
 
         long_term = plan.get("long_term", [])
         if long_term:
-            ufm += "Long-term Goals:\n"
+            ufm += "Long-term goals:\n"
             for i, goal in enumerate(long_term, start=1):
                 ufm += f"{i}. {goal}\n"
 
         return jsonify({"plan": plan, "message": ufm})
     except Exception as e:
-        return jsonify({"message": f"AI planning is currently unavailable because of {str(e)}"})
+        return jsonify({"message": "I couldn't build that plan this time. Check your connection and try again."})
     
 @app.route('/api/apply_plan', methods=['POST'])
 def apply_plan():
@@ -265,7 +257,7 @@ def apply_plan():
         if goal:
             add_long_term_goal(goal)
         
-    return jsonify({"message": "Plan applied successfully."})
+    return jsonify({"message": "Your missions are ready 🚀"})
 
 @app.route('/api/add_daily', methods=['POST'])
 def add_daily():
@@ -273,9 +265,9 @@ def add_daily():
     daily = data.get("daily", "")
     if daily:
         add_daily_mission(daily)
-        return jsonify({"message": "Daily mission added successfully."})
+        return jsonify({"message": "Your daily mission is on the board."})
     else:
-        return jsonify({"message": "Please provide a daily mission."}), 400
+        return jsonify({"message": "Tell me what you want to finish today."}), 400
 
 @app.route('/api/add_weekly', methods=['POST'])
 def add_weekly():
@@ -283,9 +275,9 @@ def add_weekly():
     weekly = data.get("weekly", "")
     if weekly:
         add_weekly_mission(weekly)
-        return jsonify({"message": "Weekly mission added successfully."})
+        return jsonify({"message": "Your weekly mission is on the board."})
     else:
-        return jsonify({"message": "Please provide a weekly mission."}), 400
+        return jsonify({"message": "Tell me what you want to work on this week."}), 400
 
 @app.route('/api/add_long_term', methods=['POST'])
 def add_long_term():
@@ -293,9 +285,9 @@ def add_long_term():
     long_term = data.get("long_term", "")
     if long_term:
         add_long_term_goal(long_term)
-        return jsonify({"message": "Long-term goal added successfully."})
+        return jsonify({"message": "Your long-term goal is on the board."})
     else:
-        return jsonify({"message": "Please provide a long-term goal."}), 400
+        return jsonify({"message": "Tell me what you're working toward."}), 400
 
 @app.route('/api/missions/<int:mission_id>/<action>', methods=['POST'])
 def update_mission(mission_id, action):
@@ -303,9 +295,9 @@ def update_mission(mission_id, action):
         recovered = recover_mission(mission_id)
 
         if not recovered:
-            return jsonify({"message": "Mission not found."}), 404
+            return jsonify({"message": "I couldn't find that mission anymore."}), 404
 
-        return jsonify({"message": "Mission recovered and moved back to active."})
+        return jsonify({"message": "Back on track. That mission is active again."})
 
     action_to_status = {
         'complete': 'completed',
@@ -316,14 +308,19 @@ def update_mission(mission_id, action):
     status = action_to_status.get(action)
 
     if not status:
-        return jsonify({"message": "Invalid mission action."}), 400
+        return jsonify({"message": "I couldn't do that with this mission."}), 400
 
     updated = update_mission_status(mission_id, status)
 
     if not updated:
-        return jsonify({"message": "Mission not found."}), 404
+        return jsonify({"message": "I couldn't find that mission anymore."}), 404
 
-    return jsonify({"message": f"Mission marked as {status}."})
+    messages = {
+        'completed': "Mission complete. Nice work!",
+        'failed': "That mission is marked as missed. You can recover it later.",
+        'deleted': "That mission has been removed.",
+    }
+    return jsonify({"message": messages[status]})
 
 @app.route('/api/hackatime/login')
 def hackatime_login():
@@ -356,7 +353,7 @@ def hackatime_callback():
     token = data.get("access_token")
 
     if not token:
-        return jsonify({"message": "Hackatime login failed. Check your OAuth app settings."}), 400
+        return jsonify({"message": "Hackatime couldn't connect. Check the connection settings and try again."}), 400
 
     session["hackatime_token"] = token
 
@@ -530,7 +527,7 @@ def hackatime_heatmap():
     oauth_token = session.get("hackatime_token")
 
     if not oauth_token:
-        return jsonify({"connected": False, "message": "No oAuth token", "days": [] }), 401
+        return jsonify({"connected": False, "message": "Connect Hackatime to see your coding activity here.", "days": [] }), 401
     
     days = []
 
@@ -568,7 +565,7 @@ def hackatime_heatmap():
     except Exception as e:
         return jsonify({
             "connected": False,
-            "message": f"Could not load hackatime heatmap because of {e}",
+            "message": "I couldn't load your coding heatmap. Try reconnecting Hackatime.",
             "days": []
         })
 

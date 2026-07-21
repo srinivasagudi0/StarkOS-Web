@@ -13,7 +13,7 @@ function MissionForge() {
 
   async function generateMissions() {
     if (!input.trim()) {
-      setError("Enter a mission idea first.")
+      setError("Tell me what you want to accomplish first.")
       return
     }
 
@@ -38,7 +38,7 @@ function MissionForge() {
         setPlan(data.plan)
       }
     } catch {
-      setError("Something went wrong. Make sure Flask is running.")
+      setError("I couldn't build your plan. Check that the app is connected and try again.")
     }
 
     setLoading(false)
@@ -83,7 +83,7 @@ function MissionForge() {
     <main className="page forge-page">
       <div className="title3">
         <h1>Mission Forge</h1>
-        <p className="greeting">Create missions that help you achieve long-term goals.</p>
+        <p className="greeting">Turn what you want to do into a plan you can actually follow.</p>
       </div>
 
         
@@ -94,7 +94,7 @@ function MissionForge() {
             <h1>✨ Quick Add with AI</h1>
 
 
-          <p>Describe your goal very clearly. AI will turn it into missions.</p>
+          <p>Tell me what you want to work on, and I'll break it into missions you can follow.</p>
 
           <textarea
             className="mission-input"
@@ -105,16 +105,16 @@ function MissionForge() {
 
           <div className="forge-actions">
             <button className="mission-button" onClick={generateMissions} disabled={loading}>
-              {loading ? "Generating..." : "Generate Missions"}
+              {loading ? "Building your plan..." : "Generate Missions"}
             </button>
 
             <button className="mission-button secondary-button" onClick={clearForge}>
-              Clear
+              Start over
             </button>
 
             {plan && (
               <button className="mission-button" onClick={applyPlan}>
-                Apply to Mission Control
+                Add this plan to Mission Control
               </button>
             )}
           </div>
@@ -124,13 +124,13 @@ function MissionForge() {
           {loading && (
             <div className="forge-loading">
               <div className="loader"></div>
-              <p>Forging your mission plan...</p>
+              <p>Putting your plan together...</p>
             </div>
           )}
 
           {result && (
             <div className="forge-result">
-              <h3>Generated Mission Plan</h3>
+              <h3>Your plan</h3>
               <pre>{result}</pre>
             </div>
           )}
@@ -150,8 +150,8 @@ function MissionForge() {
           <span className="custom-mission-icon">🧩</span>
           <h3>Daily Mission</h3>
         </div>
-        <p>Enter a daily mission to add to your plan.</p>
-        <textarea placeholder="Daily mission" value={dailyInput} onChange={(event) => setDailyInput(event.target.value)} />
+        <p>Add one thing you want to finish today.</p>
+        <textarea placeholder="What do you want to finish today?" value={dailyInput} onChange={(event) => setDailyInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("daily", dailyInput)}>Add Daily Mission</button>
       </div>
           <br />
@@ -160,8 +160,8 @@ function MissionForge() {
           <span className="custom-mission-icon">📅</span>
           <h3>Weekly Mission</h3>
         </div>
-        <p style={{ color: 'rgb(184, 83, 184)' }}>Enter a weekly mission to add to your plan.</p>
-        <textarea placeholder="Weekly mission" value={weeklyInput} onChange={(event) => setWeeklyInput(event.target.value)} />
+        <p style={{ color: 'rgb(184, 83, 184)' }}>Add something you want to make progress on this week.</p>
+        <textarea placeholder="What do you want to make progress on this week?" value={weeklyInput} onChange={(event) => setWeeklyInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("weekly", weeklyInput)}>Add Weekly Mission</button>
       </div>
           <br />
@@ -170,8 +170,8 @@ function MissionForge() {
           <span className="custom-mission-icon">🎯</span>
           <h3>Long-term Mission</h3>
         </div>
-        <p style={{ color: 'orange' }}>Enter a long-term mission to add to your plan.</p>
-        <textarea placeholder="Long-term mission" value={longTermInput} onChange={(event) => setLongTermInput(event.target.value)} />
+        <p style={{ color: 'orange' }}>Add a bigger goal you want to keep moving toward.</p>
+        <textarea placeholder="What are you working toward?" value={longTermInput} onChange={(event) => setLongTermInput(event.target.value)} />
         <button className="mission-button" onClick={() => addCustomMission("long_term", longTermInput)}>Add Long-term Mission</button>
       </div>
     </div>

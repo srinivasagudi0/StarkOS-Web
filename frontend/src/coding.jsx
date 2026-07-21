@@ -77,7 +77,7 @@ function Code() {
             .then((response) => response.json())
             .then((data) => {
                 if (data.connected) {
-                    setGoalsText(data.grand_total?.text || "No goal set")
+                    setGoalsText(data.grand_total?.text || "No coding goal yet - add one when you know what you want to hit.")
                 }
             })
     }, [])
@@ -115,7 +115,7 @@ function Code() {
       setHeatmapLoading(false);
     })
     .catch(() => {
-      setHeatmapError('Failed to fetch heatmap');
+      setHeatmapError("I couldn't load your heatmap. Try again in a moment.");
       setHeatmapLoading(false);
     });
 }, []);
@@ -126,7 +126,7 @@ function Code() {
                 <div className="card featured-card">
                     <div className='mission-icon'>⏱️</div>
                     <div className="content">
-                        <h1>Coded Hours (This week)</h1>
+                    <h1>Coding time this week</h1>
                         <div className="stats">
                             <span className="number">
                                 {hours}
@@ -187,7 +187,7 @@ function Code() {
                     <h1>Coding Heatmap</h1>
                     <p>Last 7 Days</p>
 
-                    {heatmapLoading && <p>Loading...</p>}
+                    {heatmapLoading && <p>Pulling in your coding activity...</p>}
                     {heatmapError && <p>{heatmapError}</p>}
 
                     <div className="heatmap-grid">
