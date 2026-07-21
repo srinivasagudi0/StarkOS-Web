@@ -170,14 +170,12 @@ function MissionControl() {
             })
     }, [])
 
-    const [count, setCount] = useState(null)
     const [countMessage, setCountMessage] = useState("")
     
     useEffect(() => {
         fetch('/api/mission-control/count')
             .then((response) => response.json())
             .then((data) => {
-                setCount(data.count)
                 setCountMessage(data.message)
             })
     }, [])

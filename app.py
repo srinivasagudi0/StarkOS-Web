@@ -147,21 +147,22 @@ def warnings():
 
 @app.route('/api/advice')
 def advice():
-    data=get_mission_data()
+    advice = [
+        "Focus on one mission at a time. Multitasking is a myth.",
+        "Break big goals into smaller, actionable steps.",
+        "Celebrate small wins to stay motivated.",
+        "Prioritize tasks based on impact, not urgency.",
+        "Take breaks to recharge your mind and body.",
+        "Reflect on your progress regularly to adjust your plan.",
+        "Eliminate distractions to maintain focus.",
+        "Set realistic deadlines to avoid burnout.",
+        "Use the power of habit to build consistency.",
+        "Stay flexible and adapt to changes in your plan."
+    ]
 
-    advice = data['daily_advice']
-
-    if not advice:
-        return jsonify({"message": "No advice is ready right now. Check back in a little while."})
-    
-    num = len(advice)
-
-    if num == 1:
-        return jsonify({"message": advice[0]})
-    else:
-        import random
-        random_advice = random.choice(advice)
-        return jsonify({"message": random_advice})
+    import random
+    message = random.choice(advice)
+    return jsonify({"message": message})
     
 
 def plan_with_ai(input_text):

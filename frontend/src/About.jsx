@@ -93,7 +93,7 @@ function About() {
             the work, plan the next mission, recover from a miss, and keep moving.
           </p>
           <p>
-            Next, I want to keep growing StarOS and make it even more useful for developers. I'd also love feedback from users and
+            Next, I want to keep growing StarkOS and make it even more useful for developers. I'd also love feedback from users and
             hackers about features, ideas, or bugs. You can find me on Slack at
             srinivasagudi0.
           </p>
