@@ -1,73 +1,31 @@
 # StarkOS-Web
 
-StarkOS is named after the operating system of Tony Stark (Iron Man). Anyways, this is a web app that I built to help me and other hackers to track their work, plan everything in one place, and learn from mistakes.
+StarkOS is named after the operating system of Tony Stark (Iron Man). Anyways, this is a web app that I built to help me and other hackers to track their work, plan everything in one place, and make yourself feel like you are in the movies.
 
 This is the version 1 of the app, I will try to make it even better and functional for V2.
 
-# How everything works
-The app is divided into 4 pages:
+## Some pics of the App
 
-- *Command-Center*
-- *Mission-Control*
-- *Mission-Forge*
-- *About*
+![alt text](image-9.png)
+![alt text](image-10.png)
+![alt text](image-11.png)
 
-Each section is unique and has its own use.
-
-## Command-Center
-
-The command center is the main page of the app. It has
-
-- **Coded Hours** - The hours you have coded today, this is fetched from `Hackatime`.
-- **Missions** - It displays `all` the missions you have created regardless of whether they are daily, weekly, or long-term goals.
-- **Warnings** - This says users what not to do `suggestions` based on the missions. If there are no missions, it will be showing a placeholder message.
-- **Streak** - This shows how many days you have coded, also fetched from `hackatime`.
-- **Focus Score** - This will indicate how focused you are. It determines the score by the formula `min (hours*20, 100)`.
-- **Energy Score** - This will indicate how much energy you have left/putting into your work. It is determined with a simple formula of `productivity + consistency + balance`.
-- **Daily Advice** - This gives a simple daily `advice`.
-
-![alt text](image-8.png)
-
-## Mission Control
-
-The mission control is where you can manage your tasks not just view them. The missions are also classified as daily, weekly, long and failed.
-
-- **Daily Missions** - This is where you can view your daily missions. Also if not completed by the midnight it will be transferred to the failed missions section.
-- **Weekly Mission** - Simply missions for your week, even this will transfer to failed missions after a week of no change.
-- **Long Term Missions** - This shows all your long term goals and these will transfer to failed missions after 90 days.
-- **XP Point** - XP points is calculated as follows:
-    - Daily mission completed = +20 xp
-    - Weekly Mission completed = +50 xp
-    - Long Term Mission completed = +120 xp
-    - Failed Mission = -25 xp
-- **Streak** - The streak is again fetched from `Hackatime` again.
-- **Failed Missions** - This is where all your failed missions are stored. You can view them and learn from your mistakes and also recover them if you want to.
-- **Failed Missions Recovery** - This is where you get suggestions on how to finish your recovery missions.
-
-![alt text](image-5.png)
-
-## Mission Forge
-
-This is a simple page, just add everything you need to do in day, week or long-term.
-
-- **AI Quick Add** - Just say everything you got to do, and let it pick a best plan for you and fill missions once you accept.
-- Then 3 cards each one is for daily, weekly, and long-term goals.
-
-
-![alt text](image-6.png)
-
-## About Page
-
-Just informs user how to get started with the app and about me and how the app is built.
-
-![alt text](image-7.png)
-
-# Note
-
-Your first time logging in will take longer (sorry), then it will be smooth.
-About AI use, I used it to do small stuff as a partner and used it to help me deploy this project.
-
-I am so proud to make this project and very excited to start on V2 once v1 is approved. Also if you want to, try it out [here](https://stark-os-web-eight.vercel.app)
 
 ## AI Usage
-I used AI as less as possible, I only used it to help me host it in render and asked it to help me make all the routes work properly.
+
+I used inline-suggestions, but mostly used it to style the app a bit so it looks better, also used a file template that is made using running a vite command. This is also my first ever react project, and using flask as backend. So, took help from AI learning and implemmenting. I have really worked hard on this project, I only used AI to write css(mostly the navigation) and help me understand when i needed to. This is the real use. Also, about the UI, i want to keep it minimal, so I choose this design of flashcards, thats why you see I reused them. I didn't use AI create the whole UI, just a little styling. I don't understand why it looks like AI, I got inspired from the Heads over display (HUD) in Iron Man. Hope you understand it.
+
+# Pages
+
+The pages have everything a basic coder needs. You can add missions, delete them and track your time, streaks with hackatime login.
+
+It also grades them on how they do and it works exactly as expected and easier to start.
+If you want to try it out, [click here](https://stark-os-web-eight.vercel.app)
+
+
+Please feel free to visit the demo and give me feedback on what to ship for V2. I will try to implement them as much as possible. I will also try to make it more functional and add more features in V2.
+
+
+## Note
+
+Finally, sorry for not declaring the AI usage in the beginning, I was just too vague, but I declared it now. THe UI is just styled to be like it, simple and minimal, I didn't use the AI to create the whole UI, just a little styling. I hope you understand it. I will try to make it more functional and add more features in V2. Looking forward!
