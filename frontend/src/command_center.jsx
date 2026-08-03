@@ -182,7 +182,7 @@ function CommandCenter() {
             </p>
 
             <a className="mission-button connect-button" href="/api/hackatime/login">
-              Connect Hackatime
+              Connect
             </a>
           </div>
         )}
