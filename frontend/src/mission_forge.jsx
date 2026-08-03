@@ -171,7 +171,6 @@ function MissionForge() {
     <div className="card-rows">
       <div className="card mission-card forge small-card">
         <div className="custom-mission-header">
-          <span className="custom-mission-icon">🧩</span>
           <h3>Daily Mission</h3>
         </div>
         <p>Add one thing you want to finish today.</p>
@@ -181,7 +180,6 @@ function MissionForge() {
           <br />
       <div className="card mission-card forge small-card">
         <div className="custom-mission-header">
-          <span className="custom-mission-icon">📅</span>
           <h3>Weekly Mission</h3>
         </div>
         <p style={{ color: 'rgb(184, 83, 184)' }}>Add something you want to make progress on this week.</p>
@@ -191,7 +189,6 @@ function MissionForge() {
           <br />
       <div className="card mission-card forge small-card">
         <div className="custom-mission-header">
-          <span className="custom-mission-icon">🎯</span>
           <h3>Long-term Mission</h3>
         </div>
         <p style={{ color: 'orange' }}>Add a bigger goal you want to keep moving toward.</p>
