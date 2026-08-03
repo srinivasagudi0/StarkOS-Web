@@ -73,7 +73,7 @@ function About() {
       </section>
 
       <section className="about-developer featured-card">
-        <div className="developer-avatar">👨‍💻</div>
+        <div className="developer-avatar">SG</div>
 
         <div>
           <p className="about-kicker">A little about me</p>

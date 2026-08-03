@@ -174,7 +174,6 @@ function CommandCenter() {
         {!hackatimeConnected && (
           <div className="connect-card featured-card">
             <div className="mission-header">
-              <div className="mission-icon">🔗</div>
               <h2>Connect Hackatime</h2>
             </div>
 
@@ -204,7 +203,6 @@ function CommandCenter() {
 
           <div className="card mission-card featured-card">
             <div className="mission-header">
-              <div className="mission-icon">🎯</div>
               <h2>Missions</h2>
             </div>
             <ul>
@@ -232,7 +230,6 @@ function CommandCenter() {
           </div>
           <div className="card mission-card">
             <div className="mission-header">
-              <div className="mission-icon">⚠️</div>
               <h2>Warnings</h2>
             </div>
             <ul>
@@ -248,22 +245,18 @@ function CommandCenter() {
         <br/>
         <div className="cards-row bottom-cards">
         <div className="card small-card">
-          <div className="mission-icon">🔥</div>
           <h1>Streak : {streak ?? CommandData.streaks}</h1>
           </div>
        <div className="card small-card">
-        <div className="mission-icon">🧠</div>
         <h1>Focus Score: {focus ?? CommandData.focus_score}</h1>
         </div>
         <div className="card small-card">
-          <div className="mission-icon">⚡</div>
         <h1>Energy Score: {energy ?? CommandData.energy_score}</h1>
         </div>
         
         </div>
         <div className="card advice-card featured-card">
           <div className="mission-header">
-            <div className="mission-icon">💡</div>
             <h2>Daily Advice</h2>
           </div>
 

@@ -48,16 +48,16 @@ def mission_control():
     
     daily_missions = data['daily_missions']
     if not daily_missions:
-        data['daily_missions'] = ["Your day is clear - add a mission when you're ready."]
+        data['daily_missions'] = ["Your day is clear. Add a mission"]
 
     weekly_missions = data['weekly_missions']
     if not weekly_missions:
-        data['weekly_missions'] = ["Nothing planned this week yet - add something when you're ready."]
+        data['weekly_missions'] = ["Your week is free. Add something."]
 
     ltg = data['long_term_goals']
 
     if not ltg:
-        data['long_term_goals'] = ["No big goals yet - add one when you know what you're aiming for."]
+        data['long_term_goals'] = ["No big goals yet. Add one when you know what you're aiming for."]
 
     failed_missions = data["failed_missions"]
     if not failed_missions:

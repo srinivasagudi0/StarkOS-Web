@@ -92,7 +92,7 @@ function MissionControl() {
               <button title="Complete Mission"  onClick={() => updateMission(mission.id, 'complete')}>✓</button>
               <button title="Fail Mission" onClick={() => updateMission(mission.id, 'fail')}>X</button>
               <button title="Delete Mission" className="delete-button" onClick={() => updateMission(mission.id, 'delete')}>
-                🗑️
+                Delete
               </button>
             </div>
           </li>
@@ -228,7 +228,6 @@ function MissionControl() {
 
         <div className="card mission-card">
           <div className="mission-header">
-            <div className="mission-icon">📅</div>
             <h2>Weekly Missions</h2>
           </div>
           <ul>
@@ -242,7 +241,6 @@ function MissionControl() {
 
         <div className="card mission-card">
           <div className="mission-header">
-            <div className="mission-icon">🚀</div>
             <h2>Long-Term Goals</h2>
           </div>
           <ul>
@@ -257,7 +255,6 @@ function MissionControl() {
 
       <div className="cards-row">
         <div className="card small-card">
-          <div className="mission-icon">⭐</div>
           <ul>
             <div>
               <div className="number">{missionData.XP_points}</div>
@@ -267,7 +264,6 @@ function MissionControl() {
         </div>
 
         <div className="card small-card">
-          <div className="mission-icon">🔥</div>
           <h2>Streaks: </h2>
           <div className="number">{streak}</div>
           <div className="label">day(s)</div>
@@ -275,7 +271,6 @@ function MissionControl() {
 
         <div className="card mission-card featured-card">
           <div className="mission-header">
-            <div className="mission-icon">🛠️</div>
             <h2>Failed Mission: {missionData.failed_count}</h2> 
           </div>
           <ul>
@@ -285,7 +280,6 @@ function MissionControl() {
       </div>
       <div className='card mission-card featured-card'>
         <div className="mission-header">
-          <div className="mission-icon">💡</div>
           <h2>Failed Mission Recovery</h2>
         </div>
         <ul>

@@ -136,7 +136,6 @@ function Code() {
                     </div>
                 </div>
                 <div className="card small-card">
-                    <div className='mission-icon'>🎯</div>
                     <div className="content">
                         <h1>Streak</h1>
                         <div className="stats">
@@ -148,7 +147,6 @@ function Code() {
                     </div>
                 </div>
                 <div className="card small-card">
-                    <div className='mission-icon'>🏆</div>
                     <div className="content">
                         <h1>Daily Coding Goal</h1>
                         <div className="stats">
@@ -163,7 +161,7 @@ function Code() {
             <div className="mission-card">
                 <div className="card featured-card">
                 <div className="content">
-                    <h1>This Week's Projects 📊</h1>
+                    <h1>This Week's Projects</h1>
                     <div className="warning">
                     <div className="projects-scroll">
                     <ul>
@@ -205,7 +203,6 @@ function Code() {
 
             <div className='mission-card'>
                 <div className="card small-card">
-                    <div className='mission-icon'>💻</div>
                     <div className="content">
                         <h1>Languages
                          (top 3)
