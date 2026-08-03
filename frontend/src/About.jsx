@@ -27,7 +27,6 @@ function About() {
 
       <section className="about-grid">
         <div className="about-card small-card">
-          <span>🛰️</span>
           <h3>Command Center</h3>
           <p>
             See today's coding time, missions, warnings, streak, focus, energy,
@@ -36,7 +35,6 @@ function About() {
         </div>
 
         <div className="about-card small-card">
-          <span>🎯</span>
           <h3>Mission Control</h3>
           <p>
             Plan your day, your week, and bigger goals. Complete missions, earn XP,
@@ -45,7 +43,6 @@ function About() {
         </div>
 
         <div className="about-card small-card">
-          <span>⚒️</span>
           <h3>Mission Forge</h3>
           <p>
             Turn a rough idea into a mission plan with AI, or add each mission
