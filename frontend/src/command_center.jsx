@@ -142,14 +142,14 @@ function CommandCenter() {
   }, [])
 
   const hour = new Date().getHours()
-  let greeting = "Good night! Here's a quick look at your progress. Rest counts too."
+  let greeting = "Good night. Here is your progress."
 
   if (hour >= 5 && hour < 12) {
-    greeting = "Good morning! Here's your day at a glance. Pick a mission and start there."
+    greeting = "Good morning. Here is your day."
   } else if (hour >= 12 && hour < 17) {
-    greeting = "Good afternoon! Here's your progress so far. Keep the next step small."
+    greeting = "Good afternoon. Here is your progress."
   } else if (hour >= 17 && hour < 21) {
-    greeting = "Good evening! Here's where things stand. Finish one meaningful thing if you can."
+    greeting = "Good evening. Here is your progress."
   }
 
   if (commandLoading || missionLoading || warningsLoading || adviceLoading) {
@@ -157,7 +157,7 @@ function CommandCenter() {
     return (
       <div className="loading-screen">
         <div className="loader"></div>
-        <p>Getting your dashboard ready...</p>
+        <p>Loading...</p>
       </div>
     )
   }
@@ -178,7 +178,7 @@ function CommandCenter() {
             </div>
 
             <p>
-              Connect Hackatime to bring in your real coding hours, streak, focus, and energy. It only takes one login.
+              Connect Hackatime to see your coding stats.
             </p>
 
             <a className="mission-button connect-button" href="/api/hackatime/login">
@@ -207,7 +207,7 @@ function CommandCenter() {
             </div>
             <ul>
             {missionData.daily_missions.length === 0 && missionData.weekly_missions.length === 0 && missionData.long_term_goals.length === 0 ? (
-                <li>Your board is clear - add a mission when you're ready.</li>
+                <li>No missions yet.</li>
               ) : (
                 <>
                   {missionData.daily_missions.map((mission) => (

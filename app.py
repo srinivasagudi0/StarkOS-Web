@@ -48,16 +48,16 @@ def mission_control():
     
     daily_missions = data['daily_missions']
     if not daily_missions:
-        data['daily_missions'] = ["Your day is clear. Add a mission"]
+        data['daily_missions'] = ["No daily missions."]
 
     weekly_missions = data['weekly_missions']
     if not weekly_missions:
-        data['weekly_missions'] = ["Your week is free. Add something."]
+        data['weekly_missions'] = ["No weekly missions."]
 
     ltg = data['long_term_goals']
 
     if not ltg:
-        data['long_term_goals'] = ["No big goals yet. Add one when you know what you're aiming for."]
+        data['long_term_goals'] = ["No long-term goals."]
 
     failed_missions = data["failed_missions"]
     if not failed_missions:
@@ -136,13 +136,13 @@ def warnings():
     active_missions = data['daily_missions'] + data['weekly_missions'] + data['long_term_goals']
 
     if not active_missions:
-        return jsonify({"message": "No warnings today - you're clear to focus."})
+        return jsonify({"message": "No warnings today."})
 
     try:
         warnings = generate_warnings(active_missions)
         return jsonify({"message": warnings})
     except Exception as e:
-        return jsonify({"message": "I couldn't load your warnings this time. Try again in a moment."})
+        return jsonify({"message": "Could not load warnings."})
     
 
 @app.route('/api/advice')
@@ -577,7 +577,7 @@ def hackatime_heatmap():
 def personalize():
     messages = [
         "Built by Srinivasa to make coding feel like a mission 🚀",
-        "Keep building - you're closer than yesterday 💪",
+        "Keep building. You're closer than yesterday 💪",
         "Code with heart of an artist, for elegance lies in simplicity. 🎨",
         "Your code is a story waiting to unfold in the digital realm. 📖",
         "Programming is not about what you know, it's about what you can figure out. 🧠",
@@ -593,7 +593,7 @@ def personalize():
         "Momentum grows when the first step feels manageable.",
         "Focus isn't intensity. It's loyalty to one task.",
         "Built by Srinivas while learning React and Flask.",
-        "Keep building - bugs are part of the learning."
+        "Keep building. Bugs are part of learning."
     ]
     import random
     message = random.choice(messages)

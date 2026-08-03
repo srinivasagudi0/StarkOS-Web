@@ -184,7 +184,7 @@ function MissionControl() {
     return (
       <div className="loading-screen">
         <div className="loader"></div>
-        <p>Getting your dashboard ready...</p>
+        <p>Loading...</p>
       </div>
 
     )
@@ -221,7 +221,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.daily_mission_items,
               missionData.legacy_daily_missions,
-              "Your day is clear - add a mission when you're ready."
+              "No daily missions."
             )}
           </ul>
         </div>
@@ -234,7 +234,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.weekly_mission_items,
               missionData.legacy_weekly_missions,
-              "Nothing planned this week yet - add something when you're ready."
+              "No weekly missions."
             )}
           </ul>
         </div>
@@ -247,7 +247,7 @@ function MissionControl() {
             {renderMissionList(
               missionData.long_term_goal_items,
               missionData.legacy_long_term_goals,
-              "No big goal yet - add one when you know what you're aiming for."
+              "No long-term goals."
             )}
           </ul>
         </div>

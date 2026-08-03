@@ -77,7 +77,7 @@ function Code() {
             .then((response) => response.json())
             .then((data) => {
                 if (data.connected) {
-                    setGoalsText(data.grand_total?.text || "No coding goal yet - add one when you know what you want to hit.")
+                    setGoalsText(data.grand_total?.text || "No coding goal yet.")
                 }
             })
     }, [])
@@ -115,7 +115,7 @@ function Code() {
       setHeatmapLoading(false);
     })
     .catch(() => {
-      setHeatmapError("I couldn't load your heatmap. Try again in a moment.");
+      setHeatmapError("Could not load the heatmap.");
       setHeatmapLoading(false);
     });
 }, []);
@@ -167,7 +167,7 @@ function Code() {
                     <ul>
                         {projects.map((project) => (
                             <li key={project.name}>
-                                <strong>{project.name}</strong> - {project.text}
+                                <strong>{project.name}</strong> • {project.text}
                             </li>
                         ))}
                     </ul>
@@ -185,7 +185,7 @@ function Code() {
                     <h1>Coding Heatmap</h1>
                     <p>Last 7 Days</p>
 
-                    {heatmapLoading && <p>Pulling in your coding activity...</p>}
+                    {heatmapLoading && <p>Loading activity...</p>}
                     {heatmapError && <p>{heatmapError}</p>}
 
                     <div className="heatmap-grid">

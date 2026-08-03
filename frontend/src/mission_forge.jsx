@@ -107,7 +107,7 @@ function MissionForge() {
     <main className="page forge-page">
       <div className="title3">
         <h1>Mission Forge</h1>
-        <p className="greeting">Turn what you want to do into a plan you can actually follow.</p>
+        <p className="greeting">Turn a goal into a plan.</p>
       </div>
 
         
@@ -118,7 +118,7 @@ function MissionForge() {
             <h1>✨ Quick Add with AI</h1>
 
 
-          <p>Tell me what you want to work on, and I'll break it into missions you can follow.</p>
+          <p>Enter a goal. I will make a plan.</p>
 
           <textarea
             className="mission-input"
@@ -148,7 +148,7 @@ function MissionForge() {
           {loading && (
             <div className="forge-loading">
               <div className="loader"></div>
-              <p>Putting your plan together...</p>
+              <p>Building your plan...</p>
             </div>
           )}
 
