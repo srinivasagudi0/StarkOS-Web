@@ -2,7 +2,7 @@
 
 StarkOS is named after the operating system of Tony Stark (Iron Man). Anyways, this is a web app that I built to help me and other hackers to track their work, plan everything in one place, and make yourself feel like you are in the movies.
 
-This is the version 1 of the app, I will try to make it even better and functional for V2.
+This is the version 1 of the app, I will try to make it even better and functional for V2. I also recommend getting the app code installed and run it yourself and this will be done easier in V2. Why I am not encouraging to use the vercel, it has a shared database. Sorry :(
 
 ## Some pics of the App
 
